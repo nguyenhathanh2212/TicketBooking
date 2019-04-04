@@ -12,4 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+    .copyDirectory('resources/assets/images', 'public/images')
+    .copyDirectory('resources/assets/vendor', 'public/vendor')
+    .copyDirectory('node_modules/bootstrap', 'public/vendor/bootstrap')
+    .copyDirectory('node_modules/jquery', 'public/vendor/jquery')
+    .copyDirectory('node_modules/scrolltofixed', 'public/vendor/scrolltofixed')
+    .copyDirectory('node_modules/packery', 'public/vendor/packery')
+    .copyDirectory('node_modules/countdown', 'public/vendor/countdown')
+    .copyDirectory('node_modules/font-awesome', 'public/vendor/font-awesome')
+    .version(['public/css/*.css', 'public/js/*.js']);
