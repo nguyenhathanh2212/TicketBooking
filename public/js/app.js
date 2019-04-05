@@ -21395,7 +21395,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\thanh\Desktop\TicketBooking\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/thanh/Desktop/TicketBooking/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })
