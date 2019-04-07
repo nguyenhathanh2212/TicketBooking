@@ -13,4 +13,12 @@ class Bus extends Model
         'number_of_seats',
         'type_bus',
     ];
+
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function busRoute() {
+        return $this->hasMany(BusRoute::class);
+    }
 }

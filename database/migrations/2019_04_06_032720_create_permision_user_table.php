@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActionRoleTable extends Migration
+class CreatePermisionUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateActionRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('action_role', function (Blueprint $table) {
+        Schema::create('permision_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('action_id');
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('permision_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateActionRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('action_role');
+        Schema::dropIfExists('permision_user');
     }
 }

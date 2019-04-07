@@ -15,3 +15,6 @@ yarn-error.log
 /public/fonts
 /public/images
 /public/vendor
+
+/storage/logs
+/storage/debugbar

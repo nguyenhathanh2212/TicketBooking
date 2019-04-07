@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -42,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function userCompany() {
+        return $this->hasMany(UserCompany::class, 'user_id', 'id');
+    }
+
+    public function ratings() {
+        return $this->hasMany(Rating::class);
+    }
 }

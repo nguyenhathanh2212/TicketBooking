@@ -8,5 +8,6 @@ class Action extends Model
 {
     protected $fillable = [
         'action',
+        'action_code',
     ];
 }

@@ -15,4 +15,8 @@ class Ticket extends Model
         'quantity',
         'day_away',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

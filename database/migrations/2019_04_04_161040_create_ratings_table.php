@@ -17,11 +17,11 @@ class CreateRatingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->tinyInteger('overview');
-            $table->tinyTnteger('quality');
-            $table->tinyTnteger('on_time');
+            $table->tinyInteger('quality');
+            $table->tinyInteger('on_time');
             $table->text('comment');
-            $table->unsignedInteger('rateale_id');
-            $table->string('rateable_type');
+            $table->unsignedInteger('ratingable_id');
+            $table->string('ratingable_type');
             $table->timestamps();
         });
     }
