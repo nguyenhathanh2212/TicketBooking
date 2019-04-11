@@ -1,0 +1,4 @@
+export default {
+    busRoutes: [],
+    busRoute: {}
+}

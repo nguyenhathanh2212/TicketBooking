@@ -8,6 +8,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png.htm">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
         <script>
             window.Laravel = {!! json_encode([
                 'appName' => config('app.name'),
@@ -15,11 +16,16 @@
                 'locale' => config('app.locale'),
                 'url' => url('/'),
                 'languages' => config('settings.locale'),
+                'fallbackLocale' => config('app.fallback_locale'),
             ]) !!};
+            localStorage.setItem('locale', window.Laravel.locale);
         </script>
+        {{ Html::style(asset('vendor/jquery-ui-dist/jquery-ui.min.css')) }}
         {{ Html::style(asset('vendor/bootstrap/dist/css/bootstrap.min.css')) }}
+        {{ Html::style(asset('vendor/datetimepicker/build/css/bootstrap-datetimepicker.min.css')) }}
         {{ Html::style(asset('vendor/css/normalize.css')) }}
         {{ Html::style(asset('vendor/css/font-awesome.min.css')) }}
+        {{ Html::style(asset('vendor/bootstrap-rating/bootstrap-rating.css')) }}
         {{ Html::style(asset('vendor/css/icomoon.css')) }}
         {{ Html::style(asset('vendor/css/owl.carousel.css')) }}
         {{ Html::style(asset('vendor/css/bootstrap-select.css')) }}
@@ -30,16 +36,21 @@
         {{ Html::style(asset('vendor/css/main.css')) }}
         {{ Html::style(asset('vendor/css/color.css')) }}
         {{ Html::style(asset('vendor/css/responsive.css')) }}
-        {{ Html::style(asset('vendor/css/responsive.css')) }}
         {{ Html::script(asset('vendor/js/modernizr-2.8.3-respond-1.4.2.min.js')) }}
+        <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
     </head>
     <body class="tg-home tg-homevone">
         <div id="app">
             <master-component></master-component>
         </div>
         {{ Html::script(asset('vendor/jquery/dist/jquery.min.js')) }}
+        {{ Html::script(asset('vendor/jquery-ui-dist/jquery-ui.min.js')) }}
         {{ Html::script(asset('vendor/bootstrap/dist/js/bootstrap.min.js')) }}
+        <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
         {{ Html::script(asset('vendor/js/bootstrap-select.min.js')) }}
+        {{ Html::script(asset('vendor/bootstrap-rating/bootstrap-rating.min.js')) }}
+        {{ Html::script(asset('vendor/moment/min/moment.min.js')) }}
+        {{ Html::script(asset('vendor/datetimepicker/build/js/bootstrap-datetimepicker.min.js')) }}
         {{ Html::script(asset('vendor/scrolltofixed/jquery-scrolltofixed.js')) }}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
         {{ Html::script(asset('vendor/js/jquery.mmenu.all.js')) }}
@@ -51,5 +62,16 @@
         {{ Html::script(asset('vendor/js/parallax.js')) }}
         {{ Html::script(asset('vendor/js/main.js')) }}
         {{ Html::script(asset('js/app.js')) }}
+        {{-- <script>
+            function initMap() {
+                var mapDiv = document.getElementById('tg-locationmap');
+                var map = new google.maps.Map(mapDiv, {
+                center: {lat: 44.540, lng: -78.546},
+                zoom: 8
+                });
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXTnVjJyaI2nsAVV9pBpW2pF5YfQn76JY&callback=initMap" async defer></script> --}}
+        {{-- <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script> --}}
     </body>
 </html>

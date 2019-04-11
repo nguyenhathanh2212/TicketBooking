@@ -6,7 +6,9 @@ return [
         'sort_type' => 'desc',
         'sort_field' => 'created_at',
     ],
-    'image_company_default' => '1234',
+    'image_company_default' => '/images/image_company_default.jpg',
+    'image_station_default' => '/images/image_station_default.jpg',
+    'avatar_default' => '/images/avatar_default.png',
     'user' => [
         'role' => [
             'super_admin' => 0,

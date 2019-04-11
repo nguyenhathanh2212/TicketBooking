@@ -14,114 +14,6 @@ jQuery(document).on('ready', function() {
 	--------------------------------------- */
 	jQuery('.tg-headerfixed').scrollToFixed();
 	/* -------------------------------------
-			HOME BANNER SLIDER
-	-------------------------------------- */
-	var _tg_homeslider = jQuery('#tg-homeslider');
-	_tg_homeslider.owlCarousel({
-		items: 1,
-		loop: true,
-		dots: true,
-		nav: false,
-		autoplay: true,
-		animateIn: 'fadeIn',
-		animateOut: 'fadeOut',
-		navText: [
-			'<i class="icon-chevron-left"></i>',
-			'<i class="icon-chevron-right"></i>',
-		],
-		navClass: [
-			'tg-btnroundprev',
-			'tg-btnroundnext'
-		],
-	});
-	jQuery('.owl-carousel').mouseover(function(){
-		_tg_homeslider.trigger('stop.owl.autoplay');
-	});
-	jQuery('.owl-carousel').mouseleave(function(){
-		_tg_homeslider.trigger('play.owl.autoplay',[1000]);
-	});
-	/* -------------------------------------
-			POPULAR tOUR SLIDER
-	-------------------------------------- */
-	// var _tg_populartoursslider = jQuery('#tg-populartoursslider');
-	// _tg_populartoursslider.owlCarousel({
-	// 	loop: true,
-	// 	dots: false,
-	// 	nav: true,
-	// 	margin:30,
-	// 	autoplay: false,
-	// 	responsiveClass:true,
-	// 	responsive:{
-	// 		320:{ items:1, },
-	// 		639:{ items:2, },
-	// 		768:{ items:2, },
-	// 		992:{ items:3, },
-	// 		1200:{ items:3, }
-	// 	},
-	// 	navText: [
-	// 		'<i class="icon-chevron-left"></i>',
-	// 		'<i class="icon-chevron-right"></i>',
-	// 	],
-	// 	navClass: [
-	// 		'tg-btnroundprev',
-	// 		'tg-btnroundnext'
-	// 	],
-	// });
-	/* -------------------------------------
-			POPULAR tOUR SLIDER
-	-------------------------------------- */
-	var _tg_destinationsslider = jQuery('#tg-destinationsslider');
-	_tg_destinationsslider.owlCarousel({
-		loop: true,
-		dots: false,
-		nav: true,
-		margin:40,
-		autoplay: false,
-		responsiveClass:true,
-		responsive:{
-			320:{ items:1, },
-			568:{ items:2, },
-			768:{ items:2, },
-			992:{ items:2, },
-			1200:{ items:3, }
-		},
-		navText: [
-			'<i class="icon-chevron-left"></i>',
-			'<i class="icon-chevron-right"></i>',
-		],
-		navClass: [
-			'tg-btnroundprev',
-			'tg-btnroundnext'
-		],
-	});
-	/* -------------------------------------
-			OUR GUIDES SLIDER
-	-------------------------------------- */
-	var _tg_guidesslider = jQuery('#tg-guidesslider');
-	_tg_guidesslider.owlCarousel({
-		loop: true,
-		dots: false,
-		nav: true,
-		margin:40,
-		autoplay: false,
-		responsiveClass:true,
-		responsive:{
-			320:{ items:1, },
-			568:{ items:2, },
-			768:{ items:2, },
-			992:{ items:2, },
-			1200:{ items:3, }
-		},
-		navText: [
-			'<i class="icon-chevron-left"></i>',
-			'<i class="icon-chevron-right"></i>',
-		],
-		navClass: [
-			'tg-btnroundprev',
-			'tg-btnroundnext'
-		],
-	});
-	/* -------------------------------------
 			POPULAR tOUR SLIDER
 	-------------------------------------- */
 	var _tg_populardestinationslider = jQuery('#tg-populardestinationslider');
@@ -373,17 +265,18 @@ jQuery(document).on('ready', function() {
 	/* ---------------------------------------
 			SIGN IN OPEN CLOSE
 	--------------------------------------- */
-	jQuery('a[href="#tg-loginsingup"]').on('click', function(event) {
-		event.preventDefault();
-		jQuery('#tg-loginsingup').addClass('open');
-		jQuery('body').addClass('tg-hidescroll');
-	});
-	jQuery('#tg-loginsingup, #tg-loginsingup button.close').on('click keyup', function(event) {
-		jQuery('body').removeClass('tg-hidescroll');
-		if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-			jQuery(this).removeClass('open');
-		}
-	});
+    $(document).on('click', 'a[href="#tg-loginsingup"]', function(event) {
+        event.preventDefault();
+        jQuery('#tg-loginsingup').addClass('open');
+        jQuery('body').addClass('tg-hidescroll');
+    });
+    $(document).on('click keyup', '#tg-loginsingup, #tg-loginsingup button.close', function(event) {
+        jQuery('body').removeClass('tg-hidescroll');
+
+        if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            jQuery(this).removeClass('open');
+        }
+    });
 	/* -------------------------------------
 			PRETTY PHOTO GALLERY
 	-------------------------------------- */

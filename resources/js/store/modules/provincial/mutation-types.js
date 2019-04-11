@@ -1,0 +1,5 @@
+export const SET_ALL_PROVINCIALS = 'SET_ALL_PROVINCIALS'
+
+export default {
+    SET_ALL_PROVINCIALS
+}

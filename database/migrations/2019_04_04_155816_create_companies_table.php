@@ -17,6 +17,10 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description');
+            $table->text('address');
+            $table->text('phone');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->timestamps();
         });
     }

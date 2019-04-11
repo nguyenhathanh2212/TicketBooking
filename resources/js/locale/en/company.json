@@ -1,0 +1,17 @@
+{
+    "list_company": "List Companies",
+    "route": "Route",
+    "start_time": "Start time",
+    "destination_time": "Destination time",
+    "number_of_trip": "Number of trip",
+    "location": "Location",
+    "reviews": "Reviews",
+    "address_phone": "Address - Phone",
+    "search": "Search",
+    "address": "Address",
+    "phone": "Phone",
+    "leave_your_comment": "Leave your Comment",
+    "your_rating": "Your rating",
+    "your_comment": "Your Comment",
+    "review": "Review"
+}

@@ -8,17 +8,18 @@
             <footer-component></footer-component>
         </div>
         <popup-search-component></popup-search-component>
-        <popup-login-component></popup-login-component>
+        <popup-login-component :authenticated="authenticated"></popup-login-component>
     </div>
 </template>
 
 <script>
-    import Loader from './Loader.vue'
-    import Header from './Header.vue'
-    import HeaderMobile from './HeaderMobile.vue'
-    import Footer from './Footer.vue'
-    import PopupLogin from './PopupLogin.vue'
-    import PopupSearch from './PopupSearch.vue'
+    import { mapState, mapActions } from 'vuex'
+    import Loader from '@layout/Loader.vue'
+    import Header from '@layout/Header.vue'
+    import HeaderMobile from '@layout/HeaderMobile.vue'
+    import Footer from '@layout/Footer.vue'
+    import PopupLogin from '@layout/login_popup/Index.vue'
+    import PopupSearch from '@layout/PopupSearch.vue'
 
     export default {
         components: {
@@ -28,6 +29,19 @@
             footerComponent: Footer,
             popupSearchComponent: PopupSearch,
             popupLoginComponent: PopupLogin
+        },
+        computed: {
+            ...mapState('auth', [
+                'authenticated'
+            ])
+        },
+        created() {
+            this.checkAuthenticated();
+        },
+        methods: {
+            ...mapActions('auth', [
+                'checkAuthenticated',
+            ])
         }
     }
 </script>
