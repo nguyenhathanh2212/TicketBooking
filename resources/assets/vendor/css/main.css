@@ -518,8 +518,62 @@ li.tg-rss a { background:#ff6600; }
 	line-height:12px;
 	position:relative;
 }
-.tg-stars span:after,
 .tg-stars:before {
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 12px;
+	position: absolute;
+	letter-spacing: 4px;
+	color: #ffa127 !important;
+	font-family: 'FontAwesome';
+	content: '\f005';
+}
+.tg-stars span.one:after {
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 12px;
+	position: absolute;
+	letter-spacing: 4px;
+	color: #ffa127 !important;
+	font-family: 'FontAwesome';
+	content: '\f005 \f005 \f005 \f005 \f005';
+}
+.tg-stars span.two:after {
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 12px;
+	position: absolute;
+	letter-spacing: 4px;
+	color: #ffa127 !important;
+	font-family: 'FontAwesome';
+	content: '\f005 \f005';
+}
+.tg-stars span.three:after {
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 12px;
+	position: absolute;
+	letter-spacing: 4px;
+	color: #ffa127 !important;
+	font-family: 'FontAwesome';
+	content: '\f005 \f005 \f005';
+}
+.tg-stars span.four:after {
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 12px;
+	position: absolute;
+	letter-spacing: 4px;
+	color: #ffa127 !important;
+	font-family: 'FontAwesome';
+	content: '\f005 \f005 \f005 \f005';
+}
+.tg-stars span.five:after {
 	top: 0;
 	left: 0;
 	font-size: 12px;
@@ -532,7 +586,7 @@ li.tg-rss a { background:#ff6600; }
 }
 .tg-stars:before { content: '\f006 \f006 \f006 \f006 \f006'; }
 .tg-stars span {
-	width:75%;
+	width: 100%;
 	overflow: hidden;
 }
 .tg-stars span:after { color:#000; }

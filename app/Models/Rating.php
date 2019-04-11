@@ -12,7 +12,12 @@ class Rating extends Model
         'quality',
         'on_time',
         'comment',
-        'rateale_id',
-        'rateable_type',
+        'ratingable_id',
+        'ratingable_type',
     ];
+
+    public function ratingable()
+    {
+        return $this->morphTo();
+    }
 }

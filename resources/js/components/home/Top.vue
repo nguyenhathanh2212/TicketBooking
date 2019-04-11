@@ -10,93 +10,22 @@
                                 <a class="tg-btnvtwo" href="javascript:void(0);">All Tours</a>
                             </div>
                             <div id="tg-populartoursslider" class="tg-populartoursslider tg-populartours owl-carousel">
-                                <div class="item tg-populartour">
+                                <div class="item tg-populartour" v-for="(company, index) in companies" :key="index">
                                     <figure>
-                                        <a href="tourbookingdetail.html"><img src="images/tours/img-01.jpg" alt="image destinations"></a>
+                                        <a href=""><img :src="company.first_image" alt="image destinations"></a>
                                         <span class="tg-descount">25% Off</span>
                                     </figure>
                                     <div class="tg-populartourcontent">
                                         <div class="tg-populartourtitle">
-                                            <h3><a href="tourbookingdetail.html">City Tours in Europe, Paris</a></h3>
+                                            <h3><a href="">{{ company.name }}</a></h3>
                                         </div>
                                         <div class="tg-description">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
+                                            <p>{{ company.description }}</p>
                                         </div>
                                         <div class="tg-populartourfoot">
                                             <div class="tg-durationrating">
-                                                <span class="tg-tourduration">7 Days</span>
-                                                <span class="tg-stars"><span></span></span>
-                                                <em>(3 Review)</em>
-                                            </div>
-                                            <div class="tg-pricearea">
-                                                <del>$2,800</del>
-                                                <h4>$2,500</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item tg-populartour">
-                                    <figure><a href="tourbookingdetail.html"><img src="images/tours/img-02.jpg" alt="image destinations"></a></figure>
-                                    <div class="tg-populartourcontent">
-                                        <div class="tg-populartourtitle">
-                                            <h3><a href="tourbookingdetail.html">Best of Canada Tours and Travel</a></h3>
-                                        </div>
-                                        <div class="tg-description">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                        </div>
-                                        <div class="tg-populartourfoot">
-                                            <div class="tg-durationrating">
-                                                <span class="tg-tourduration">7 Days</span>
-                                                <span class="tg-stars"><span></span></span>
-                                                <em>(3 Review)</em>
-                                            </div>
-                                            <div class="tg-pricearea">
-                                                <span>from</span>
-                                                <h4>$600</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item tg-populartour">
-                                    <figure><a href="tourbookingdetail.html"><img src="images/tours/img-03.jpg" alt="image destinations"></a></figure>
-                                    <div class="tg-populartourcontent">
-                                        <div class="tg-populartourtitle">
-                                            <h3><a href="tourbookingdetail.html">Italy – 3 Days in Rome, Golden Gate</a></h3>
-                                        </div>
-                                        <div class="tg-description">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                        </div>
-                                        <div class="tg-populartourfoot">
-                                            <div class="tg-durationrating">
-                                                <span class="tg-tourduration">7 Days</span>
-                                                <span class="tg-stars"><span></span></span>
-                                                <em>(3 Review)</em>
-                                            </div>
-                                            <div class="tg-pricearea">
-                                                <span>from</span>
-                                                <h4>$1,430</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item tg-populartour">
-                                    <figure><a href="tourbookingdetail.html"><img src="images/tours/img-04.jpg" alt="image destinations"></a></figure>
-                                    <div class="tg-populartourcontent">
-                                        <div class="tg-populartourtitle">
-                                            <h3><a href="tourbookingdetail.html">Best of Canada Tours and Travel</a></h3>
-                                        </div>
-                                        <div class="tg-description">
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                        </div>
-                                        <div class="tg-populartourfoot">
-                                            <div class="tg-durationrating">
-                                                <span class="tg-tourduration">7 Days</span>
-                                                <span class="tg-stars"><span></span></span>
-                                                <em>(3 Review)</em>
-                                            </div>
-                                            <div class="tg-pricearea">
-                                                <span>from</span>
-                                                <h4>$600</h4>
+                                                <span v-html="getRatingTemplate(company.rating.overview)"></span>
+                                                <em>(Over view)</em> <br>
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +40,69 @@
 </template>
 
 <script>
-    export default {
+    import { get } from '../../helpers/api'
 
+    export default {
+        data() {
+            return {
+                companies: [],
+                errors: []
+            }
+        },
+        created() {
+            this.getTopCompanies();
+        },
+        updated() {
+            this.addSlider();
+        },
+        methods: {
+            getRatingTemplate: function(ratting) {
+                ratting = Math.round(ratting);
+                var className = {
+                    1: 'one',
+                    2: 'two',
+                    3: 'three',
+                    4: 'four',
+                    5: 'five'
+                }
+
+                return `<span class="tg-stars"><span class="${className[ratting]}"></span></span>`;
+            },
+            getTopCompanies: function () {
+                get('company?size=4&page=1')
+                    .then(response => {
+                        this.companies = response.data.companies.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            },
+            addSlider: function () {
+                var _tg_populartoursslider = jQuery('#tg-populartoursslider');
+                _tg_populartoursslider.owlCarousel({
+                    loop: true,
+                    dots: false,
+                    nav: true,
+                    margin:30,
+                    autoplay: false,
+                    responsiveClass:true,
+                    responsive:{
+                        320:{ items:1, },
+                        639:{ items:2, },
+                        768:{ items:2, },
+                        992:{ items:3, },
+                        1200:{ items:3, }
+                    },
+                    navText: [
+                        '<i class="icon-chevron-left"></i>',
+                        '<i class="icon-chevron-right"></i>',
+                    ],
+                    navClass: [
+                        'tg-btnroundprev',
+                        'tg-btnroundnext'
+                    ],
+                });
+            }
+        }
     }
 </script>

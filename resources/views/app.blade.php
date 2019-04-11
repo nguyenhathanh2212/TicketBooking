@@ -8,6 +8,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png.htm">
+        <script>
+            window.Laravel = {!! json_encode([
+                'appName' => config('app.name'),
+                'csrfToken' => csrf_token(),
+                'locale' => config('app.locale'),
+                'url' => url('/'),
+                'languages' => config('settings.locale'),
+            ]) !!};
+        </script>
         {{ Html::style(asset('vendor/bootstrap/dist/css/bootstrap.min.css')) }}
         {{ Html::style(asset('vendor/css/normalize.css')) }}
         {{ Html::style(asset('vendor/css/font-awesome.min.css')) }}
@@ -28,7 +37,6 @@
         <div id="app">
             <master-component></master-component>
         </div>
-        {{ Html::script(asset('js/app.js')) }}
         {{ Html::script(asset('vendor/jquery/dist/jquery.min.js')) }}
         {{ Html::script(asset('vendor/bootstrap/dist/js/bootstrap.min.js')) }}
         {{ Html::script(asset('vendor/js/bootstrap-select.min.js')) }}
@@ -42,5 +50,6 @@
         {{ Html::script(asset('vendor/countdown/countdown.js')) }}
         {{ Html::script(asset('vendor/js/parallax.js')) }}
         {{ Html::script(asset('vendor/js/main.js')) }}
+        {{ Html::script(asset('js/app.js')) }}
     </body>
 </html>

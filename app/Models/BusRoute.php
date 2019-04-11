@@ -13,4 +13,12 @@ class BusRoute extends Model
         'route_id',
         'price',
     ];
+
+    public function bus() {
+        return $this->belongsTo(Bus::class);
+    }
+
+    public function route() {
+        return $this->belongsTo(Route::class);
+    }
 }
