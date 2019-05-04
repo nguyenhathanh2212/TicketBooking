@@ -32,17 +32,18 @@ class CompanyService extends BaseService {
     {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
+        $query->with(['images']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
     /**
      * get company
-     * 
+     *
      * @param string $id
      */
     public function getCompany($id)
     {
-        return $this->model->find($id);
+        return $this->model->with(['images', 'routes'])->find($id);
     }
 }

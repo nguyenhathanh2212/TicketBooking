@@ -1,0 +1,21 @@
+{
+  "choose_seat": "Chọn ghế ngồi",
+  "choose_place": "Chọn điểm đi/điểm đến",
+  "information": "Thông tin",
+  "start_place": "Điểm đi",
+  "destination_place": "Điểm đến",
+  "seat_choice": "Đang chọn",
+  "seat_booked": "Ghế đã bị đặt",
+  "seat_empty": "Ghế còn trống",
+  "bus_station": "Bến xe",
+  "other_place": "Chọn nơi khác",
+  "name": "Tên",
+  "phone": "Số điện thoại",
+  "enter_name": "Nhập tên của bạn",
+  "enter_phone": "Nhập số điện thoại",
+  "number_of_seats": "Số ghế",
+  "total": "Tổng tiền",
+  "continue": "Tiếp tục",
+  "company": "Hãng xe",
+  "ticket_price": "Giá một vé"
+}

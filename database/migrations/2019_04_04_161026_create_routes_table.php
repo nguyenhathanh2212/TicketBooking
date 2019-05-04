@@ -18,8 +18,8 @@ class CreateRoutesTable extends Migration
             $table->unsignedInteger('company_id');
             $table->unsignedInteger('start_station_id');
             $table->unsignedInteger('destination_station_id');
-            $table->dateTime('start_time');
-            $table->dateTime('destination_time');
+            $table->time('start_time');
+            $table->time('destination_time');
             $table->timestamps();
         });
     }

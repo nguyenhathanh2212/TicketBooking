@@ -27,10 +27,23 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "bootstrap-rating": "0.0.1",
         "countdown": "^2.6.0",
+        "css-loader": "^2.1.1",
+        "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "font-awesome": "^4.7.0",
+        "jquery-ui-dist": "^1.12.1",
+        "module-alias": "^2.2.0",
+        "moment": "^2.24.0",
         "normalize.css": "^8.0.1",
         "packery": "^2.1.2",
-        "scrolltofixed": "^1.0.6"
+        "scrolltofixed": "^1.0.6",
+        "v-autocomplete": "^1.8.2",
+        "vee-validate": "^2.2.4",
+        "vue-bootstrap-datetimepicker": "^5.0.1",
+        "vue-i18n": "^8.10.0",
+        "vue-star-rating": "^1.6.1",
+        "vue2-datepicker": "^2.11.1",
+        "vuex": "^3.1.0"
     }
 }

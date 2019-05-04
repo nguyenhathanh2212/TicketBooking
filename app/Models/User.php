@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,8 @@ class User extends Authenticatable
         'password',
         'role_id',
         'provider_id',
-        'provider'
+        'provider',
+        'type'
     ];
 
     /**
@@ -43,6 +45,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'avatar',
+        'full_name',
+    ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function tickets() {
         return $this->hasMany(Ticket::class);
     }
@@ -53,5 +65,21 @@ class User extends Authenticatable
 
     public function ratings() {
         return $this->hasMany(Rating::class);
+    }
+
+    public function images() {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function getAvatarAttribute()
+    {
+        return $this->images()->count() ? $this->images()->first()->url : config('setting.avatar_default');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name || $this->lastname
+            ? $this->first_name . ' ' . $this->lastname
+            : $this->email;
     }
 }

@@ -1,5 +1,17 @@
 import axios from 'axios'
 
+axios.interceptors.request.use(config => {
+    NProgress.start();
+
+    return config;
+})
+
+axios.interceptors.response.use(response => {
+    NProgress.done();
+    
+    return response;
+})
+
 const concatUrl = function (url) {
     const baseUrl = window.Laravel.url + '/api/'
 

@@ -11,14 +11,16 @@ class Bus extends Model
         'lisense_plate',
         'driver_name',
         'number_of_seats',
-        'type_bus',
+        'number_level',
+        'number_row',
+        'number_column',
     ];
 
     public function company() {
         return $this->belongsTo(Company::class);
     }
 
-    public function busRoute() {
+    public function busRoutes() {
         return $this->hasMany(BusRoute::class);
     }
 }

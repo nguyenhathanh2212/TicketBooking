@@ -9,11 +9,17 @@ class Company extends Model
     protected $fillable = [
         'name',
         'description',
+        'address',
+        'phone',
+        'latitude',
+        'longitude'
     ];
 
     protected $appends = [
         'rating',
         'first_image',
+        'list_images',
+        'number_of_review'
     ];
 
     public function userCompany() {
@@ -41,22 +47,22 @@ class Company extends Model
         $rating = $this->ratings();
         $count = $rating->count();
 
-        if ($count) {
-            return [
-                'overview' => $rating->sum('overview') / $count,
-                'quality' => $rating->sum('quality') / $count,
-                'on_time' => $rating->sum('on_time') / $count,
-            ];
-        }
-        return [
-            'overview' => 0,
-            'quality' => 0,
-            'on_time' => 0,
-        ];
+        if ($count) return $rating->sum('rating') / $count;
+        
+        return 0;
     }
 
     public function getFirstImageAttribute()
     {
-        return $this->images()->count() ? $this->images()->first()->url : config('setting.image_company_default');
+        return $this->images->count() ? $this->images->first()->url : config('setting.image_company_default');
+    }
+
+    public function getListImagesAttribute()
+    {
+        return $this->images->count() ? $this->images : ['url' => config('setting.image_company_default')];
+    }
+
+    public function getNumberOfReviewAttribute() {
+        return $this->ratings()->count();
     }
 }

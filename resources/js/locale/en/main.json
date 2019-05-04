@@ -1,0 +1,20 @@
+{
+    "date_format": "MM/DD/YYYY",
+    "date_time_format": "MM/DD/YYYY HH:mm:ss",
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "lost_password": "Lost your password?",
+    "confirm_password": "Confirm password",
+    "login_with": "Sign in With...",
+    "or": "or",
+    "home": "Home",
+    "companies": "Companies",
+    "routes": "Routes",
+    "enter_destination": "Enter destination",
+    "enter_start": "Enter place start",
+    "search_ticket": "Search",
+    "reviews": "Reviews",
+    "date_away": "Date away"
+}

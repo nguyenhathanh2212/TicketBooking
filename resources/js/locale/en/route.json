@@ -1,0 +1,21 @@
+{
+    "choose_seat": "Choose a seat",
+    "choose_place": "Choose start/destination place",
+    "information": "Information",
+    "start_place": "Start place",
+    "destination_place": "Destination place",
+    "seat_choice": "Seat is choosing",
+    "seat_booked": "Seat is booked",
+    "seat_empty": "Seat is vacant",
+    "bus_station": "Bus station",
+    "other_place": "Choose another place",
+    "name": "Name",
+    "phone": "Phone",
+    "enter_name": "Enter your name",
+    "enter_phone": "Enter your phone",
+    "number_of_seats": "Number of seats",
+    "total": "Total",
+    "continue": "Continue",
+    "company": "Company",
+    "ticket_price": "Ticket price"
+}

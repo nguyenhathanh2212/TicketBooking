@@ -7,30 +7,30 @@
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="tg-feature">
                                 <div class="tg-featuretitle">
-                                    <h2><span>01</span>Luxury Hotels</h2>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <div class="tg-feature">
-                                <div class="tg-featuretitle">
-                                    <h2><span>02</span>Tourist Guide</h2>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
+                                    <div class="tg-description">
+                                        <span class="icon-statistic"><i class="fa fa-bus" aria-hidden="true"></i></span>
+                                    </div>
+                                    <h2><span>{{ countCompanies }}</span>{{ $t('home.companies') }}</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="tg-feature">
                                 <div class="tg-featuretitle">
-                                    <h2><span>03</span>Flights Tickets</h2>
+                                    <div class="tg-description">
+                                        <span class="icon-statistic"><i class="fa fa-road" aria-hidden="true"></i></span>
+                                    </div>
+                                    <h2><span>{{ countBusRoutes }}</span>{{ $t('home.routes') }}</h2>
                                 </div>
-                                <div class="tg-description">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <div class="tg-feature">
+                                <div class="tg-featuretitle">
+                                    <div class="tg-description">
+                                        <span class="icon-statistic"><i class="fa fa-university" aria-hidden="true"></i></span>
+                                    </div>
+                                    <h2><span>{{ countBusStations }}</span>{{ $t('home.link_bus_station') }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,32 @@
 </template>
 
 <script>
-    export default {
+    import { mapGetters } from 'vuex'
 
+    export default {
+        computed: {
+            ...mapGetters('bus_route', ['countBusRoutes']),
+            ...mapGetters('bus_station', ['countBusStations']),
+            ...mapGetters('company', ['countCompanies'])
+        }
     }
 </script>
+
+<style scoped>
+    .tg-featuretitle .icon-statistic {
+        display: inline-block;
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+        font-size: 35px;
+    }
+
+    .tg-featuretitle {
+        width: auto;
+    }
+
+    .tg-feature {
+        display: flex;
+        justify-content: center;
+    }
+</style>

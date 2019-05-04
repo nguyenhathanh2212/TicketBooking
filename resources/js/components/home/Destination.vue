@@ -63,11 +63,13 @@
             <div class="container">
                 <div class="row">
                     <div id="tg-destinationsslider" class="tg-destinationsslider tg-destinations owl-carousel">
-                        <div class="item tg-destination">
+                        <div class="item tg-destination custom">
                             <figure>
                                 <a href="tourbookingdetail.html"><img src="images/destination/img-04.jpg" alt="image description"></a>
                                 <figcaption>
-                                    <h2><a href="tourbookingdetail.html">Paris</a></h2>
+                                    <h2>
+                                        <a href="tourbookingdetail.html">Paris <i class="fa fa-long-arrow-right"></i> Paris </a>
+                                    </h2>
                                     <div class="tg-description">
                                         <p>in the streets of London</p>
                                     </div>
@@ -94,59 +96,6 @@
                                 </figcaption>
                             </figure>
                         </div>
-                        <div class="item tg-destination">
-                            <figure>
-                                <a href="javascript:void(0);"><img src="images/destination/img-07.jpg" alt="image description"></a>
-                                <figcaption>
-                                    <h2><a href="javascript:void(0);">Istanbul</a></h2>
-                                    <div class="tg-description">
-                                        <p>Beautiful Mosque</p>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </div>
-                        <div class="item tg-destination">
-                            <figure>
-                                <a href="javascript:void(0);"><img src="images/destination/img-04.jpg" alt="image description"></a>
-                                <figcaption>
-                                    <h2><a href="javascript:void(0);">Paris</a></h2>
-                                    <div class="tg-description">
-                                        <p>in the streets of London</p>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </div>
-                        <div class="item tg-destination">
-                            <figure>
-                                <a href="javascript:void(0);"><img src="images/destination/img-05.jpg" alt="image description"></a>
-                                <figcaption>
-                                    <h2><a href="javascript:void(0);">Egypt</a></h2>
-                                    <div class="tg-description">
-                                        <p>in the streets of London</p>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                            <figure>
-                                <a href="javascript:void(0);"><img src="images/destination/img-06.jpg" alt="image description"></a>
-                                <figcaption>
-                                    <h2><a href="javascript:void(0);">London</a></h2>
-                                    <div class="tg-description">
-                                        <p>in the streets of London</p>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </div>
-                        <div class="item tg-destination">
-                            <figure>
-                                <a href="javascript:void(0);"><img src="images/destination/img-07.jpg" alt="image description"></a>
-                                <figcaption>
-                                    <h2><a href="javascript:void(0);">Istanbul</a></h2>
-                                    <div class="tg-description">
-                                        <p>Beautiful Mosque</p>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -156,6 +105,42 @@
 
 <script>
     export default {
-
+        mounted() {
+            this.setSlider();
+        },
+        methods: {
+            setSlider: function() {
+                var _tg_destinationsslider = jQuery('#tg-destinationsslider');
+                _tg_destinationsslider.owlCarousel({
+                    loop: true,
+                    dots: false,
+                    nav: true,
+                    margin:40,
+                    autoplay: false,
+                    responsiveClass:true,
+                    responsive:{
+                        320:{ items:1, },
+                        568:{ items:2, },
+                        768:{ items:2, },
+                        992:{ items:2, },
+                        1200:{ items:3, }
+                    },
+                    navText: [
+                        '<i class="icon-chevron-left"></i>',
+                        '<i class="icon-chevron-right"></i>',
+                    ],
+                    navClass: [
+                        'tg-btnroundprev',
+                        'tg-btnroundnext'
+                    ],
+                });
+            }
+        }
     }
 </script>
+
+<style scoped>
+    .tg-destination.custom figure figcaption h2 {
+        font-size: 20px;
+    }
+</style>

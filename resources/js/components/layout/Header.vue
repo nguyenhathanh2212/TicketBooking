@@ -5,27 +5,33 @@
                 <div class="row">
                     <top-header-component></top-header-component>
                     <div class="tg-navigationarea tg-headerfixed">
-                        <strong class="tg-logo"><a href="index.html"><img src="images/logo.png" alt="company logo here"></a></strong>
+                        <strong class="tg-logo">
+                            <router-link
+                                    :to="{ name: 'home' }"
+                                    tag="a">
+                                <span class="strong-text-logo">Ticket </span><img class="logo" src="images/logo.png">nline
+                            </router-link>
+                        </strong>
                         <div class="tg-socialsignin">
-                            <ul class="tg-socialicons">
+                            <!-- <ul class="tg-socialicons">
                                 <li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
                                 <li><a href="javascript:void(0);"><i class="icon-instagram-social-outlined-logo"></i></a></li>
                                 <li><a href="javascript:void(0);"><i class="icon-twitter-social-outlined-logo"></i></a></li>
-                            </ul>
+                            </ul> -->
                             <div class="tg-userbox">
-                                <a id="tg-btnsignin" class="tg-btn" href="#tg-loginsingup"><span>sign in</span></a>
-                                <!--<div class="dropdown tg-dropdown">-->
-                                    <!--<button class="tg-btndropdown" id="tg-dropdowndashboard" type="button" data-toggle="dropdown">-->
-                                        <!--<img src="images/author/img-01.jpg" alt="image description">-->
-                                        <!--<span>john smith</span>-->
-                                        <!--<i class="fa fa-caret-down"></i>-->
-                                    <!--</button>-->
-                                    <!--<ul class="dropdown-menu tg-dropdownusermenu" aria-labelledby="tg-dropdowndashboard">-->
-                                        <!--<li><a href="dashboard.html">Dashboard</a></li>-->
-                                        <!--<li><a href="dashboard.html">Edit Profile</a></li>-->
-                                        <!--<li><a href="javascript:void(0);">Sign Out</a></li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
+                                <a v-if="!authenticated" id="tg-btnsignin" class="tg-btn" href="#tg-loginsingup"><span>{{ $t('main.login') }}</span></a>
+                                <div v-else class="dropdown tg-dropdown">
+                                    <button class="tg-btndropdown" id="tg-dropdowndashboard" type="button" data-toggle="dropdown">
+                                        <img :src="user.avatar" alt="image description">
+                                        <span>{{ user.full_name }}</span>
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu tg-dropdownusermenu" aria-labelledby="tg-dropdowndashboard">
+                                        <li><a href="javascript:void(0);">Dashboard</a></li>
+                                        <li><a href="javascript:void(0);">Edit Profile</a></li>
+                                        <li><a href="" @click.prevent="logout()" >Sign Out</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <nav id="tg-nav" class="tg-nav">
@@ -39,88 +45,26 @@
                             </div>
                             <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                 <ul>
-                                    <li><a href="javascript:void(0);">Home</a></li>
-                                    <li><a href="destinations.html">destinations</a></li>
-                                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="javascript:void(0);">listings</a>
-                                        <div class="mega-menu">
-                                            <ul>
-                                                <li><a href="listingvone.html">list style one</a></li>
-                                                <li><a href="listingvtwo.html">list style two</a></li>
-                                                <li><a href="listingvthree.html">list style three</a></li>
-                                                <li><a href="listingvfour.html">list style four</a></li>
-                                                <li><a href="listingvfive.html">list style five</a></li>
-                                                <li><a href="listingvsix.html">list style six</a></li>
-                                            </ul>
-                                            <div class="tg-sliderarea">
-                                                <h2>Popular Tours</h2>
-                                                <div class="tg-trendingtripsslider tg-trendingtrips owl-carousel">
-                                                    <div class="item tg-trendingtrip">
-                                                        <figure>
-                                                            <a href="javascript:void(0);">
-                                                                <img src="images/tours/img-05.jpg" alt="image destinations">
-                                                                <div class="tg-hover">
-                                                                    <span class="tg-stars"><span></span></span>
-                                                                    <span class="tg-tourduration">7 Days</span>
-                                                                    <span class="tg-locationname">Paris</span>
-                                                                    <div class="tg-pricearea">
-                                                                        <span>from</span>
-                                                                        <h4>$600</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </figure>
-                                                    </div>
-                                                    <div class="item tg-trendingtrip">
-                                                        <figure>
-                                                            <a href="javascript:void(0);">
-                                                                <img src="images/tours/img-06.jpg" alt="image destinations">
-                                                                <div class="tg-hover">
-                                                                    <span class="tg-stars"><span></span></span>
-                                                                    <span class="tg-tourduration">7 Days</span>
-                                                                    <span class="tg-locationname">Paris</span>
-                                                                    <div class="tg-pricearea">
-                                                                        <span>from</span>
-                                                                        <h4>$600</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </figure>
-                                                    </div>
-                                                    <div class="item tg-trendingtrip">
-                                                        <figure>
-                                                            <a href="javascript:void(0);">
-                                                                <img src="images/tours/img-07.jpg" alt="image destinations">
-                                                                <div class="tg-hover">
-                                                                    <span class="tg-stars"><span></span></span>
-                                                                    <span class="tg-tourduration">7 Days</span>
-                                                                    <span class="tg-locationname">Paris</span>
-                                                                    <div class="tg-pricearea">
-                                                                        <span>from</span>
-                                                                        <h4>$600</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </figure>
-                                                    </div>
-                                                    <div class="item tg-trendingtrip">
-                                                        <figure>
-                                                            <a href="javascript:void(0);">
-                                                                <img src="images/tours/img-08.jpg" alt="image destinations">
-                                                                <div class="tg-hover">
-                                                                    <span class="tg-stars"><span></span></span>
-                                                                    <span class="tg-tourduration">7 Days</span>
-                                                                    <span class="tg-locationname">Paris</span>
-                                                                    <div class="tg-pricearea">
-                                                                        <span>from</span>
-                                                                        <h4>$600</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </figure>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <li>
+                                        <router-link
+                                                :to="{ name: 'home' }"
+                                                tag="a">
+                                            {{ $t('main.home') }}
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link
+                                                :to="{ name: 'company.index' }"
+                                                tag="a">
+                                            {{ $t('main.companies') }}
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link
+                                                :to="{ name: 'route.index' }"
+                                                tag="a">
+                                            {{ $t('main.routes') }}
+                                        </router-link>
                                     </li>
                                     <li><a href="javascript:void(0);">pages</a></li>
                                     <li><a href="shop.html">shop</a></li>
@@ -136,11 +80,74 @@
 </template>
 
 <script>
-    import TopHeader from './TopHeader.vue'
+    import { mapState, mapActions } from 'vuex'
+    import TopHeader from '@layout/TopHeader.vue'
 
     export default {
         components: {
             topHeaderComponent: TopHeader
+        },
+        computed: {
+            ...mapState('auth', [
+                'authenticated',
+                'user'
+            ])
+        },
+        methods: {
+            ...mapActions('auth', [
+                'logout'
+            ])
         }
     }
 </script>
+
+<style scoped>
+    .logo {
+        width: 42px;
+        height: 42px;
+        display: inline-block;
+    }
+
+    .tg-logo {
+        line-height: 42px;
+    }
+
+    .tg-logo a {
+        color: #fddf00;
+        font-weight: 100;
+    }
+
+    .strong-text-logo {
+        font-size: 16px;
+        color: #62d0fa;
+        font-weight: 700;
+    }
+
+    .tg-dropdown {
+        display: unset;
+    }
+
+    .tg-btndropdown span {
+        text-transform: unset;
+        width: calc(100% - 52px);
+        margin-right: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .tg-btndropdown img {
+        width: 35px;
+        height: 35px;
+    }
+
+    a.router-link-exact-active::before {
+        height: 6px;
+    }
+
+    @media (max-width: 990px) {
+        #tg-dropdowndashboard {
+            max-width: 200px;
+        }
+    }
+</style>

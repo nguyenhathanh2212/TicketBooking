@@ -1,0 +1,20 @@
+{
+    "date_format": "DD/MM/YYYY",
+    "date_time_format": "DD/MM/YYYY HH:mm:ss",
+    "login": "Đăng nhập",
+    "register": "Đăng kí",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "lost_password": "Quên mật khẩu?",
+    "confirm_password": "Xác nhận mật khẩu",
+    "login_with": "Đăng nhập với...",
+    "or": "hoặc",
+    "home": "Trang chủ",
+    "companies": "Hãng xe",
+    "routes": "Tuyến đường",
+    "enter_destination": "Gõ vào nơi đến",
+    "enter_start": "Gõ vào nơi đi",
+    "search_ticket": "Tìm vé xe",
+    "reviews": "Đánh giá",
+    "date_away": "Ngày đi"
+}

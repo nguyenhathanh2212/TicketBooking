@@ -8,9 +8,7 @@ class Rating extends Model
 {
     protected $fillable = [
         'user_id',
-        'overview',
-        'quality',
-        'on_time',
+        'rating',
         'comment',
         'ratingable_id',
         'ratingable_type',
@@ -19,5 +17,10 @@ class Rating extends Model
     public function ratingable()
     {
         return $this->morphTo();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -4,19 +4,27 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Services\CompanyService;
+use App\Services\RatingService;
 use Illuminate\Http\Response;
+use Auth;
+use Exception;
 
 class CompanyController extends BaseController
 {
     protected $companyService;
+    protected $ratingService;
 
     /**
      * CompanyController constructor.
-     * @param $companyService
+     * @param CompanyService $companyService
+     * @param RatingService $ratingService
      */
-    public function __construct(CompanyService $companyService)
-    {
+    public function __construct(
+        CompanyService $companyService,
+        RatingService $ratingService
+    ) {
         $this->companyService = $companyService;
+        $this->ratingService = $ratingService;
     }
 
     /**
@@ -27,15 +35,21 @@ class CompanyController extends BaseController
      */
     public function index(Request $request)
     {
-        $params = $request->only([
-            'size',
-            'sort_field',
-            'sort_type',
-        ]);
+        try {
+            $params = $request->only([
+                'size',
+                'sort_field',
+                'sort_type',
+            ]);
 
-        $companies = $this->companyService->search($params);
+            $companies = $this->companyService->search($params);
 
-        return $this->responseSuccess(compact('companies'));
+            return $this->responseSuccess(compact('companies'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
     }
 
     /**
@@ -67,9 +81,15 @@ class CompanyController extends BaseController
      */
     public function show($id)
     {
-        $company = $this->companyService->getCompany($id);
+        try {
+            $company = $this->companyService->getCompany($id);
 
-        return $this->responseSuccess(compact('company'));
+            return $this->responseSuccess(compact('company'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
     }
 
     /**
@@ -104,5 +124,44 @@ class CompanyController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function getRatings(Request $request, $id)
+    {
+        try {
+            $company = $this->companyService->getCompany($id);
+            $params = $request->only([
+                'size',
+                'sort_field',
+                'sort_type',
+            ]);
+
+            $ratings = $this->ratingService->search($company, $params);
+
+            return $this->responseSuccess(compact('ratings'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function rate(Request $request, $id)
+    {
+        try {
+            $data = $request->only([
+                'rating',
+                'comment'
+            ]);
+            $data['user_id'] = Auth::user()->id;
+            $company = $this->companyService->getCompany($id);
+            $rating = $this->ratingService->createRating($company, $data);
+
+            return $this->responseSuccess(compact('rating'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
     }
 }

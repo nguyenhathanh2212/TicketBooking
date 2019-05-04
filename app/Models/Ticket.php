@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Ticket extends Model
 {
@@ -13,10 +14,23 @@ class Ticket extends Model
         'phone',
         'seat_number',
         'quantity',
-        'day_away',
+        'date_away',
     ];
+
+    protected $appends = [
+        'date'
+    ];
+
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->date_away)->format(trans('main.date_format'));
+    }
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function busRoute() {
+        return $this->belongsTo(BusRoute::class, 'bus_route_id');
     }
 }

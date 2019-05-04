@@ -19,7 +19,9 @@ class CreateBusesTable extends Migration
             $table->string('lisense_plate');
             $table->string('driver_name');
             $table->tinyInteger('number_of_seats');
-            $table->tinyInteger('type_bus');
+            $table->tinyInteger('number_row');
+            $table->tinyInteger('number_column');
+            $table->tinyInteger('number_level');
             $table->timestamps();
         });
     }

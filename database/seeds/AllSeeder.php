@@ -13,6 +13,7 @@ use App\Models\Route;
 use App\Models\Station;
 use App\Models\Ticket;
 use App\Models\UserCompany;
+use App\Models\Provincial;
 
 class AllSeeder extends Seeder
 {
@@ -40,28 +41,32 @@ class AllSeeder extends Seeder
 
         // user seeder
         factory(User::class)->create([
-            'email' => 'supperadmin@gmail.com',
+            'email' => 'superadmin@gmail.com',
             'first_name' => 'Admin',
             'last_name' => 'Super',
-            // 'role_id' => config('setting.user.role.super_admin'),
+            'type' => config('setting.user.role.super_admin'),
         ]);
 
-        // factory(User::class, 2)->create([
-        //     'role_id' => config('setting.user.role.admin'),
-        // ]);
+        factory(User::class, 2)->create([
+            'type' => config('setting.user.role.admin'),
+        ]);
 
-        // factory(User::class, 5)->create([
-        //     'role_id' => config('setting.user.role.super_manager'),
-        // ]);
+        factory(User::class, 5)->create([
+            'type' => config('setting.user.role.super_manager'),
+        ]);
 
-        // factory(User::class, 10)->create([
-        //     'role_id' => config('setting.user.role.manager'),
-        // ]);
+        factory(User::class, 10)->create([
+            'type' => config('setting.user.role.manager'),
+        ]);
 
         $users = factory(User::class, 15)->create();
 
         //station
-        $stations = factory(Station::class, 10)->create();
+        $stations = factory(Provincial::class, 10)->create()->each(function($provincial) use ($faker) {
+            $stations = factory(Station::class, 3)->create([
+                'provincial_id' => $provincial->id,
+            ]);
+        });
 
         //permision
 //        $permisions = Permision::create([
@@ -74,15 +79,27 @@ class AllSeeder extends Seeder
                 'company_id' => $company->id,
             ]);
 
+            $startStation = $stations->random()->id;
+            $destinationStation = $stations->random()->id;
+
+            while($destinationStation == $startStation) {
+                $destinationStation = $stations->random()->id;
+            }
+
             factory(Route::class, 3)->create([
                 'company_id' => $company->id,
-                'start_station_id' => $stations->random()->id,
-                'destination_station_id' => $stations->random()->id,
+                'start_station_id' => $startStation,
+                'destination_station_id' => $destinationStation,
             ])->each(function($route) use ($faker, $buses) {
-                $route->busRoute()->create([
+                $route->busRoutes()->create([
                     'bus_id' => $buses->random()->id,
-                    'price' => $faker->randomFloat(),
-                ]);
+                    'price' => rand(100000, 200000),
+                    'phone' => $faker->tollFreePhoneNumber(),
+                ])->each(function($busStation) use ($faker) {
+                    factory(Ticket::class, rand(30, 50))->create([
+                        'bus_route_id' => $busStation->id,
+                    ]);
+                });
             });
 
             factory(Rating::class, 10)->create([
