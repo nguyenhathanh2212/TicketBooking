@@ -62,16 +62,5 @@
         {{ Html::script(asset('vendor/js/parallax.js')) }}
         {{ Html::script(asset('vendor/js/main.js')) }}
         {{ Html::script(asset('js/app.js')) }}
-        {{-- <script>
-            function initMap() {
-                var mapDiv = document.getElementById('tg-locationmap');
-                var map = new google.maps.Map(mapDiv, {
-                center: {lat: 44.540, lng: -78.546},
-                zoom: 8
-                });
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXTnVjJyaI2nsAVV9pBpW2pF5YfQn76JY&callback=initMap" async defer></script> --}}
-        {{-- <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script> --}}
     </body>
 </html>

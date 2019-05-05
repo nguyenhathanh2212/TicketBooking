@@ -3,5 +3,7 @@
     "companies": "Companies",
     "all_companies": "All companies",
     "routes": "Routes",
-    "link_bus_station": "Linking the bus station"
+    "link_bus_station": "Linking the bus station",
+    "popular_provincial": "Popular Provincial",
+    "all_bus_station": "All bus station"
 }

@@ -3,6 +3,8 @@ import * as types from './mutation-types'
 
 export const setBusStations = ({ commit }, params) => {
     var path = 'bus-station?';
+    params.size = params.size ? params.size : 9;
+    params.page = params.page ? params.page : 1;
 
     for (let param in params) {
         path += `${param}=${params[param]}&`;

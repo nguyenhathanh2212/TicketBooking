@@ -8,6 +8,11 @@
                     </a>
                 </li>
                 <li role="presentation">
+                    <a href="#picture" aria-controls="picture" role="tab" data-toggle="tab">
+                        <span>{{ $t('company.picture') }}</span>
+                    </a>
+                </li>
+                <li role="presentation">
                     <a href="#italy" aria-controls="italy" role="tab" data-toggle="tab">
                         <span>{{ $t('company.location') }}</span>
                     </a>
@@ -17,17 +22,12 @@
                         <span>{{ $t('company.reviews') }}</span>
                     </a>
                 </li>
-                <li role="presentation">
-                    <a href="#australia" aria-controls="australia" role="tab" data-toggle="tab">
-                        <span>{{ $t('company.address_phone') }}</span>
-                    </a>
-                </li>
             </ul>
             <div class="tab-content tg-themetabcontent">
                 <route-component></route-component>
+                <picture-component></picture-component>
                 <location-component></location-component>
                 <review-component></review-component>
-                <contact-component></contact-component>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
     import Route from '@company/detail/Route.vue'
     import Location from '@company/detail/Location.vue'
     import Review from '@company/detail/Review.vue'
-    import Contact from '@company/detail/Contact.vue'
+    import Picture from '@company/detail/Picture.vue'
 
     export default {
         props: {
@@ -48,9 +48,9 @@
         },
         components: {
             routeComponent: Route,
-            contactComponent: Contact,
             locationComponent: Location,
-            reviewComponent: Review
+            reviewComponent: Review,
+            pictureComponent: Picture
         }
     }
 </script>

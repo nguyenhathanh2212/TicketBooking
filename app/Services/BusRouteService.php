@@ -8,13 +8,19 @@ use App\Models\Route;
 use Carbon\Carbon;
 
 class BusRouteService extends BaseService {
+    protected $routeModel;
+
     /**
      * CompanyService constructor.
      * @param BusRoute $busRoute
+     * @param Route $routeModel
      */
-    public function __construct(BusRoute $busRoute)
-    {
+    public function __construct(
+        BusRoute $busRoute,
+        Route $routeModel
+    ) {
         $this->model = $busRoute;
+        $this->routeModel = $routeModel;
     }
 
     /**
@@ -39,26 +45,38 @@ class BusRouteService extends BaseService {
     {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
-        $routeIds = [];
 
-//        if (!empty($params['provincial_start'])) {
-//            $stationIds = Station::where('provincial_id', $params['provincial_start'])->pluck('id')->all();
-//            $routeIds = array_merge($routeIds, Route::whereIn('start_station_id', $stationIds)->pluck('id')->all());
-//        }
-//
-//        if (!empty($params['provincial_destination'])) {
-//            $stationIds = Station::where('provincial_id', $params['provincial_destination'])->pluck('id')->all();
-//            $routeIds = array_merge($routeIds, Route::whereIn('destination_station_id', $stationIds)->pluck('id')->all());
-//        }
-//
-//        if (!empty($params['date_away'])) {
-//            $routeIds = array_merge($routeIds, Route::where('start_time', $params['date_away'])->pluck('id')->all());
-//        }
-        
-        if ($routeIds) {
-            $query = $query->whereIn('route_id', $routeIds);
+        $routesQuery = $this->routeModel->newQuery();
+
+        if (!empty($params['provincial_start'])) {
+            $stationIds = Station::where('provincial_id', $params['provincial_start'])->pluck('id')->all();
+            $routesQuery = $routesQuery->whereIn('start_station_id', $stationIds);
         }
-        
+
+        if (!empty($params['provincial_destination'])) {
+            $stationIds = Station::where('provincial_id', $params['provincial_destination'])->pluck('id')->all();
+            $routesQuery = $routesQuery->whereIn('destination_station_id', $stationIds);
+        }
+
+        if (!empty($params['date_away'])) {
+            $now = Carbon::now();
+            $numberPresetDate = $now->diffInDays($params['date_away'], false);
+
+            if ($numberPresetDate > 0) {
+                $routesQuery = $routesQuery->where('number_preset_date', '>=', $numberPresetDate);
+            } else if ($numberPresetDate == 0) {
+                $now->addHour(config('setting.number_hours_preset'));
+                $routesQuery = $routesQuery->whereTime('start_time', '>=', $now->format('H:i:m'));
+            } else {
+                $routesQuery->whereNull('number_preset_date');
+            }
+        }
+
+        if (!empty($params['route'])) {
+            $query = $query->where('route_id', $params['route']);
+        }
+
+        $query = $query->whereIn('route_id', $routesQuery->pluck('id')->all());
         $query->with(['route', 'bus', 'ratings', 'tickets']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);

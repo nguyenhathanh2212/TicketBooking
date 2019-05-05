@@ -36,6 +36,7 @@ mix.webpackConfig({
             '@home': __dirname + '/resources/js/components/home',
             '@company': __dirname + '/resources/js/components/company',
             '@route': __dirname + '/resources/js/components/route',
+            '@station': __dirname + '/resources/js/components/station',
             '@layout': __dirname + '/resources/js/components/layout'
         },
     },

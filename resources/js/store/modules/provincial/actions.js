@@ -15,6 +15,21 @@ export const setAllProvincials = ({ commit }) => {
     })
 }
 
+export const setPopularProvincials = ({ commit }) => {
+    var path = 'provincial/popular';
+    return new Promise((resolve, reject) => {
+        get(path)
+            .then(response => {
+                commit(types.SET_POPULAR_PROVINCIALS, response.data);
+                resolve(response.data.code);
+            })
+            .catch(error => {
+                reject(error);
+            })
+    })
+}
+
 export default {
-    setAllProvincials
+    setAllProvincials,
+    setPopularProvincials
 }

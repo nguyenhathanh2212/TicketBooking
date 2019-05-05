@@ -18,4 +18,5 @@ return [
             'user' => 4,
         ],
     ],
+    'number_hours_preset' => 3,
 ];

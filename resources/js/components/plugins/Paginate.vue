@@ -1,5 +1,5 @@
 <template>
-    <nav class="tg-pagination">
+    <nav v-if="data.last_page > 1" class="tg-pagination">
         <ul>
             <li class="tg-prevpage" v-if="page > 1">
                 <router-link
@@ -23,14 +23,16 @@
 <script>
     export default {
         props: [
-            "data",
-            "params",
-            "routeName"
+            'data',
+            'routeName'
         ],
         computed: {
             page: function() {
                 return this.$route.query.page ? this.$route.query.page : 1;
-            }
+            },
+            params: function() {
+                return this.$route.query;
+            },
         }
     }
 </script>

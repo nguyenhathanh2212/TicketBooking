@@ -7,11 +7,12 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-7">
-                                <select v-model="date" class="form-control">
-                                    <option v-for="(dateItem, index) in busRoute.dates"
-                                            :key="index"
-                                            :value="dateItem">{{ dateItem }}</option>
-                                </select>
+                                <date-picker-component v-if="busRoute.route" v-model="date"
+                                    :config="{
+                                        format: this.$t('main.date_format'),
+                                        minDate: getMoment(busRoute.route.start_date),
+                                        maxDate: getMoment(busRoute.route.start_date, busRoute.route.number_preset_date)
+                                    }"></date-picker-component>
                             </div>
                             <div class="col-md-5 infor-seat">{{ `${numberOfSeat} ${$t('route.seat_empty')}` }}</div>
                         </div>
@@ -187,7 +188,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-4">{{ $t('route.total') }}:</div>
                     <div class="col-md-8 col-sm-8 col-xs-8">
                         <span class="display-text">
-                            {{ total_price }}đ
+                            {{ totalPrice }}đ
                         </span>
                     </div>
                 </div>
@@ -218,6 +219,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import datePicker from 'vue-bootstrap-datetimepicker'
 
     export default {
         data: function() {
@@ -246,14 +248,13 @@
             placeDestinationValue: function () {
                 return this.placeDestination ? this.placeDestination : this.otherPlaceDestination;
             },
-            total_price: function () {
+            totalPrice: function () {
                 return Number(this.busRoute.price * this.seatYouBooks.length).toLocaleString()
             }
         },
         watch: {
             busRoute: function () {
-                console.log(this.busRoute);
-                this.date = this.$route.params.date ? this.$route.params.date: this.busRoute.dates[0];
+                this.date = this.$route.params.start_date ? this.$route.params.date : this.busRoute.route.start_date;
                 this.numberLevel = this.busRoute.bus.number_level;
                 this.numberRow = this.busRoute.bus.number_row;
                 this.numberColumn = this.busRoute.bus.number_column;
@@ -303,7 +304,7 @@
                             seat_you_books: this.seatYouBooks,
                             destination_place: this.placeDestination ? '' : this.otherPlaceDestination,
                             start_place: this.placeStart ? '' : this.otherPlaceStart,
-                            total_price: this.total_price,
+                            totalPrice: this.totalPrice,
                             phone: this.phone,
                             name: this.name,
                             date: this.date
@@ -315,8 +316,14 @@
                         })
                     }
                 });
+            },
+            getMoment(date, addDate = 0) {
+                return moment(date, this.$t('main.date_format')).add(addDate, 'days');
             }
-        }
+        },
+        components: {
+            datePickerComponent: datePicker
+        },
     }
 </script>
 

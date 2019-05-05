@@ -2,11 +2,9 @@
     <div>
         <div class="tg-bookinginfo">
             <div class="top-detail">
-                <div class="company-slider-wrapper col-md-4">
-                    <div class="images-company-slider owl-carousel owl-theme">
-                        <div class="item-slider" v-for="(image, index) in company.list_images" :key="index">
-                            <img :src="image.url">
-                        </div>
+                <div class="col-md-4">
+                    <div class="images-company">
+                            <img :src="company.first_image">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -51,6 +49,11 @@
                     </div>
                 </fieldset>
             </form>
+            <ul class="tg-tripinfo">
+                <li><span class="tg-tourduration tg-availabilty">{{ company.phone }}</span></li>
+                <li><span class="tg-tourduration tg-location">{{ company.address }}</span></li>
+                <li><span class="tg-tourduration tg-peoples">{{ company.routes ? company.routes.length : 0 }} {{ $t('company.route') }}</span></li>
+            </ul>
         </div>
     </div>
 </template>
@@ -62,9 +65,6 @@
     import SelectOption from '../../plugins/SelectOption.vue'
 
     export default {
-        updated() {
-            this.addSlider();
-        },
         computed: {
             ...mapState('company', [
                 'company'
@@ -74,34 +74,16 @@
             ratingComponent: Rating,
             selectOptionComponent: SelectOption,
             dateTimeComponent: DateTime
-        },
-        methods: {
-            addSlider: function() {
-                $('.images-company-slider').owlCarousel({
-                    items: 1,
-                    loop: true,
-                    margin: 2,
-                    nav: false
-                });
-            }
         }
     }
 </script>
 
 <style scoped>
-    .images-company-slider {
-        margin: 4px;
-    }
-
-    .images-company-slider .item-slider {
-        display: flex;
-        justify-content: center;
-        justify-items: center;
-    }
-
-    .images-company-slider .item-slider img {
-        height: 250px;
-        width: auto;
+    .images-company {
+        margin: 3px;
+        border: 1px solid #dbdbdb;
+        padding: 3px;
+        border-radius: 4px;
     }
 
     .top-detail {

@@ -19,6 +19,11 @@ class Station extends Model
         return $this->belongsTo(Provincial::class);
     }
 
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
+
     protected $appends = [
         'first_image',
     ];

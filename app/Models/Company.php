@@ -22,6 +22,10 @@ class Company extends Model
         'number_of_review'
     ];
 
+    public function station() {
+        return $this->belongsTo(Station::class);
+    }
+
     public function userCompany() {
         return $this->hasMany(UserCompany::class, 'company_id', 'id');
     }

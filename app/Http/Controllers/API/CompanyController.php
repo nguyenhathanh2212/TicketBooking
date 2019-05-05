@@ -40,6 +40,8 @@ class CompanyController extends BaseController
                 'size',
                 'sort_field',
                 'sort_type',
+                'provincial',
+                'station'
             ]);
 
             $companies = $this->companyService->search($params);

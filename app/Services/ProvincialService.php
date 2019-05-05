@@ -14,12 +14,14 @@ class ProvincialService extends BaseService {
         $this->model = $provincial;
     }
 
-    /**
-     * @param array $params
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
     public function getAll()
     {
         return $this->model->all();
+    }
+
+    public function getPopulars()
+    {
+        return $this->model
+            ->withCount('companies')->orderBy('companies_count', 'desc')->limit(8)->get();
     }
 }

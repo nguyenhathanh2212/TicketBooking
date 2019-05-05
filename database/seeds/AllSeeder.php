@@ -74,7 +74,9 @@ class AllSeeder extends Seeder
 //        ]);
 
         // company
-        factory(Company::class, 10)->create()->each(function($company) use ($faker, $stations, $users) {
+        factory(Company::class, 10)->create([
+            'station_id' => $stations->random()->id
+        ])->each(function($company) use ($faker, $stations, $users) {
             $buses = factory(Bus::class, 5)->create([
                 'company_id' => $company->id,
             ]);

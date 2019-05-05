@@ -1,1 +1,10 @@
-{    "login_success": "Đăng nhập thành công",    "login_error": "Đăng nhập thất bại",    "not_select_seat": "Bạn chưa chọn chỗ ngồi"}
+{
+    "login_success": "Đăng nhập thành công",
+    "login_error": "Đăng nhập thất bại",
+    "not_select_seat": "Bạn chưa chọn chỗ ngồi",
+    "bus_company_network": "Mạng lưới nhà xe lớn",
+    "connect_nationwide": "Kết nối toàn quốc",
+    "link_many_bus_stations": "Liên kết nhiều bến xe",
+    "booking_tickets_is_easy": "Đặt vé dễ dàng",
+    "no_data_found": "Không tìm thấy dữ liệu nào!"
+}

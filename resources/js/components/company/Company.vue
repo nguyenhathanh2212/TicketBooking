@@ -11,43 +11,47 @@
                                     <h2>{{ $t('company.list_company') }}</h2>
                                 </div>
                                 <div class="clearfix"></div>
+                                <div v-if="companies.total">
                                     <div class="row">
-                                    <div v-for="(company, index) in companies.data" :key="index" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                                        <div class="tg-populartour">
-                                            <figure>
-                                                <router-link :to="{ name: 'company.show', params: { id: company.id }}">
-                                                <img :src="company.first_image">
-                                                </router-link>
-                                            </figure>
-                                            <div class="tg-populartourcontent">
-                                                <div class="tg-populartourtitle">
-                                                    <h3>
-                                                        <router-link :to="{ name: 'company.show', params: { id: company.id }}">
-                                                            {{ company.name }}
-                                                        </router-link>
-                                                    </h3>
-                                                </div>
-                                                <div class="tg-description">
-                                                    <p>{{ company.description }}</p>
-                                                </div>
-                                                <div class="tg-populartourfoot">
-                                                    <div class="tg-durationrating">
-                                                        <rating-component
-                                                            :rating="company.rating"></rating-component>
-                                                        <em>({{ company.number_of_review }} Review)</em>
+                                        <div v-for="(company, index) in companies.data" :key="index" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="tg-populartour">
+                                                <figure>
+                                                    <router-link :to="{ name: 'company.show', params: { id: company.id }}">
+                                                        <img :src="company.first_image">
+                                                    </router-link>
+                                                </figure>
+                                                <div class="tg-populartourcontent">
+                                                    <div class="tg-populartourtitle">
+                                                        <h3>
+                                                            <router-link :to="{ name: 'company.show', params: { id: company.id }}">
+                                                                {{ company.name }}
+                                                            </router-link>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="tg-description">
+                                                        <p>{{ company.description }}</p>
+                                                    </div>
+                                                    <div class="tg-populartourfoot">
+                                                        <div class="tg-durationrating">
+                                                            <rating-component
+                                                                :rating="company.rating"></rating-component>
+                                                            <em>({{ company.number_of_review }} Review)</em>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
+                                    <paginate-component
+                                        :data="companies"
+                                        :routeName="'company.index'"></paginate-component>
                                 </div>
-                                <div class="clearfix"></div>
-                                <paginate-component
-                                    :data="companies"
-                                    :params="{
-                                        size: size
-                                    }"
-                                    :routeName="'company.index'"></paginate-component>
+                                <div v-else>
+                                    <div class="alert alert-info" style="margin-top: 30px" role="alert">
+                                        {{ $t('message.no_data_found') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,10 +69,7 @@
 
     export default {
         created() {
-            this.setCompanies({
-                size: this.size,
-                page: this.page
-            });
+            this.setCompanies(this.query);
         },
         components: {
             bannerComponent: Banner,
@@ -76,28 +77,16 @@
             paginateComponent: Paginate
         },
         watch: {
-            size: function() {
-                this.setCompanies({
-                    size: this.size,
-                    page: this.page
-                });
-            },
-            page: function() {
-                this.setCompanies({
-                    size: this.size,
-                    page: this.page
-                });
+            query: function() {
+                this.setCompanies(this.query);
             }
         },
         computed: {
             ...mapState('company', [
                 'companies'
             ]),
-            size: function() {
-                return this.$route.query.size ? this.$route.query.size : 9;
-            },
-            page: function() {
-                return this.$route.query.page ? this.$route.query.page : 1;
+            query: function() {
+                return this.$route.query;
             }
         },
         methods: {

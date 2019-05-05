@@ -9,6 +9,7 @@ import Route from '@route/Route.vue'
 import RouteDetail from '@route/detail/Index.vue'
 import Book from '@route/detail/Book.vue'
 import NotFound from '@layout/404.vue'
+import BusStation from '@station/Index.vue'
 
 Vue.use(VueRouter);
 
@@ -16,14 +17,15 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: Home, name: 'home' },
         { path: '/company', component: CompanyIndex, name: 'company', children: [
-            { path: '', component: Company, name: 'company.index' },
+            { path: 'index', component: Company, name: 'company.index' },
             { path: ':id', component: CompanyDetail, name: 'company.show' }
         ] },
         { path: '/route', component: RouteIndex, name: 'route', children: [
-            { path: '', component: Route, name: 'route.index' },
+            { path: 'index', component: Route, name: 'route.index' },
             { path: ':id', component: RouteDetail, name: 'route.show' },
             { path: ':id/booking', component: Book, name: 'route.booking' }
         ] },
+        { path: '/bus-station', component: BusStation, name: 'bus_station'},
         { path: '/*', component: NotFound, name: '404'}
     ],
     scrollBehavior (to, from, savedPosition) {

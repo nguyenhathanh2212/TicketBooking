@@ -11,10 +11,10 @@
                                         <img src="images/destination/img-01.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
-                                                <h2>Ice Adventure Vacations</h2>
+                                                <h2>{{ $t('message.bus_company_network') }}</h2>
                                             </div>
                                             <div class="tg-description">
-                                                <p>your best vacation ever</p>
+                                                <p>{{ $t('message.connect_nationwide') }}</p>
                                             </div>
                                         </div>
                                     </a>
@@ -26,7 +26,7 @@
                                         <img src="images/destination/img-02.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
-                                                <h2>National Park</h2>
+                                                <h2>{{ $t('message.link_many_bus_stations') }}</h2>
                                             </div>
                                         </div>
                                     </a>
@@ -38,7 +38,7 @@
                                         <img src="images/destination/img-03.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
-                                                <h2>Adult Vacations</h2>
+                                                <h2>{{ $t('message.booking_tickets_is_easy') }}</h2>
                                             </div>
                                         </div>
                                     </a>
