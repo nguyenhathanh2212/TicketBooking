@@ -5,7 +5,6 @@ import auth from './modules/auth'
 import bus_route from './modules/bus_route'
 import bus_station from './modules/bus_station'
 import provincial from './modules/provincial'
-import route from './modules/route'
 
 Vue.use(Vuex)
 
@@ -15,7 +14,6 @@ export default new Vuex.Store({
         auth,
         bus_route,
         bus_station,
-        provincial,
-        route
+        provincial
     }
 });

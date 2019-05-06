@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="busRoutes && busRoutes.total">
+        <div v-if="busRoutes.total">
             <div>
                 <ul class="list-group list-group-flush">
                     <item-component

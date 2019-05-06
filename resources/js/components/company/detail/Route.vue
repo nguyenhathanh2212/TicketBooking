@@ -1,7 +1,7 @@
 <template>
     <div role="tabpanel" class="tab-pane active tg-overviewtab" id="america">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div v-if="routes.total" class="tg-cartproductdetail">
+            <div class="tg-cartproductdetail">
                 <table class="table">
                     <tr>
                         <th class="width-30pc">{{ $t('company.route') }}</th>
@@ -10,7 +10,7 @@
                         <th class="width-20pc">{{ $t('company.number_of_bus') }}</th>
                     </tr>
                     <tbody>
-                        <tr v-for="(route, index) in routes.data" :key="index">
+                        <tr v-for="(route, index) in company.routes" :key="index">
                             <td class="width-30pc">
                                 <router-link
                                     :to="{
@@ -45,65 +45,19 @@
                         </tr>
                     </tbody>
                 </table>
-                <nav v-if="routes.last_page > 1" class="tg-pagination">
-                    <ul>
-                        <li class="tg-prevpage" v-if="page > 1">
-                            <a href="#" @click.prevent="page--"><i class="fa fa-angle-left"></i></a>
-                        </li>
-                        <li v-for="pageIndex in routes.last_page" :key="pageIndex" :class="pageIndex == routes.current_page ? 'tg-active' : ''">
-                            <a href="#" @click.prevent="page = pageIndex">{{ pageIndex }}</a>
-                        </li>
-                        <li class="tg-nextpage" v-if="page < routes.last_page">
-                            <a href="#" @click.prevent="page++"><i class="fa fa-angle-right"></i></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div v-else>
-                <div class="alert alert-info" style="margin-top: 30px" role="alert">
-                    {{ $t('message.no_data_found') }}
-                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex'
+    import { mapState } from 'vuex'
 
     export default {
-        created() {
-            this.setRoutes({
-                page: this.page,
-                size: this.size,
-                company_id: this.company_id
-            })
-        },
-        data: function() {
-            return {
-                page: 1,
-                size: 5,
-                company_id: this.$route.params.id
-            }
-        },
-        watch: {
-            checkChange: function() {
-                this.setRoutes({
-                    page: this.page,
-                    size: this.size,
-                    company_id: this.company_id
-                })
-            }
-        },
         computed: {
-            ...mapState('company', ['company']),
-            ...mapState('route', ['routes']),
-            checkChange: function () {
-                return `${this.page}|${this.size}|${this.company_id}`;
-            }
-        },
-        methods: {
-            ...mapActions('route', ['setRoutes'])
+            ...mapState('company', [
+                'company'
+            ])
         }
     }
 </script>
@@ -143,11 +97,5 @@
 
     .link-to-route:hover {
         color: #ff7550;
-    }
-
-    .tg-pagination {
-        display: flex;
-        justify-content: flex-end;
-        float: unset;
     }
 </style>

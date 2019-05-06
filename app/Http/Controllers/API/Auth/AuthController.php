@@ -5,13 +5,12 @@ namespace App\Http\Controllers\API\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\API\BaseController;
 use Auth;
 use Lcobucci\JWT\Parser;
 use App\Services\UserService;
 use Exception;
 
-class AuthController extends BaseController
+class AuthController extends Controller
 {
     protected $successStatus = 200;
     protected $unauthorized = 401;
