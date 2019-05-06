@@ -3,11 +3,13 @@ import * as types from './mutation-types'
 
 export const setBusRoutes = ({ commit }, params) => {
     var path = 'bus-route?';
+    params.size = params.size ? params.size : 9;
+    params.page = params.page ? params.page : 1;
 
     for (let param in params) {
         path += `${param}=${params[param]}&`;
     }
-    console.log(path);
+    
     return new Promise((resolve, reject) => {
         get(path)
             .then(response => {

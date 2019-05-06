@@ -98,4 +98,17 @@ class ProvincialController extends BaseController
     {
         //
     }
+
+    public function popular()
+    {
+        try {
+            $popularProvincials = $this->provincialService->getPopulars();
+
+            return $this->responseSuccess(compact('popularProvincials'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
+    }
 }

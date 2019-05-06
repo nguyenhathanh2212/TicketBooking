@@ -23,11 +23,12 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <select v-model="date" class="form-control">
-                    <option v-for="(dateItem, index) in busRoute.dates"
-                        :key="index"
-                        :value="dateItem">{{ dateItem }}</option>
-                </select>
+                <date-picker-component v-model="date"
+                    :config="{
+                        format: this.$t('main.date_format'),
+                        minDate: getMoment(busRoute.route.start_date),
+                        maxDate: getMoment(busRoute.route.start_date, busRoute.route.number_preset_date)
+                    }"></date-picker-component>
                 <div>{{ `${numberOfSeat} ${$t('route.seat_empty')}` }}</div>
             </div>
             <div class="col-md-2">
@@ -52,15 +53,18 @@
 </template>
 
 <script>
+    var moment = require('moment');
+
     import Rating from '@plugins/Rating.vue'
+    import datePicker from 'vue-bootstrap-datetimepicker'
 
     export default {
-        props: ['busRoute'],
         data: function() {
             return {
-                date: this.busRoute.dates[0]
+                date: this.busRoute.route.start_date
             }
         },
+        props: ['busRoute'],
         computed: {
             numberOfSeat: function () {
                 let count = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date].length : 0;
@@ -69,7 +73,13 @@
             }
         },
         components: {
-            ratingComponent: Rating
+            ratingComponent: Rating,
+            datePickerComponent: datePicker
+        },
+        methods: {
+            getMoment(date, addDate = 0) {
+                return moment(date, this.$t('main.date_format')).add(addDate, 'days');
+            }
         }
     }
 </script>

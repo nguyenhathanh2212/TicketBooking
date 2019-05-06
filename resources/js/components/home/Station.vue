@@ -1,9 +1,6 @@
 <template>
     <div>
-        <!--************************************
-                    Call To Action Start
-            *************************************-->
-        <!-- <section class="tg-parallax" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-02.jpg">
+        <section class="tg-parallax tg-parallax2" data-appear-top-offset="600" data-parallax="scroll">
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
                     <div class="row">
@@ -18,43 +15,49 @@
                     </div>
                 </div>
             </div>
-        </section> -->
-        <!--************************************
-                Call To Action End
-        *************************************-->
-        <!--************************************
-                Our Guides Start
-        *************************************-->
+        </section>
         <section class="tg-sectionspace tg-haslayout">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tg-sectionhead">
-                            <div class="tg-sectiontitle">
-                                <h2>{{ $t('home.bus_station') }}</h2>
-                            </div>
-                        </div>
-                        <div id="tg-guidesslider" class="tg-guidesslider tg-guides owl-carousel">
-                            <div class="item tg-guide" v-for="(busStation, index) in busStations.data" :key="index">
-                                <figure><img :src="busStation.first_image" alt="image destination"></figure>
-                                <div class="tg-guidecontent">
-                                    <div class="tg-guidecontenthead">
-                                        <h3>{{ busStation.name }}</h3>
-                                        <h4>{{ busStation.address }}</h4>
+                    <div id="tg-destinationsslider" class="tg-destinationsslider tg-destinations owl-carousel">
+                        <div class="item tg-destination custom">
+                            <figure>
+                                <a href="tourbookingdetail.html"><img src="images/destination/img-04.jpg" alt="image description"></a>
+                                <figcaption>
+                                    <h2>
+                                        <a href="tourbookingdetail.html">Paris <i class="fa fa-long-arrow-right"></i> Paris </a>
+                                    </h2>
+                                    <div class="tg-description">
+                                        <p>in the streets of London</p>
                                     </div>
-                                </div>
-                            </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="item tg-destination">
+                            <figure>
+                                <a href="tourbookingdetail.html"><img src="images/destination/img-05.jpg" alt="image description"></a>
+                                <figcaption>
+                                    <h2><a href="tourbookingdetail.html">Egypt</a></h2>
+                                    <div class="tg-description">
+                                        <p>in the streets of London</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            <figure>
+                                <a href="tourbookingdetail.html"><img src="images/destination/img-06.jpg" alt="image description"></a>
+                                <figcaption>
+                                    <h2><a href="tourbookingdetail.html">London</a></h2>
+                                    <div class="tg-description">
+                                        <p>in the streets of London</p>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!--************************************
-                Our Guides End
-        *************************************-->
-        <!--************************************
-                Our Partners Start
-        *************************************-->
+        <div class="clearfix"></div>
         <section class="tg-parallax tg-parallax3" data-appear-top-offset="600" data-parallax="scroll">
             <div class="tg-sectionspace tg-haslayout">
                 <div class="container">
@@ -84,9 +87,8 @@
 
     export default {
         mounted() {
+            $('.tg-parallax2').parallax({imageSrc: '/images/parallax/bgparallax-02.jpg'});
             $('.tg-parallax3').parallax({imageSrc: '/images/parallax/bgparallax-03.jpg'});
-        },
-        updated() {
             this.setSlider();
         },
         computed: {
@@ -96,8 +98,8 @@
         },
         methods: {
             setSlider: function() {
-                var _tg_guidesslider = jQuery('#tg-guidesslider');
-                _tg_guidesslider.owlCarousel({
+                var _tg_destinationsslider = jQuery('#tg-destinationsslider');
+                _tg_destinationsslider.owlCarousel({
                     loop: true,
                     dots: false,
                     nav: true,
@@ -130,7 +132,11 @@
         color: #b1700c;
     }
 
-    section.tg-sectionspace.tg-haslayout {
+    /* section.tg-sectionspace.tg-haslayout {
         height: 617px;
+    } */
+    
+    .tg-destination.custom figure figcaption h2 {
+        font-size: 20px;
     }
 </style>

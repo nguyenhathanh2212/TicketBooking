@@ -5,7 +5,7 @@
             <advanture-conponent></advanture-conponent>
             <feature-conponent></feature-conponent>
             <company-slider-conponent></company-slider-conponent>
-            <!-- <destination-conponent></destination-conponent> -->
+            <provincial-conponent></provincial-conponent>
             <station-conponent></station-conponent>
         </main>
     </div>
@@ -17,7 +17,7 @@
     import Advanture from '@home/Advanture.vue'
     import Feature from '@home/Feature.vue'
     import CompanySlider from '@home/CompanySlider.vue'
-    import Destination from '@home/Destination.vue'
+    import Provincial from '@home/Provincial.vue'
     import Station from '@home/Station.vue'
 
     export default {
@@ -26,7 +26,7 @@
             advantureConponent: Advanture,
             featureConponent: Feature,
             companySliderConponent: CompanySlider,
-            destinationConponent: Destination,
+            provincialConponent: Provincial,
             stationConponent: Station
         },
         methods: {

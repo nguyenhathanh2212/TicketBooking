@@ -31,6 +31,7 @@ class BusRouteController extends BaseController
                 'date_away',
                 'provincial_start',
                 'provincial_destination',
+                'route'
             ]);
 
             $busRoutes = $this->busRouteService->search($params);

@@ -18,26 +18,8 @@ class BusRoute extends Model
     protected $appends = [
         'rating',
         'price_format',
-        'dates',
         'route_tickets',
     ];
-
-    public function getDatesAttribute()
-    {
-        $startTime = Carbon::parse($this->route->start_time);
-
-        if ($startTime->lt(Carbon::now()->addHour())) $startTime->addDay();
-
-        $endTime = $startTime->copy()->addDay($this->number_preset_date);
-        $dates = [];
-
-        while ($startTime->lte($endTime)) {
-            array_push($dates, $startTime->format(trans('main.date_format')));
-            $startTime->addDay();
-        }
-
-        return $dates;
-    }
 
     public function getRouteTicketsAttribute()
     {

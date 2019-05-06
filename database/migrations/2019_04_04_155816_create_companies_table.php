@@ -15,6 +15,7 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('station_id');
             $table->string('name');
             $table->text('description');
             $table->text('address');

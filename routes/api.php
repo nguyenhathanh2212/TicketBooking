@@ -22,6 +22,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::get('company/{id}/rating', 'CompanyController@getRatings');
     Route::resource('bus-route', 'BusRouteController');
     Route::resource('bus-station', 'StationController');
+    Route::get('provincial/popular', 'ProvincialController@popular');
     Route::resource('provincial', 'ProvincialController');
 
     Route::group(['middleware' => 'auth:api'], function() {

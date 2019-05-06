@@ -1,21 +1,24 @@
 <template>
     <div>
-        <div>
-            <ul class="list-group list-group-flush">
-                <item-component
-                    v-for="(busRoute, index) in busRoutes.data"
-                    :key="index"
-                    :busRoute="busRoute"></item-component>
-            </ul>
+        <div v-if="busRoutes.total">
+            <div>
+                <ul class="list-group list-group-flush">
+                    <item-component
+                        v-for="(busRoute, index) in busRoutes.data"
+                        :key="index"
+                        :busRoute="busRoute"></item-component>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <paginate-component
+                :data="busRoutes"
+                :routeName="'route.index'"></paginate-component>
         </div>
-        <div class="clearfix"></div>
-        <paginate-component
-            :data="busRoutes"
-            :params="{
-                size: size,
-                page: page
-            }"
-            :routeName="'route.index'"></paginate-component>
+        <div v-else>
+            <div class="alert alert-info" style="margin-top: 30px" role="alert">
+                {{ $t('message.no_data_found') }}
+            </div>
+        </div>
     </div>
 </template>
 
@@ -26,21 +29,10 @@
     import DatePicker from 'vue-bootstrap-datetimepicker'
 
     export default {
-        data: function() {
-            return {
-                value1: ''
-            }
-        },
         computed: {
             ...mapState('bus_route', [
                 'busRoutes'
-            ]),
-            size: function() {
-                return this.$route.params.size ? this.$route.params.size : 9;
-            },
-            page: function() {
-                return this.$route.params.size ? this.$route.params.page : 1;
-            },
+            ])
         },
         components: {
             paginateComponent: Paginate,

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Company;
+use App\Models\Station;
 
 class CompanyService extends BaseService {
     /**
@@ -32,6 +33,16 @@ class CompanyService extends BaseService {
     {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
+
+        if (!empty($params['provincial'])) {
+            $stationsID = Station::where('provincial_id', $params['provincial'])->pluck('id');
+            $query = $query->whereIn('station_id', $stationsID);
+        }
+
+        if (!empty($params['station'])) {
+            $query = $query->where('station_id', $params['station']);
+        }
+
         $query->with(['images']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);

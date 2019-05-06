@@ -13,6 +13,7 @@ class Route extends Model
         'destination_station_id',
         'start_time',
         'destination_time',
+        'number_preset_date'
     ];
 
     protected $appends = [
@@ -21,7 +22,18 @@ class Route extends Model
         'start_time_format',
         'destination_time_format',
         'company_name',
+        'number_of_buses',
+        'start_date',
     ];
+
+    public function getStartDateAttribute()
+    {
+        $startTime = Carbon::parse($this->start_time);
+
+        if ($startTime->lt(Carbon::now()->addHour(config('setting.number_hours_preset')))) $startTime->addDay();
+
+        return $startTime->format(trans('main.date_format'));
+    }
 
     public function startStation()
     {
@@ -39,6 +51,11 @@ class Route extends Model
 
     public function busRoutes() {
         return $this->hasMany(BusRoute::class, 'route_id', 'id');
+    }
+
+    public function getNumberOfBusesAttribute()
+    {
+        return $this->busRoutes()->count();
     }
 
     public function getStartStationNameAttribute()

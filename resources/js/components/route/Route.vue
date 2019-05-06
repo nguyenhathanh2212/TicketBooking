@@ -79,9 +79,9 @@
     export default {
         data: function() {
             return {
-                provincial_start: this.$route.params.provincial_start ? this.$route.params.provincial_start : '',
-                provincial_destination: this.$route.params.provincial_destination ? this.$route.params.provincial_destination : '',
-                date_away: this.$route.params.date_away ? this.$route.params.date_away : ''
+                provincial_start: this.$route.query.provincial_start ? this.$route.query.provincial_start : '',
+                provincial_destination: this.$route.query.provincial_destination ? this.$route.query.provincial_destination : '',
+                date_away: this.$route.query.date_away ? this.$route.query.date_away : ''
             }
         },
         components: {
@@ -90,27 +90,18 @@
             datePickerComponent: datePicker
         },
         watch: {
-            checkChange: function() {
-                this.setBusRoutes({
-                    size: this.size,
-                    page: this.page,
-                    provincial_start: this.provincial_start,
-                    provincial_destination: this.provincial_start,
-                    date_away: this.date_away
-                });
-            },
             provincial_start: function() {
                 this.provincial_destination = this.provincial_start != 1 ? 1 : this.provincial_destination;
             },
             provincial_destination: function() {
                 this.provincial_start = this.provincial_destination != 1 ? 1 : this.provincial_start;
+            },
+            query: function() {
+                this.setBusRoutes(this.query);
             }
         },
         created() {
-            this.setBusRoutes({
-                size: this.size,
-                page: this.page
-            });
+            this.setBusRoutes(this.query);
             this.setAllProvincials();
         },
         updated() {
@@ -125,26 +116,21 @@
             ]),
             ...mapActions('provincial', ['setAllProvincials']),
             search: function() {
-                this.setBusRoutes({
-                    size: this.size,
-                    page: this.page,
-                    provincial_start: this.provincial_start,
-                    provincial_destination: this.provincial_destination,
-                    date_away: this.date_away
+                this.$router.push({
+                    name: 'route.index',
+                    query: {
+                        provincial_start: this.provincial_start,
+                        provincial_destination: this.provincial_destination,
+                        date_away: this.date_away
+                    }
                 });
             },
         },
         computed: {
             ...mapState('provincial', ['allProvincials']),
-            size: function () {
-                return this.$route.query.size ? this.$route.query.size : 9;
+            query: function () {
+                return this.$route.query;
             },
-            page: function () {
-                return this.$route.query.page ? this.$route.query.page : 1;
-            },
-            checkChange: function () {
-                return `${this.size}|${this.page}`;
-            }
         }
     }
 </script>

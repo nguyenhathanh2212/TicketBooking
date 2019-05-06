@@ -1,17 +1,33 @@
 <template>
     <div role="tabpanel" class="tab-pane tg-locationtab" id="italy">
         <div class="tg-box tg-location">
-            <h3>The neighborhood</h3>
+            <h3>{{ $t('company.address') }}</h3>
             <div class="tg-description">
-                <p>Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna molliseuismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>{{ company.address }}</p>
             </div>
-            <div id="tg-locationmap" class="tg-locationmap tg-map"></div>
+            <div id="tg-locationmap" class="tg-locationmap tg-map"><GmapMap
+                :center="{lat: company.latitude, lng: company.longitude}"
+                :zoom="7"
+                map-type-id="roadmap"
+                style="width: 100%; height: 100%">
+                    <GmapMarker
+                        :position="{lat: company.latitude, lng: company.longitude}"
+                        :clickable="true"
+                        :draggable="true"/>
+                </GmapMap>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
-        
+        computed: {
+            ...mapState('company', [
+                'company'
+            ])
+        }
     }
 </script>

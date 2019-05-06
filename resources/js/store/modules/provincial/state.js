@@ -1,3 +1,4 @@
 export default {
-    allProvincials: []
+    allProvincials: [],
+    popularProvincials: [],
 }

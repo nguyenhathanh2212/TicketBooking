@@ -3,7 +3,7 @@
     "route": "Tuyến đường",
     "start_time": "Thời gian xuất bến",
     "destination_time": "Thời gian đến",
-    "number_of_trip": "Số chuyến / ngày",
+    "number_of_bus": "Số lượng xe",
     "location": "Vị trí",
     "reviews": "Đánh giá",
     "address_phone": "Địa chỉ - Số điện thoại",
@@ -13,5 +13,6 @@
     "leave_your_comment": "Để lại bình luận",
     "your_rating": "Đánh giá",
     "your_comment": "Bình luận của bạn",
-    "review": "Đánh giá"
+    "review": "Đánh giá",
+    "picture": "Hình ảnh"
 }

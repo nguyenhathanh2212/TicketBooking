@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h1>Experience the Wonder</h1>
+                            <h1>Make your Journey happier</h1>
                             <h2>People don’t take trips, trips take People</h2>
                             <form class="tg-formtheme tg-formtrip">
                                 <fieldset>
@@ -137,7 +137,7 @@
             search: function() {
                 this.$router.push({
                     name: 'route.index',
-                    params: {
+                    query: {
                         provincial_start: this.provincial_start,
                         provincial_destination: this.provincial_destination,
                         date_away: this.date_away

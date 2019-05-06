@@ -14,4 +14,9 @@ class Provincial extends Model
     {
         return $this->hasMany(Station::class);
     }
+
+    public function companies()
+    {
+        return $this->hasManyThrough(Company::class, Station::class);
+    }
 }

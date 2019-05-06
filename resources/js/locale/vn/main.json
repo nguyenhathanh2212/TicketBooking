@@ -10,11 +10,12 @@
     "login_with": "Đăng nhập với...",
     "or": "hoặc",
     "home": "Trang chủ",
-    "companies": "Hãng xe",
+    "companies": "Nhà xe",
     "routes": "Tuyến đường",
     "enter_destination": "Gõ vào nơi đến",
     "enter_start": "Gõ vào nơi đi",
     "search_ticket": "Tìm vé xe",
     "reviews": "Đánh giá",
-    "date_away": "Ngày đi"
+    "date_away": "Ngày đi",
+    "list_bus_station": "Danh sách bến xe"
 }
