@@ -85,7 +85,7 @@
             $('.my-selectpicker').selectpicker('refresh');
         },
         components: {
-            datePickerComponent: datePicker,
+            datePickerComponent: datePicker
         },
         computed: {
             ...mapState('provincial', ['allProvincials'])

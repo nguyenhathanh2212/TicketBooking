@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'API'], function () {
     Route::resource('company', 'CompanyController');
     Route::get('company/{id}/rating', 'CompanyController@getRatings');
+    Route::resource('route', 'RouteController');
     Route::resource('bus-route', 'BusRouteController');
     Route::resource('bus-station', 'StationController');
     Route::get('provincial/popular', 'ProvincialController@popular');

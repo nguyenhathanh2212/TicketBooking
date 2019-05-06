@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
     {
         $rules = [
             'email' => 'required|email',
-            'password' => 'required|digits_between:6,20',
+            'password' => 'required|between:6,20',
         ];
 
         if (isset($this->confirm_password)) {
