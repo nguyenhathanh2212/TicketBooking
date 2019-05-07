@@ -38,6 +38,7 @@
         "normalize.css": "^8.0.1",
         "packery": "^2.1.2",
         "scrolltofixed": "^1.0.6",
+        "sweetalert2": "^8.10.1",
         "v-autocomplete": "^1.8.2",
         "vee-validate": "^2.2.4",
         "vue-bootstrap-datetimepicker": "^5.0.1",
@@ -45,6 +46,7 @@
         "vue-star-rating": "^1.6.1",
         "vue2-datepicker": "^2.11.1",
         "vue2-google-maps": "^0.10.6",
-        "vuex": "^3.1.0"
+        "vuex": "^3.1.0",
+        "vuex-router-sync": "^5.0.0"
     }
 }

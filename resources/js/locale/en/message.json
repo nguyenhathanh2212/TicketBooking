@@ -1,10 +1,15 @@
 {
     "login_success": "Logged in successfully",
+    "register_success": "Register thành công",
     "login_error": "Login failed",
+    "register_error": "Register failed",
     "not_select_seat": "You have not selected a seat",
     "bus_company_network": "Big bus company network",
     "connect_nationwide": "Connect nationwide",
     "link_many_bus_stations": "Link many bus stations",
     "booking_tickets_is_easy": "Booking tickets is easy",
-    "no_data_found": "No data found!"
+    "no_data_found": "No data found!",
+    "error_message": "An error occurred while processing your request",
+    "update_password_success": "Update password successfully",
+    "update_profile_success": "Update profile successfully"
 }

@@ -37,6 +37,7 @@ Route::group(['namespace' => 'API'], function () {
         Route::get('unauthorized', 'AuthController@unauthorized')->name('unauthorized');
         Route::group(['middleware' => 'auth:api'], function() {
             Route::get('user', 'AuthController@getUser');
+            Route::patch('update', 'AuthController@update');
             Route::post('logout', 'AuthController@logout');
         });
     });

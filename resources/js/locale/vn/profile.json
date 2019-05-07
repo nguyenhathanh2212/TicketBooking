@@ -1,0 +1,19 @@
+{
+    "name": "Tên",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Địa chỉ Email",
+    "phone": "Số điện thoại",
+    "contact_address": "Địa chỉ liên hệ",
+    "edit_profile": "Chỉnh sửa trang cá nhân",
+    "my_profile": "Trang cá nhân",
+    "dashboard": "Dashboard",
+    "change_password": "Đổi mật khẩu",
+    "my_booking": "Lịch sử đặt vé",
+    "my_account": "Tài khoản cá nhân",
+    "update": "Cập nhật",
+    "old_password": "Mật khẩu củ",
+    "new_password": "Mật khẩu mới",
+    "confirm_password": "Xác nhận mật khẩu",
+    "logout": "Đăng xuất"
+}

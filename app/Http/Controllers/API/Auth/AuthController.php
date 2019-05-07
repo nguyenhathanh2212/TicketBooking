@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
 use Auth;
@@ -129,5 +130,29 @@ class AuthController extends BaseController
 
             return $this->responseErrors($e->getCode(), $e->getMessage());
         }
-     }
+    }
+
+    public function update(UpdateUserRequest $request)
+    {
+        try {
+            $user = Auth::user();
+            $data = $request->only([
+                'first_name',
+                'last_name',
+                'password',
+            ]);
+            $user->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'user' => $user,
+                ],
+            ], $this->successStatus);
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
+    }
 }
