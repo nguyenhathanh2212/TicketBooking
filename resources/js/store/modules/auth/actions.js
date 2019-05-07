@@ -19,6 +19,22 @@ export const login = ({ commit }, data) => {
     })
 }
 
+
+export const loginSocial = ({ commit }, data) => {
+    return new Promise((resolve, reject) => {
+        post('auth/login_social', data)
+            .then(response => {
+                console.log(response.data);
+                commit(types.LOGIN, response.data);
+                commit(types.SET_USER, response.data.data.user);
+                resolve(response.status);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    })
+}
+
 export const setUser = ({ commit }) => {
     return new Promise((resolve, reject) => {
         get('auth/user')
@@ -66,6 +82,7 @@ export const update = ({ commit }, data) => {
 export default {
     checkAuthenticated,
     login,
+    loginSocial,
     setUser,
     logout,
     register,

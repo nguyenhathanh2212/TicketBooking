@@ -43,5 +43,14 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-
+    'google' => [
+        'client_id' => env('MIX_GOOGLE_CLIENT_ID'),
+        'client_secret' => env('MIX_GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('MIX_GOOGLE_REDIRECT_URL'),
+    ],
+    'facebook' => [
+        'client_id' => env('MIX_FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('MIX_FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('MIX_FACEBOOK_REDIRECT_URL'),
+    ],
 ];

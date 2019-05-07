@@ -17,6 +17,10 @@ use App\Services\Api\Pagination\ApiPaginator;
 
 class BaseController extends Controller
 {
+    protected $successStatus = 200;
+    protected $unauthorized = 401;
+    protected $notFound = 404;
+
     public function __construct()
     {
         //

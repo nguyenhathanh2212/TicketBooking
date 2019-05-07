@@ -6,11 +6,18 @@ axios.interceptors.request.use(config => {
     return config;
 })
 
-axios.interceptors.response.use(response => {
-    NProgress.done();
-    
-    return response;
-})
+axios.interceptors.response.use(
+    response => {
+        NProgress.done();
+        
+        return response;
+    },
+    error => {
+        NProgress.done();
+        
+        return error;
+    },
+)
 
 const concatUrl = function (url) {
     const baseUrl = window.Laravel.url + '/api/'

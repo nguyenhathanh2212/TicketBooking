@@ -32,6 +32,9 @@ Route::group(['namespace' => 'API'], function () {
 
     // Auth
     Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+        Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+        Route::get('/callback/{social}', 'SocialAuthController@callback');
+        Route::post('/login_social', 'SocialAuthController@handleProviderCallback');
         Route::post('login', 'AuthController@login');
         Route::post('register', 'AuthController@register');
         Route::get('unauthorized', 'AuthController@unauthorized')->name('unauthorized');

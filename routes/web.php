@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('app');
-});
+})->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::resource('company', 'CompanyController');

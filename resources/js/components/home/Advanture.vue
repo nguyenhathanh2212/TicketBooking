@@ -8,7 +8,7 @@
                             <div class="tg-tourdestination tg-tourdestinationbigbox">
                                 <figure>
                                     <a href="javascript:void(0);">
-                                        <img src="images/destination/img-01.jpg" alt="image destinations">
+                                        <img src="/images/destination/img-01.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
                                                 <h2>{{ $t('message.bus_company_network') }}</h2>
@@ -23,7 +23,7 @@
                             <div class="tg-tourdestination">
                                 <figure>
                                     <a href="javascript:void(0);">
-                                        <img src="images/destination/img-02.jpg" alt="image destinations">
+                                        <img src="/images/destination/img-02.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
                                                 <h2>{{ $t('message.link_many_bus_stations') }}</h2>
@@ -35,7 +35,7 @@
                             <div class="tg-tourdestination">
                                 <figure>
                                     <a href="javascript:void(0);">
-                                        <img src="images/destination/img-03.jpg" alt="image destinations">
+                                        <img src="/images/destination/img-03.jpg" alt="image destinations">
                                         <div class="tg-hoverbox">
                                             <div class="tg-adventuretitle">
                                                 <h2>{{ $t('message.booking_tickets_is_easy') }}</h2>

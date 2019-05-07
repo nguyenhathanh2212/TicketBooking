@@ -17,10 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('provider_id')->nullable();
-            $table->string('provider')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
             $table->tinyInteger('type')->default(config('setting.user.role.user'));
             $table->rememberToken();
             $table->timestamps();

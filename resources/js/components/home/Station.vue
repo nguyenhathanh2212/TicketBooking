@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="tg-calltoaction">
-                                <div class="tg-pattern"><img src="images/patternw.png" alt="image destination"></div>
+                                <div class="tg-pattern"><img src="/images/patternw.png" alt="image destination"></div>
                                 <h2>Get 10% Off on your Next Travel</h2>
                                 <div class="tg-description"><p>Travel between 22 April to 21 May and get existing offers along with a sure 10% cash discount</p></div>
                                 <a class="tg-btn" href="javascript:void(0);"><span>Explore Tour</span></a>
@@ -22,7 +22,7 @@
                     <div id="tg-destinationsslider" class="tg-destinationsslider tg-destinations owl-carousel">
                         <div class="item tg-destination custom">
                             <figure>
-                                <a href="tourbookingdetail.html"><img src="images/destination/img-04.jpg" alt="image description"></a>
+                                <a href="tourbookingdetail.html"><img src="/images/destination/img-04.jpg" alt="image description"></a>
                                 <figcaption>
                                     <h2>
                                         <a href="tourbookingdetail.html">Paris <i class="fa fa-long-arrow-right"></i> Paris </a>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="item tg-destination">
                             <figure>
-                                <a href="tourbookingdetail.html"><img src="images/destination/img-05.jpg" alt="image description"></a>
+                                <a href="tourbookingdetail.html"><img src="/images/destination/img-05.jpg" alt="image description"></a>
                                 <figcaption>
                                     <h2><a href="tourbookingdetail.html">Egypt</a></h2>
                                     <div class="tg-description">
@@ -44,7 +44,7 @@
                                 </figcaption>
                             </figure>
                             <figure>
-                                <a href="tourbookingdetail.html"><img src="images/destination/img-06.jpg" alt="image description"></a>
+                                <a href="tourbookingdetail.html"><img src="/images/destination/img-06.jpg" alt="image description"></a>
                                 <figcaption>
                                     <h2><a href="tourbookingdetail.html">London</a></h2>
                                     <div class="tg-description">
@@ -64,14 +64,14 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="tg-ourpartners">
-                                <div class="tg-pattern"><img src="images/patternw.png" alt="image destination"></div>
+                                <div class="tg-pattern"><img src="/images/patternw.png" alt="image destination"></div>
                                 <h2>Our Partners</h2>
                                 <ul class="tg-partners">
-                                    <li><figure><a href="javascript:void(0);"><img src="images/partners/img-01.png" alt="image destinations"></a></figure></li>
-                                    <li><figure><a href="javascript:void(0);"><img src="images/partners/img-02.png" alt="image destinations"></a></figure></li>
-                                    <li><figure><a href="javascript:void(0);"><img src="images/partners/img-03.png" alt="image destinations"></a></figure></li>
-                                    <li><figure><a href="javascript:void(0);"><img src="images/partners/img-04.png" alt="image destinations"></a></figure></li>
-                                    <li><figure><a href="javascript:void(0);"><img src="images/partners/img-05.png" alt="image destinations"></a></figure></li>
+                                    <li><figure><a href="javascript:void(0);"><img src="/images/partners/img-01.png" alt="image destinations"></a></figure></li>
+                                    <li><figure><a href="javascript:void(0);"><img src="/images/partners/img-02.png" alt="image destinations"></a></figure></li>
+                                    <li><figure><a href="javascript:void(0);"><img src="/images/partners/img-03.png" alt="image destinations"></a></figure></li>
+                                    <li><figure><a href="javascript:void(0);"><img src="/images/partners/img-04.png" alt="image destinations"></a></figure></li>
+                                    <li><figure><a href="javascript:void(0);"><img src="/images/partners/img-05.png" alt="image destinations"></a></figure></li>
                                 </ul>
                             </div>
                         </div>

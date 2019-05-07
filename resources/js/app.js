@@ -10,6 +10,17 @@ import messages from './locale'
 import VeeValidate, { Validator } from 'vee-validate'
 import vi from 'vee-validate/dist/locale/vi'
 import * as VueGoogleMaps from 'vue2-google-maps'
+const HelloJs = require('hellojs/dist/hello.all.min.js');
+const VueHello = require('vue-hellojs');
+
+HelloJs.init({
+    google: process.env.MIX_GOOGLE_CLIENT_ID,
+    facebook: process.env.MIX_FACEBOOK_CLIENT_ID
+}, {
+    redirect_uri: '/'
+});
+
+Vue.use(VueHello, HelloJs);
 
 Vue.use(VueI18n);
 Vue.component('master-component', require('./components/layout/Master.vue').default);
