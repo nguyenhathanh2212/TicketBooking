@@ -12,8 +12,8 @@
                             <li role="presentation"><a href="#register" data-toggle="tab">{{ $t('main.register') }}</a></li>
                         </ul>
                         <div class="tg-tabcontent tab-content">
-                            <login-component></login-component>
-                            <register-component></register-component>
+                            <login-component @closePopupLogin="closePupup"></login-component>
+                            <register-component @closePopupRegister="closePupup"></register-component>
                         </div>
                     </div>
                     <div class="tg-shareor"><span>{{ $t('main.or') }}</span></div>
@@ -40,8 +40,8 @@
             loginComponent: Login,
             registerComponent: Register
         },
-        watch: {
-            authenticated: function() {
+        methods: {
+            closePupup: function () {
                 if (this.authenticated) {
                     jQuery('#tg-loginsingup').removeClass('open');
                     jQuery('body').removeClass('tg-hidescroll');

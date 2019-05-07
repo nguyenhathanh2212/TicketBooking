@@ -10,6 +10,7 @@
                            name="email"
                            v-model="email"
                            :class="['form-control', { 'input-error': errors.first('email') }]"
+                           :data-vv-as="this.$t('main.email')"
                            placeholder="">
                 </div>
                 <div class="form-group">
@@ -19,8 +20,10 @@
                            name="password"
                            v-model="password"
                            :class="['form-control', { 'input-error': errors.first('password') }]"
+                           :data-vv-as="this.$t('main.password')"
                            v-validate="{ required: true, max: 20, min: 6 }"
-                           placeholder="">
+                           placeholder=""
+                           ref="1">
                 </div>
                 <div class="form-group">
                     <label>{{ $t('main.confirm_password') }} <sup>*</sup></label>
@@ -29,7 +32,8 @@
                            name="confirm_password"
                            v-model="confirm_password"
                            :class="['form-control', { 'input-error': errors.first('password') }]"
-                           v-validate="{ required: true, confirmed: password }"
+                           :data-vv-as="this.$t('main.confirm_password')"
+                           v-validate="{ required: true, confirmed: 1 }"
                            class="form-control"
                            placeholder="">
                 </div>
@@ -57,7 +61,27 @@
             handleRegister: function() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        this.register({ email: this.email, password: this.password, confirm_password: this.confirm_password });
+                        this.register({ email: this.email, password: this.password, confirm_password: this.confirm_password })
+                            .then(success => {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: this.$t('message.register_success'),
+                                    type: 'success',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        this.$emit('closePopupRegister');
+                                    }
+                                });
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: this.$t('message.register_error'),
+                                    type: 'error',
+                                    confirmButtonText: 'Ok'
+                                });
+                            });
                     }
                 });
             }

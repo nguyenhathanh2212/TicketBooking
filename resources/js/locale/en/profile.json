@@ -1,0 +1,19 @@
+{
+    "name": "Name",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email Address",
+    "phone": "Phone",
+    "contact_address": "Contact Address",
+    "edit_profile": "Edit Profile",
+    "my_profile": "My Profile",
+    "dashboard": "Dashboard",
+    "change_password": "Change password",
+    "my_booking": "My booking",
+    "my_account": "My Account",
+    "update": "Update",
+    "old_password": "Old password",
+    "new_password": "New password",
+    "confirm_password": "Confirm password",
+    "logout": "Logout"
+}

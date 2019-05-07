@@ -1,11 +1,5 @@
 <template>
     <div role="tabpanel" class="tab-pane active fade in" id="login">
-        <div v-if="messagesError" class="alert alert-danger" role="alert">
-            {{ messagesError }}
-        </div>
-        <div v-if="messagesSuccess" class="alert alert-success" role="alert">
-            {{ messagesSuccess }}
-        </div>
         <form class="tg-formtheme tg-formlogin" @submit.prevent="handleLogin()">
             <fieldset>
                 <div class="form-group">
@@ -13,6 +7,7 @@
                     <span class="error">{{ errors.first('email') }}</span>
                     <input type="text"
                             v-validate="'required|email'"
+                            :data-vv-as="this.$t('main.email')"
                             name="email"
                             v-model="email"
                             :class="['form-control', { 'input-error': errors.first('email') }]"
@@ -24,6 +19,7 @@
                     <input type="password"
                            name="password"
                            v-validate="{ required: true, max: 20, min: 6 }"
+                           :data-vv-as="this.$t('main.password')"
                            v-model="password"
                            :class="['form-control', { 'input-error': errors.first('password') }]"
                            placeholder="">
@@ -46,9 +42,7 @@
         data: function() {
             return {
                 email: '',
-                password: '',
-                messagesError: '',
-                messagesSuccess: ''
+                password: ''
             }
         },
         methods: {
@@ -58,14 +52,26 @@
             handleLogin: function () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        this.login({email: this.email, password: this.password})
+                        this.login({ email: this.email, password: this.password })
                             .then(success => {
-                                this.messagesError = '';
-                                this.messagesSuccess = this.$t('message.login_success');
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: this.$t('message.login_success'),
+                                    type: 'success',
+                                    confirmButtonText: 'Ok'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        this.$emit('closePopupLogin');
+                                    }
+                                });
                             })
                             .catch(error => {
-                                this.messagesSuccess = '';
-                                this.messagesError = this.$t('message.login_error');
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: this.$t('message.login_error'),
+                                    type: 'error',
+                                    confirmButtonText: 'Ok'
+                                });
                             });
                     }
                 });

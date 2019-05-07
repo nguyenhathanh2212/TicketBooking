@@ -21,6 +21,7 @@ export default {
         localStorage.removeItem('access_token');
         localStorage.removeItem('user');
         axios.defaults.headers.common['Authorization'];
+        window.location.href = '/';
     },
 
     [types.SET_USER](state, user) {

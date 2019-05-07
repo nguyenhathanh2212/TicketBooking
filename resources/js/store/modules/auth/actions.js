@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-import { post, get } from '../../../helpers/api'
+import { post, get, patch } from '../../../helpers/api'
 
 export const checkAuthenticated = ({ commit }) => {
     commit(types.CHECK_AUTHENTICATED);
@@ -50,10 +50,24 @@ export const register = ({ commit }, data) => {
     })
 }
 
+export const update = ({ commit }, data) => {
+    return new Promise((resolve, reject) => {
+        patch('auth/update', data)
+            .then(response => {
+                commit(types.SET_USER, response.data.data.user);
+                resolve(response.status);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    })
+}
+
 export default {
     checkAuthenticated,
     login,
     setUser,
     logout,
-    register
+    register,
+    update
 }

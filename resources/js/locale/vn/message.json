@@ -1,10 +1,15 @@
 {
     "login_success": "Đăng nhập thành công",
+    "register_success": "Đăng kí thành công",
     "login_error": "Đăng nhập thất bại",
+    "register_error": "Đăng kí thất bại",
     "not_select_seat": "Bạn chưa chọn chỗ ngồi",
     "bus_company_network": "Mạng lưới nhà xe lớn",
     "connect_nationwide": "Kết nối toàn quốc",
     "link_many_bus_stations": "Liên kết nhiều bến xe",
     "booking_tickets_is_easy": "Đặt vé dễ dàng",
-    "no_data_found": "Không tìm thấy dữ liệu nào!"
+    "no_data_found": "Không tìm thấy dữ liệu nào!",
+    "error_message": "Đã xảy ra lỗi trong khi xử lý yêu cầu của bạn",
+    "update_password_success": "Cập nhật mật khẩu thành công",
+    "update_profile_success": "Cập nhật thông tin thành công"
 }
