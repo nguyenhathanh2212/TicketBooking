@@ -7,4 +7,7 @@ return [
     'manage_company' => 'Manage bus company',
     'users' => 'Users',
     'manage_user' => 'Manage users',
+    'delete' => 'Delete',
+    'show' => 'Show',
+    'entries' => 'entries',
 ];

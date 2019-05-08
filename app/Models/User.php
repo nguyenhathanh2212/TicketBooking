@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'type'
+        'provider_id',
+        'provider',
+        'role'
     ];
 
     /**
@@ -62,7 +64,7 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public function userCompany() {
+    public function userCompanies() {
         return $this->hasMany(UserCompany::class, 'user_id', 'id');
     }
 

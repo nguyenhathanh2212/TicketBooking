@@ -17,6 +17,7 @@ class CreateActionPermisionTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('action_id');
             $table->unsignedInteger('permision_id');
+            $table->integer('licensed');
             $table->timestamps();
         });
     }

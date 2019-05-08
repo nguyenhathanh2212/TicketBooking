@@ -13,10 +13,17 @@ return [
         'role' => [
             'super_admin' => 0,
             'admin' => 1,
-            'super_manager' => 2,
-            'manager' => 3,
-            'user' => 4,
+            'user' => 2,
+        ],
+        'role_company' => [
+            'super_manager' => 0,
+            'manager' => 1,
         ],
     ],
     'number_hours_preset' => 3,
+    'number_of_records_pagination' => [
+        '10' => 10,
+        '25' => 25,
+        '50' => 50,
+    ],
 ];

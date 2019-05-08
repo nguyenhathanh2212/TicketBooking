@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => 'password', // password
-        'type' => config('setting.user.role.user'),
+        'role' => config('setting.user.role.user'),
     ];
 });
 

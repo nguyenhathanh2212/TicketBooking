@@ -3,12 +3,12 @@
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Action;
+use App\Models\Permision;
 use App\Models\Bus;
 use App\Models\BusRoute;
 use App\Models\Company;
 use App\Models\Image;
 use App\Models\Rating;
-use App\Models\Permision;
 use App\Models\Route;
 use App\Models\Station;
 use App\Models\Ticket;
@@ -27,13 +27,11 @@ class AllSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         User::truncate();
-        Action::truncate();
         Bus::truncate();
         BusRoute::truncate();
         Company::truncate();
         Image::truncate();
         Rating::truncate();
-        Permision::truncate();
         Route::truncate();
         Station::truncate();
         Ticket::truncate();
@@ -44,22 +42,14 @@ class AllSeeder extends Seeder
             'email' => 'superadmin@gmail.com',
             'first_name' => 'Admin',
             'last_name' => 'Super',
-            'type' => config('setting.user.role.super_admin'),
+            'role' => config('setting.user.role.super_admin'),
         ]);
 
         factory(User::class, 2)->create([
-            'type' => config('setting.user.role.admin'),
+            'role' => config('setting.user.role.admin'),
         ]);
 
-        factory(User::class, 5)->create([
-            'type' => config('setting.user.role.super_manager'),
-        ]);
-
-        factory(User::class, 10)->create([
-            'type' => config('setting.user.role.manager'),
-        ]);
-
-        $users = factory(User::class, 15)->create();
+        $users = factory(User::class, 25)->create();
 
         //station
         $stations = factory(Provincial::class, 10)->create()->each(function($provincial) use ($faker) {
@@ -74,7 +64,7 @@ class AllSeeder extends Seeder
 //        ]);
 
         // company
-        factory(Company::class, 10)->create([
+        $companies = factory(Company::class, 10)->create([
             'station_id' => $stations->random()->id
         ])->each(function($company) use ($faker, $stations, $users) {
             $buses = factory(Bus::class, 5)->create([
@@ -115,5 +105,12 @@ class AllSeeder extends Seeder
                 'imageable_type' => 'App\Models\Company',
             ]);
         });
+
+        foreach ($companies as $company) {
+            $company->userCompanies()->create([
+                'user_id' => $users->random()->id,
+                'role' => rand(0,1),
+            ]);
+        }
     }
 }

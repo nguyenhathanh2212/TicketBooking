@@ -17,6 +17,7 @@ class CreatePermisionUserTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('permision_id');
+            $table->integer('licensed')->default(0);
             $table->timestamps();
         });
     }

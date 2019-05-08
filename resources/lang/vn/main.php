@@ -6,4 +6,7 @@ return [
     'manage_company' => 'Quản lý nhà xe',
     'users' => 'Người dùng',
     'manage_user' => 'Quản lý người dùng',
+    'delete' => 'Xóa',
+    'show' => 'Hiển thị',
+    'entries' => 'mục',
 ];

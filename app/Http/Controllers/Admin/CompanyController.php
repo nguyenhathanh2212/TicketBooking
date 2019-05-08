@@ -33,6 +33,7 @@ class CompanyController extends Controller
                 'size',
                 'sort_field',
                 'sort_type',
+                'keyword'
             ]);
 
             $companies = $this->companyService->search($params);
@@ -73,7 +74,14 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $company = $this->companyService->getCompany($id);
+
+            return view('admin.company.show', compact('company'));
+        } catch (Exception $e) {
+            report($e);
+            abort(404);
+        }
     }
 
     /**
