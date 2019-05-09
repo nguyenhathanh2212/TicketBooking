@@ -12,24 +12,40 @@
                                 </div>
                                 <div class="clearfix"></div>
                                     <div class="row">
-                                    <div v-for="(busStation, index) in busStations.data" :key="index" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                                        <div class="item tg-guide">
-                                            <figure>
-                                                <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
-                                                    <img :src="busStation.first_image" alt="image destination">
-                                                </router-link>
-                                            </figure>
-                                            <div class="tg-guidecontent">
-                                                <div class="tg-guidecontenthead">
-                                                    <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
-                                                        <h3>{{ busStation.name }}</h3>
-                                                    </router-link>
-                                                    <h4>{{ busStation.address }}</h4>
+                                        <template v-for="(busStation, index) in busStations.data">
+                                            <div :key="index" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                <div class="item tg-guide">
+                                                    <div class="tg-topdestination">
+                                                        <figure>
+                                                            <router-link
+                                                                    tag="a"
+                                                                    class="tg-btnviewall"
+                                                                    :to="{ name: 'company.index', query: { station: busStation.id }}">
+                                                                View All Tours
+                                                            </router-link>
+                                                            <router-link
+                                                                    tag="a"
+                                                                    :to="{ name: 'company.index', query: { station: busStation.id }}">
+                                                                <img :src="busStation.first_image" alt="image destination">
+                                                            </router-link>
+                                                            <figcaption>
+                                                                <h2>{{ busStation.provincial.name }}</h2>
+                                                                <span class="tg-totaltours">{{ busStation.companies_count }} {{ $t('main.companies') }}</span>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="tg-guidecontent">
+                                                        <div class="tg-guidecontenthead">
+                                                            <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
+                                                                <h3>{{ busStation.name }}</h3>
+                                                            </router-link>
+                                                            <h4>{{ busStation.address }}</h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </template>
                                     </div>
-                                </div>
                                 <div class="clearfix"></div>
                                 <paginate-component
                                     :data="busStations"
@@ -50,10 +66,7 @@
 
     export default {
         created() {
-            this.setBusStations({
-                size: this.size,
-                page: this.page
-            });
+            this.setBusStations(this.$route.query);
         },
         components: {
             bannerComponent: Banner,
@@ -62,13 +75,7 @@
         computed: {
             ...mapState('bus_station', [
                 'busStations'
-            ]),
-            size: function() {
-                return this.$route.query.size ? this.$route.query.size : 9;
-            },
-            page: function() {
-                return this.$route.query.page ? this.$route.query.page : 1;
-            }
+            ])
         },
         methods: {
         ...mapActions('bus_station', [
@@ -76,24 +83,30 @@
             ]),
         },
         watch: {
-            size: function() {
-                this.setBusStations({
-                    size: this.size,
-                    page: this.page
-                });
-            },
-            page: function() {
-                this.setBusStations({
-                    size: this.size,
-                    page: this.page
-                });
+            '$route' (to, from) {
+                console.log(this.busStations);
+                this.setBusStations(this.$route.query);
             }
-        },
+        }
     }
 </script>
 
 <style scoped>
     .tg-sectiontitle {
         padding: 0 0 70px;
+    }
+
+    .tg-topdestination figure a img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        height: 270px;
+    }
+
+    .tg-topdestination figure figcaption h2 {
+        width: 73%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 </style>

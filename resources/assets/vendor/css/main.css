@@ -70,6 +70,7 @@ p {
 	line-height: 23px;
 	letter-spacing: normal;
 }
+.mm-slideout { z-index:auto;}
 a { text-decoration: none; }
 a:hover, a:focus, a:active {
 	outline: none;
@@ -176,6 +177,10 @@ li {
 	line-height: 28px;
 	list-style: disc inside none;
 }
+.bootstrap-datetimepicker-widget li {
+	line-height: normal;
+	list-style: unset;
+}
 ul ul { margin-left: 20px; }
 ol {
 	float: none;
@@ -208,6 +213,10 @@ table > tfoot > tr > td {
 	padding-left: 3px;
 	text-align:center;
 	vertical-align: top;
+}
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+	border: unset;
 }
 table thead tr th {
 	border-top: 1px solid #dbdbdb;
@@ -583,6 +592,9 @@ li.tg-rss a { background:#ff6600; }
 	color: #ffa127 !important;
 	font-family: 'FontAwesome';
 	content: '\f005 \f005 \f005 \f005 \f005';
+}
+.show-rating-block-button .tg-stars span:after {
+	font-size: 16px;
 }
 .tg-stars:before { content: '\f006 \f006 \f006 \f006 \f006'; }
 .tg-stars span {
@@ -5458,4 +5470,32 @@ body.tg-hidescroll{overflow:hidden;}
 .funkyradio-info input[type="checkbox"]:checked ~ label:before {
 	color: #fff;
 	background-color: #5bc0de;
+}
+
+@media (max-width: 767px) {
+	.text-xs-left { text-align: left; }
+	.text-xs-right { text-align: right; }
+	.text-xs-center { text-align: center; }
+	.text-xs-justify { text-align: justify; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.text-sm-left { text-align: left; }
+	.text-sm-right { text-align: right; }
+	.text-sm-center { text-align: center; }
+	.text-sm-justify { text-align: justify; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.text-md-left { text-align: left; }
+	.text-md-right { text-align: right; }
+	.text-md-center { text-align: center; }
+	.text-md-justify { text-align: justify; }
+}
+
+@media (min-width: 1200px) {
+	.text-lg-left { text-align: left; }
+	.text-lg-right { text-align: right; }
+	.text-lg-center { text-align: center; }
+	.text-lg-justify { text-align: justify; }
 }

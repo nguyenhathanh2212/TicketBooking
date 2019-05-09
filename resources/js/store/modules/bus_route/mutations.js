@@ -7,5 +7,9 @@ export default {
 
     [types.SET_BUS_ROUTE](state, data) {
         state.busRoute = data.busRoute;
+    },
+    
+    [types.SET_RATINGS](state, data) {
+        state.ratings = data.ratings;
     }
 }

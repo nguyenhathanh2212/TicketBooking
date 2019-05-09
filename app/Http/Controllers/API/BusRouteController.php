@@ -5,14 +5,20 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Exception;
 use App\Services\BusRouteService;
+use App\Services\RatingService;
+use Auth;
 
 class BusRouteController extends BaseController
 {
     protected $busRouteService;
+    protected $ratingService;
 
-    public function __construct(BusRouteService $busRouteService)
-    {
+    public function __construct(
+        BusRouteService $busRouteService,
+        RatingService $ratingService
+    ) {
         $this->busRouteService = $busRouteService;
+        $this->ratingService = $ratingService;
     }
 
     /**
@@ -116,5 +122,44 @@ class BusRouteController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function getRatings(Request $request, $id)
+    {
+        try {
+            $busRoute = $this->busRouteService->getBusRoute($id);
+            $params = $request->only([
+                'size',
+                'sort_field',
+                'sort_type',
+            ]);
+
+            $ratings = $this->ratingService->search($busRoute, $params);
+
+            return $this->responseSuccess(compact('ratings'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
+    }
+
+    public function rate(Request $request, $id)
+    {
+        try {
+            $data = $request->only([
+                'rating',
+                'comment'
+            ]);
+            $data['user_id'] = Auth::user()->id;
+            $busRoute = $this->busRouteService->getBusRoute($id);
+            $rating = $this->ratingService->createRating($busRoute, $data);
+
+            return $this->responseSuccess(compact('rating'));
+        } catch (Exception $e) {
+            report($e);
+
+            return $this->responseErrors($e->getCode(), $e->getMessage());
+        }
     }
 }

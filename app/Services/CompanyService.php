@@ -43,7 +43,7 @@ class CompanyService extends BaseService {
             $query = $query->where('station_id', $params['station']);
         }
 
-        $query->with(['images']);
+        $query->with(['images', 'ratings'])->withCount(['routes', 'ratings']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
@@ -55,6 +55,6 @@ class CompanyService extends BaseService {
      */
     public function getCompany($id)
     {
-        return $this->model->with(['images', 'routes'])->find($id);
+        return $this->model->with(['images', 'routes'])->withCount(['routes', 'ratings'])->find($id);
     }
 }

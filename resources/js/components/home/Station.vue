@@ -89,6 +89,9 @@
         mounted() {
             $('.tg-parallax2').parallax({imageSrc: '/images/parallax/bgparallax-02.jpg'});
             $('.tg-parallax3').parallax({imageSrc: '/images/parallax/bgparallax-03.jpg'});
+            setTimeout(function() {
+                jQuery(window).trigger('resize').trigger('scroll');
+            }, 1000);
             this.setSlider();
         },
         computed: {
@@ -131,10 +134,6 @@
     .tg-guidecontenthead h4 {
         color: #b1700c;
     }
-
-    /* section.tg-sectionspace.tg-haslayout {
-        height: 617px;
-    } */
     
     .tg-destination.custom figure figcaption h2 {
         font-size: 20px;

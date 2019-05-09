@@ -22,12 +22,14 @@ Route::group(['namespace' => 'API'], function () {
     Route::get('company/{id}/rating', 'CompanyController@getRatings');
     Route::resource('route', 'RouteController');
     Route::resource('bus-route', 'BusRouteController');
+    Route::get('bus-route/{id}/rating', 'BusRouteController@getRatings');
     Route::resource('bus-station', 'StationController');
     Route::get('provincial/popular', 'ProvincialController@popular');
     Route::resource('provincial', 'ProvincialController');
 
     Route::group(['middleware' => 'auth:api'], function() {
         Route::post('company/{id}/rating', 'CompanyController@rate')->name('company.rating.rate');
+        Route::post('bus-route/{id}/rating', 'BusRouteController@rate')->name('bus-route.rating.rate');
     });
 
     // Auth

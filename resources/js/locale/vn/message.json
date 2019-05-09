@@ -11,5 +11,8 @@
     "no_data_found": "Không tìm thấy dữ liệu nào!",
     "error_message": "Đã xảy ra lỗi trong khi xử lý yêu cầu của bạn",
     "update_password_success": "Cập nhật mật khẩu thành công",
-    "update_profile_success": "Cập nhật thông tin thành công"
+    "update_profile_success": "Cập nhật thông tin thành công",
+    "no_reviews_yet": "Chưa có đánh giá nào",
+    "must_login_to_rate": "Bạn phải đăng nhập để đánh giá",
+    "rating_record": "Đánh giá của bạn đã được ghi lại"
 }

@@ -153,6 +153,7 @@
 
     .choose-date.tg-select input {
         width: 100%;
+        height: 100%;
     }
 
     .tg-formbookingdetail .col-md-4.col-sm-6.col-xs-12 .form-group {
@@ -169,13 +170,13 @@
         width: 200px;
     }
 
-    .date-away-input {
+    .choose-date {
         height: 50px;
     }
 
     @media (max-width: 1199px) {
         .tg-formbookingdetail fieldset {
-            padding: 10;
+            padding: 10px;
         }
     }
 </style>

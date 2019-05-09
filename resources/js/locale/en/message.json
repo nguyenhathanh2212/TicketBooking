@@ -1,6 +1,6 @@
 {
     "login_success": "Logged in successfully",
-    "register_success": "Register thành công",
+    "register_success": "Register successfully",
     "login_error": "Login failed",
     "register_error": "Register failed",
     "not_select_seat": "You have not selected a seat",
@@ -11,5 +11,8 @@
     "no_data_found": "No data found!",
     "error_message": "An error occurred while processing your request",
     "update_password_success": "Update password successfully",
-    "update_profile_success": "Update profile successfully"
+    "update_profile_success": "Update profile successfully",
+    "no_reviews_yet": "No reviews yet",
+    "must_login_to_rate": "You must be logged in to rate",
+    "rating_record": "Your rating has been recorded"
 }
