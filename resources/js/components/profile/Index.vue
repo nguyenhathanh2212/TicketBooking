@@ -25,14 +25,14 @@
                                                     <router-link
                                                         tag="a"
                                                         :to="{ name: 'profile.edit' }">
-                                                        <i class="icon-user"></i><span>{{ $t('profile.edit_profile') }}</span>
+                                                        <i class="icon-pen2"></i><span>{{ $t('profile.edit_profile') }}</span>
                                                     </router-link>
                                                 </li>
                                                 <li>
                                                     <router-link
                                                         tag="a"
                                                         :to="{ name: 'profile.change_password' }">
-                                                        <i class="icon-user"></i><span>{{ $t('profile.change_password') }}</span>
+                                                        <i class="icon-lock-open3"></i><span>{{ $t('profile.change_password') }}</span>
                                                     </router-link>
                                                 </li>
                                                 <li><a href="my-booking.html"><i class="icon-basket3"></i><span>{{ $t('profile.my_booking') }}</span></a></li>
@@ -71,5 +71,13 @@
 <style scoped>
     li .router-link-exact-active {
         color: #ff7550;
+    }
+
+    .tg-widgetcontent li a i {
+        display: inline-block;
+        height: 20px;
+        width: 30px;
+        text-align: center;
+        line-height: 20px;
     }
 </style>

@@ -22,8 +22,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'provider_id',
-        'provider',
         'type'
     ];
 
@@ -49,6 +47,11 @@ class User extends Authenticatable
         'avatar',
         'full_name',
     ];
+
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
 
     public function setPasswordAttribute($value)
     {

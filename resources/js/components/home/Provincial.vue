@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="tg-ourdestination">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 tg-verticalmiddle">
-                            <figure><img src="images/placeholder/placeholder-01.png" alt="image destinations"></figure>
+                            <figure><img src="/images/placeholder/placeholder-01.png" alt="image destinations"></figure>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 tg-verticalmiddle">
                             <div class="tg-ourdestinationcontent">

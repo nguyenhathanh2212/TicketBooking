@@ -14,9 +14,6 @@ use Exception;
 
 class AuthController extends BaseController
 {
-    protected $successStatus = 200;
-    protected $unauthorized = 401;
-    protected $notFound = 404;
     protected $userService;
 
     public function __construct(UserService $userService)

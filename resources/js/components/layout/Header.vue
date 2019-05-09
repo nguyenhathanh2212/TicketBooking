@@ -5,31 +5,38 @@
                 <div class="row">
                     <top-header-component></top-header-component>
                     <div class="tg-navigationarea tg-headerfixed">
-                        <strong class="tg-logo">
+                        <strong class="tg-logo" style="line-height: 40px">
                             <router-link
                                     :to="{ name: 'home' }"
                                     tag="a">
-                                <span class="strong-text-logo">Ticket </span><img class="logo" src="images/logo.png">nline
+                                <span class="strong-text-logo">Ticket </span><img class="logo" src="/images/logo.png">nline
                             </router-link>
                         </strong>
                         <div class="tg-socialsignin">
-                            <!-- <ul class="tg-socialicons">
-                                <li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-instagram-social-outlined-logo"></i></a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-twitter-social-outlined-logo"></i></a></li>
-                            </ul> -->
                             <div class="tg-userbox">
                                 <a v-if="!authenticated" id="tg-btnsignin" class="tg-btn" href="#tg-loginsingup"><span>{{ $t('main.login') }}</span></a>
-                                <div v-else class="dropdown tg-dropdown">
+                                <div v-else class="dropdown tg-dropdown tg-drop-custom">
                                     <button class="tg-btndropdown" id="tg-dropdowndashboard" type="button" data-toggle="dropdown">
                                         <img :src="user.avatar" alt="image description">
                                         <span>{{ user.full_name }}</span>
                                         <i class="fa fa-caret-down"></i>
                                     </button>
                                     <ul class="dropdown-menu tg-dropdownusermenu" aria-labelledby="tg-dropdowndashboard">
-                                        <li><a href="javascript:void(0);">Dashboard</a></li>
-                                        <li><a href="javascript:void(0);">Edit Profile</a></li>
-                                        <li><a href="" @click.prevent="logout()" >Sign Out</a></li>
+                                        <li>
+                                            <router-link
+                                                tag="a"
+                                                :to="{ name: 'profile.index' }">
+                                                <i class="icon-user"></i><span>{{ $t('profile.dashboard') }}</span>
+                                            </router-link>
+                                        </li>
+                                        <li>
+                                            <router-link
+                                                tag="a"
+                                                :to="{ name: 'profile.edit' }">
+                                                <i class="icon-pen2"></i><span>{{ $t('profile.edit_profile') }}</span>
+                                            </router-link>
+                                        </li>
+                                        <li><a href="" @click.prevent="logout()" ><i class="icon-lock"></i>{{ $t('profile.logout') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -64,6 +71,13 @@
                                                 :to="{ name: 'route.index' }"
                                                 tag="a">
                                             {{ $t('main.routes') }}
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link
+                                                :to="{ name: 'bus_station' }"
+                                                tag="a">
+                                            {{ $t('main.station') }}
                                         </router-link>
                                     </li>
                                     <li><a href="javascript:void(0);">pages</a></li>
@@ -145,9 +159,21 @@
         height: 6px;
     }
 
+    .tg-drop-custom {
+        display: block !important;
+    }
+
     @media (max-width: 990px) {
         #tg-dropdowndashboard {
             max-width: 200px;
         }
+    }
+
+    ul.dropdown-menu.tg-dropdownusermenu li a i {
+        display: inline-block;
+        height: 20px;
+        width: 30px;
+        text-align: center;
+        line-height: 20px;
     }
 </style>

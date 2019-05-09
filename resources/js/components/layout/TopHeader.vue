@@ -3,11 +3,11 @@
         <nav class="tg-infonav">
             <ul>
                 <li>
-                    <i><img src="images/icons/icon-01.png" alt="image destinations"></i>
+                    <i><img src="/images/icons/icon-01.png" alt="image destinations"></i>
                     <span>1-800-321-6543</span>
                 </li>
                 <li>
-                    <i><img src="images/icons/icon-02.png" alt="image destinations"></i>
+                    <i><img src="/images/icons/icon-02.png" alt="image destinations"></i>
                     <span>CHOOSE YOUR EXPERIENCE <a href="javascript:void(0);">Discover more</a></span>
                 </li>
             </ul>
@@ -22,12 +22,12 @@
             <nav class="tg-cartsearch">
                 <ul>
                     <li>
-                        <a href="javascript:void(0);"><img src="images/icons/icon-03.png" alt="image destinations"></a>
+                        <a href="javascript:void(0);"><img src="/images/icons/icon-03.png" alt="image destinations"></a>
                         <div class="tg-cartitems">
                             <div class="tg-cartlistitems">
                                 <h3>Shopping Cart</h3>
                                 <div class="tg-cartitem">
-                                    <figure class="tg-itemimg"><img src="images/products/img-11.jpg" alt="image description"></figure>
+                                    <figure class="tg-itemimg"><img src="/images/products/img-11.jpg" alt="image description"></figure>
                                     <div class="tg-contentbox">
                                         <div class="tg-producthead">
                                             <em>x 2</em>
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="tg-cartitem">
-                                    <figure class="tg-itemimg"><img src="images/products/img-11.jpg" alt="image description"></figure>
+                                    <figure class="tg-itemimg"><img src="/images/products/img-11.jpg" alt="image description"></figure>
                                     <div class="tg-contentbox">
                                         <div class="tg-producthead">
                                             <em>x 2</em>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="#tg-search"><img src="images/icons/icon-04.png" alt="image destinations"></a></li>
+                    <li><a href="#tg-search"><img src="/images/icons/icon-04.png" alt="image destinations"></a></li>
                 </ul>
             </nav>
         </div>

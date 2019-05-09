@@ -20,8 +20,8 @@
                     <div class="tg-signupwith">
                         <h2>{{ $t('main.login_with') }}</h2>
                         <ul class="tg-sharesocialicon">
-                            <li class="tg-facebook"><a href="index.htm#"><i class="icon-facebook-1"></i><span>Facebook</span></a></li>
-                            <li class="tg-googleplus"><a href="index.htm#"><i class="icon-google4"></i><span>Google+</span></a></li>
+                            <li class="tg-facebook"><a href="" @click.prevent="loginSocialAccount('facebook')"><i class="icon-facebook-1"></i><span>Facebook</span></a></li>
+                            <li class="tg-googleplus"><a href="" @click.prevent="loginSocialAccount('google')"><i class="icon-google4"></i><span>Google+</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
     import Login from './Login.vue'
     import Register from './Register.vue'
 
@@ -41,11 +42,30 @@
             registerComponent: Register
         },
         methods: {
+            ...mapActions('auth', ['loginSocial']),
             closePupup: function () {
                 if (this.authenticated) {
                     jQuery('#tg-loginsingup').removeClass('open');
                     jQuery('body').removeClass('tg-hidescroll');
                 }
+            },
+            loginSocialAccount: function (provider) {
+                const hello = this.hello;
+                hello(provider).login({
+                    scope: 'email',
+                    force: true
+                }).then(() => {
+                    const authRes = hello(provider).getAuthResponse();
+                    console.log(authRes);
+                    this.loginSocial({
+                        access_token : authRes.access_token,
+                        provider: provider
+                    }).then(success => {
+                        this.closePupup();
+                    })
+                    .catch(error => {});
+                })
+
             }
         }
     }

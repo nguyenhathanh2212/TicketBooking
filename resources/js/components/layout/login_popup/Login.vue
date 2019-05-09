@@ -1,5 +1,8 @@
 <template>
     <div role="tabpanel" class="tab-pane active fade in" id="login">
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
         <form class="tg-formtheme tg-formlogin" @submit.prevent="handleLogin()">
             <fieldset>
                 <div class="form-group">
@@ -42,7 +45,8 @@
         data: function() {
             return {
                 email: '',
-                password: ''
+                password: '',
+                errorMessage: ''
             }
         },
         methods: {
@@ -54,6 +58,7 @@
                     if (valid) {
                         this.login({ email: this.email, password: this.password })
                             .then(success => {
+                                this.errorMessage = '';
                                 Swal.fire({
                                     title: 'Success!',
                                     text: this.$t('message.login_success'),
@@ -66,12 +71,7 @@
                                 });
                             })
                             .catch(error => {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: this.$t('message.login_error'),
-                                    type: 'error',
-                                    confirmButtonText: 'Ok'
-                                });
+                                this.errorMessage = this.$t('message.login_error');
                             });
                     }
                 });
