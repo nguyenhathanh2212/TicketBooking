@@ -47,6 +47,8 @@
         "vue-bootstrap-datetimepicker": "^5.0.1",
         "vue-hellojs": "0.0.4",
         "vue-i18n": "^8.10.0",
+        "vue-loading-spinner": "^1.0.11",
+        "vue-spinner": "^1.0.3",
         "vue-star-rating": "^1.6.1",
         "vue2-google-maps": "^0.10.6",
         "vuex": "^3.1.0",

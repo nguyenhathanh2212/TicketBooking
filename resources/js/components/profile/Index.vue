@@ -35,7 +35,13 @@
                                                         <i class="icon-lock-open3"></i><span>{{ $t('profile.change_password') }}</span>
                                                     </router-link>
                                                 </li>
-                                                <li><a href="my-booking.html"><i class="icon-basket3"></i><span>{{ $t('profile.my_booking') }}</span></a></li>
+                                                <li>
+                                                    <router-link
+                                                        tag="a"
+                                                        :to="{ name: 'profile.my_booking' }">
+                                                        <i class="icon-basket3"></i><span>{{ $t('profile.my_booking') }}</span>
+                                                    </router-link>
+                                                </li>
                                                 <li><a href="#" @click.prevent="logout"><i class="icon-lock"></i><span>{{ $t('profile.logout') }}</span></a></li>
                                             </ul>
                                         </div>

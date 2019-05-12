@@ -8,12 +8,14 @@ import RouteIndex from '@route/Index.vue'
 import Route from '@route/Route.vue'
 import RouteDetail from '@route/detail/Index.vue'
 import Book from '@route/detail/Book.vue'
+import TiketDetail from '@route/detail/TiketDetail.vue'
 import NotFound from '@layout/404.vue'
 import BusStation from '@station/Index.vue'
 import ProfileIndex from '@profile/Index.vue'
 import Profile from '@profile/Profile.vue'
 import EditProfile from '@profile/EditProfile.vue'
 import ChangePassword from '@profile/ChangePassword.vue'
+import MyBooking from '@profile/MyBooking.vue'
 import * as middleware from './middleware'
 
 Vue.use(VueRouter);
@@ -38,8 +40,14 @@ const router = new VueRouter({
             children: [
                 { path: 'index', component: Profile, name: 'profile.index' },
                 { path: 'edit', component: EditProfile, name: 'profile.edit' },
-                { path: 'change-password', component: ChangePassword, name: 'profile.change_password' }
+                { path: 'change-password', component: ChangePassword, name: 'profile.change_password' },
+                { path: 'my-booking', component: MyBooking, name: 'profile.my_booking' }
             ] },
+        { path: '/ticket/:id',
+            component: TiketDetail,
+            beforeEnter: middleware.isLoggedIn,
+            name: 'ticket.detail'
+        },
         { path: '/*', component: NotFound, name: '404'}
     ],
     scrollBehavior (to, from, savedPosition) {

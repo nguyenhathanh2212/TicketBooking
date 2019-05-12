@@ -17,5 +17,10 @@
     "total": "Total",
     "continue": "Continue",
     "company": "Company",
-    "ticket_price": "Ticket price"
+    "ticket_price": "Ticket price",
+    "your_info": "Your information",
+    "pay_method": "Payment methods",
+    "driver_name": "Driver name",
+    "lisense_plate": "Lisense plate",
+    "cancel": "Cancel"
 }

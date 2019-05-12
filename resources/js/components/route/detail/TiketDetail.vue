@@ -2,12 +2,12 @@
     <div>
         <baner-component></baner-component>
         <main id="tg-main" class="tg-main tg-haslayout">
-            <div class="container component-booking">
+            <div v-if="ticket && ticket.bus_route" class="container component-booking">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div id="tg-content" class="tg-content">
                             <div class="tg-tourbookingdetail">
-                                <div v-if="busRoute.route" class="tg-bookinginfo tg-formtheme tg-formbillingdetail">
+                                <div class="tg-bookinginfo tg-formtheme tg-formbillingdetail">
                                     <div class="col-md-5 block-info">
                                         <div class="tg-bookingdetail">
                                             <div class="tg-box tg-yourorder">
@@ -16,32 +16,32 @@
                                                 </div>
                                                 <div class="tg-widgetpersonprice">
                                                     <div class="tg-widgetcontent">
-                                                        <ul v-if="data.check">
+                                                        <ul>
                                                             <li class="tg-personprice">
                                                                 <div>
-                                                                    <span>{{ $t('route.name') }}:</span><em>{{ data.name }}</em><br><br>
-                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ data.phone }}</em>
+                                                                    <span>{{ $t('route.name') }}:</span><em>{{ ticket.name }}</em><br><br>
+                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ ticket.phone }}</em>
                                                                 </div>
                                                             </li>
-                                                            <li><span>{{ $t('route.company') }}:</span><em>{{ busRoute.route.company_name }}</em></li>
+                                                            <li><span>{{ $t('route.company') }}:</span><em>{{ ticket.bus_route.route.company_name }}</em></li>
                                                             <li>
                                                                 <span>{{ $t('company.route') }}:</span>
-                                                                <em>{{ busRoute.route.start_station_name }}</em>
-                                                                <em>=> {{ busRoute.route.destination_station_name }}</em>
+                                                                <em>{{ ticket.bus_route.route.start_station_name }}</em>
+                                                                <em>=> {{ ticket.bus_route.route.destination_station_name }}</em>
                                                             </li>
-                                                            <li><span>{{ $t('route.start_place') }}:</span><em>{{ data.start_place ? data.start_place : busRoute.route.start_station.address }}</em></li>
-                                                            <li><span>{{ $t('route.destination_place') }}:</span><em>{{ data.destination_place ? data.destination_place : busRoute.route.destination_station.address }}</em></li>
-                                                            <li><span>{{ $t('company.start_time') }}:</span><em>{{ busRoute.route.start_time }} - {{ data.date_away }}</em></li>
+                                                            <li><span>{{ $t('route.start_place') }}:</span><em>{{ ticket.start_place ? ticket.start_place : ticket.bus_route.route.start_station.address }}</em></li>
+                                                            <li><span>{{ $t('route.destination_place') }}:</span><em>{{ ticket.destination_place ? ticket.destination_place : ticket.bus_route.route.destination_station.address }}</em></li>
+                                                            <li><span>{{ $t('company.start_time') }}:</span><em>{{ ticket.bus_route.route.start_time }} - {{ ticket.date }}</em></li>
                                                             <li>
                                                                 <span>{{ $t('route.number_of_seats') }}:</span>
-                                                                <em>{{ data.seat_number.length }}
-                                                                    ( <template v-for="(seat, index) in data.seat_number">
+                                                                <em>{{ ticket.seat_number.length }}
+                                                                    ( <template v-for="(seat, index) in ticket.seat_number">
                                                                         <label class="label label-info" :key="index">{{ seat }}</label>&nbsp;
                                                                     </template>)</em>
                                                             </li>
-                                                            <li><span>{{ $t('route.ticket_price') }}:</span><em>{{ Number(busRoute.price).toLocaleString() }}đ</em></li>
+                                                            <li><span>{{ $t('route.ticket_price') }}:</span><em>{{ Number(ticket.bus_route.price).toLocaleString() }}đ</em></li>
                                                             <li class="tg-totalprice">
-                                                                <div class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(busRoute.price * data.seat_number.length).toLocaleString() }}đ</em></div>
+                                                                <div class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * ticket.seat_number.length).toLocaleString() }}đ</em></div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -56,9 +56,9 @@
                                                     <h3>{{ $t('route.pay_method') }}</h3>
                                                 </div>
                                                 <div id="tg-accordion" class="tg-accordion" role="tablist" aria-multiselectable="true">
-                                                    <div v-if="busRoute.route.direct_payment == directPayment.allow" class="tg-panel">
+                                                    <div v-if="ticket.bus_route.route.direct_payment == directPayment.allow" class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
+                                                            <input disabled type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
                                                             <label for="bank-transfer">Direct Bank Transfer</label>
                                                         </h4>
                                                         <div class="tg-panelcontent">
@@ -67,9 +67,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tg-panel">
+                                                    <!-- <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="cash" name="paymenttype">
+                                                            <input disabled type="radio" id="cash" name="paymenttype">
                                                             <label for="cash">Cash On Delivery</label>
                                                         </h4>
                                                         <div class="tg-panelcontent">
@@ -80,7 +80,7 @@
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="paypal" name="paymenttype">
+                                                            <input disabled type="radio" id="paypal" name="paymenttype">
                                                             <label for="paypal">PayPal Express Checkout </label>
                                                             <img src="images/paypal.jpg" alt="image description">
                                                         </h4>
@@ -92,7 +92,7 @@
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="creditcard" name="paymenttype">
+                                                            <input disabled type="radio" id="creditcard" name="paymenttype">
                                                             <label for="creditcard"> Credit Card (Stripe)</label>
                                                             <img src="images/visastrip.jpg" alt="image description">
                                                         </h4>
@@ -101,11 +101,8 @@
                                                                 <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
-                                            </fieldset>
-                                            <fieldset v-if="!bookingSuccess">
-                                                <button @click="bookingTicket" class="tg-btn" type="submit"><span>place order</span></button>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -127,53 +124,33 @@
         data: function() {
             return {
                 directPayment: window.Laravel.setting.direct_payment,
-                paymentMethodSetting: window.Laravel.setting.ticket.payment_method,
-                paymentMethod: window.Laravel.setting.ticket.payment_method.direct,
-                bookingSuccess: false
+                paymentMethodSetting: window.Laravel.setting.ticket.payment_method
             }
         },
         computed: {
-            ...mapState('bus_route', ['busRoute']),
-            data: function() {
-                return this.$route.params;
+            ...mapState('ticket', ['ticket']),
+            paymentMethod: function() {
+                return this.ticket.payment_method;
             }
         },
         created() {
-            this.setBusRoute(this.$route.params.id);
-
-            if (!this.$route.params.check) {
-                this.$router.push({
-                    name: '404'
+            this.setTicket(this.$route.params.id)
+                .catch(error => {
+                    this.$router.push({
+                        name: '404'
+                    })
                 });
+        },
+        watch: {
+            ticket: function() {
+                console.log(this.ticket);
             }
         },
         components: {
             banerComponent: Banner
         },
         methods: {
-            ...mapActions('bus_route', ['setBusRoute']),
-            ...mapActions('ticket', ['createTicket']),
-            bookingTicket: function () {
-                this.data['payment_method'] = this.paymentMethod;
-                this.createTicket(this.data)
-                    .then(success => {
-                        this.bookingSuccess = true;
-                        Swal.fire({
-                            title: 'Success!',
-                            text: this.$t('message.booking_success'),
-                            type: 'success',
-                            confirmButtonText: 'Ok'
-                        });
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: this.$t('message.booking_error'),
-                            type: 'error',
-                            confirmButtonText: 'Ok'
-                        });
-                    });;
-            }
+            ...mapActions('ticket', ['setTicket'])
         },
         updated() {
             jQuery(function() {

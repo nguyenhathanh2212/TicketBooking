@@ -1,5 +1,5 @@
 <template>
-    <div class="tg-bookinginfo">
+    <div v-if="busRoute && busRoute.bus" class="tg-bookinginfo">
         <div class="top-detail">
             <div class="col-md-4">
                 <div class="panel panel-warning">
@@ -54,122 +54,154 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">2. {{ $t('route.choose_place') }}</div>
-                    <div class="panel-body">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a data-toggle="tab" href="#start-place">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $t('route.start_place') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#destination-place">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $t('route.destination_place') }}
-                                </a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div id="start-place" class="tab-pane fade in active">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="start_place"
-                                              :value="busRoute.route ? busRoute.route.start_station.address : ''"
-                                              v-model="placeStart">
-                                        <span class="radio-title">{{ $t('route.bus_station') }}</span>
-                                        {{ busRoute.route ? busRoute.route.start_station.address : '' }}
-                                    </label>
+            <div class="col-md-8">
+                <div class="col-md-12" style="padding-top: 0px">
+                    <div class="panel panel-warning" style="min-height: unset">
+                        <div class="panel-heading">{{ $t('route.information') }}</div>
+                        <div class="panel-body text-left">
+                            <div class="col-md-8">
+                                <div>
+                                    <label class="col-md-5">{{ $t('route.driver_name') }}</label>
+                                    <label class="col-md-7">{{ busRoute.bus.driver_name }}</label>
                                 </div>
-                                <div class="radio">
-                                    <label><input type="radio"
-                                              name="start_place"
-                                              v-model="placeStart">
-                                        <span class="radio-title">{{ $t('route.other_place') }}</span>
-                                        <input class="another-place"
-                                               @click="placeStart = null"
-                                               v-model="otherPlaceStart"
-                                               name="start_place"
-                                               :data-vv-as="this.$t('route.start_place')"
-                                               v-validate="{
-                                                    required: !placeStart
-                                               }"
-                                               type="text"/>
-                                        <small class="form-text text-muted error">{{ errors.first('start_place') }}</small><br>
-                                        <small class="form-text text-muted error">{{ errors.first('destination_place') }}</small>
-                                    </label>
+                                <div>
+                                    <label class="col-md-5">{{ $t('route.lisense_plate') }}</label>
+                                    <label class="col-md-7">{{ busRoute.bus.lisense_plate }}</label>
+                                </div>
+                                <div>
+                                    <label class="col-md-5">{{ $t('route.phone') }}</label>
+                                    <label class="col-md-7">{{ busRoute.phone }}</label>
                                 </div>
                             </div>
-                            <div id="destination-place" class="tab-pane fade">
-                                <div class="radio">
-                                    <label><input type="radio" name="destination_place"
-                                          :value="busRoute.route ? busRoute.route.destination_station.address : ''"
-                                          v-model="placeDestination"
-                                          checked >
-                                        <span class="radio-title">{{ $t('route.bus_station') }}</span>
-                                        {{ busRoute.route ? busRoute.route.destination_station.address : '' }}
-                                    </label>
+                            <div class="col-md-4">
+                                <div @click="showRatingModal()">
+                                    <rating-component
+                                        :rating="busRoute.rating"></rating-component>
                                 </div>
-                                <div class="radio">
-                                    <label><input type="radio"
-                                              @click="placeDestination = null"
-                                              name="destination_place"
-                                              v-model="placeDestination">
-                                        <span class="radio-title">{{ $t('route.other_place') }}</span>
-                                        <input class="another-place"
-                                               v-model="otherPlaceDestination"
-                                               @click="placeDestination = null"
-                                               name="destination_place"
-                                               :data-vv-as="this.$t('route.destination_place')"
-                                               v-validate="{
-                                                    required: !placeDestination
-                                               }"
-                                               type="text"/>
-                                        <small class="form-text text-muted error">{{ errors.first('start_place') }}</small><br>
-                                        <small class="form-text text-muted error">{{ errors.first('destination_place') }}</small>
-                                    </label>
+                            </div>
+                        </div>
+                    </div>
+                    <modal-rating-component
+                        :statusModal="statusModal"
+                        :idBusRoute="busRoute.id"></modal-rating-component>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">2. {{ $t('route.choose_place') }}</div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#start-place">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $t('route.start_place') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#destination-place">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $t('route.destination_place') }}
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="start-place" class="tab-pane fade in active">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="start_place"
+                                                :value="busRoute.route ? busRoute.route.start_station.address : ''"
+                                                v-model="placeStart">
+                                            <span class="radio-title">{{ $t('route.bus_station') }}</span>
+                                            {{ busRoute.route ? busRoute.route.start_station.address : '' }}
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio"
+                                                name="start_place"
+                                                v-model="placeStart">
+                                            <span class="radio-title">{{ $t('route.other_place') }}</span>
+                                            <input class="another-place"
+                                                @click="placeStart = null"
+                                                v-model="otherPlaceStart"
+                                                name="start_place"
+                                                :data-vv-as="this.$t('route.start_place')"
+                                                v-validate="{
+                                                        required: !placeStart
+                                                }"
+                                                type="text"/>
+                                            <small class="form-text text-muted error">{{ errors.first('start_place') }}</small><br>
+                                            <small class="form-text text-muted error">{{ errors.first('destination_place') }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="destination-place" class="tab-pane fade">
+                                    <div class="radio">
+                                        <label><input type="radio" name="destination_place"
+                                            :value="busRoute.route ? busRoute.route.destination_station.address : ''"
+                                            v-model="placeDestination"
+                                            checked >
+                                            <span class="radio-title">{{ $t('route.bus_station') }}</span>
+                                            {{ busRoute.route ? busRoute.route.destination_station.address : '' }}
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio"
+                                                @click="placeDestination = null"
+                                                name="destination_place"
+                                                v-model="placeDestination">
+                                            <span class="radio-title">{{ $t('route.other_place') }}</span>
+                                            <input class="another-place"
+                                                v-model="otherPlaceDestination"
+                                                @click="placeDestination = null"
+                                                name="destination_place"
+                                                :data-vv-as="this.$t('route.destination_place')"
+                                                v-validate="{
+                                                        required: !placeDestination
+                                                }"
+                                                type="text"/>
+                                            <small class="form-text text-muted error">{{ errors.first('start_place') }}</small><br>
+                                            <small class="form-text text-muted error">{{ errors.first('destination_place') }}</small>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-warning">
-                    <div class="panel-heading">3. {{ $t('route.information') }}</div>
-                    <div class="panel-body">
-                        <div class="form-information">
-                            <form>
-                                <div class="form-group">
-                                    <label for="name">{{ $t('route.name') }}</label>
-                                    <input type="text"
-                                           name="name"
-                                           :data-vv-as="this.$t('route.name')"
-                                           class="form-control" id="name"
-                                           v-model="name"
-                                           v-validate="{
-                                                required: true
-                                           }"
-                                           :placeholder="this.$t('route.enter_name')">
-                                    <small class="form-text text-muted error">{{ errors.first('name') }}</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">{{ $t('route.phone') }}</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           id="phone"
-                                           name="phone"
-                                           :data-vv-as="this.$t('route.phone')"
-                                           v-model="phone"
-                                           v-validate="{
-                                                required: true,
-                                                numeric: true
-                                           }"
-                                           :placeholder="this.$t('route.enter_phone')">
-                                    <small class="form-text text-muted error">{{ errors.first('phone') }}</small>
-                                </div>
-                            </form>
+                <div class="col-md-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">3. {{ $t('route.information') }}</div>
+                        <div class="panel-body">
+                            <div class="form-information">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">{{ $t('route.name') }}</label>
+                                        <input type="text"
+                                            name="name"
+                                            :data-vv-as="this.$t('route.name')"
+                                            class="form-control" id="name"
+                                            v-model="name"
+                                            v-validate="{
+                                                    required: true
+                                            }"
+                                            :placeholder="this.$t('route.enter_name')">
+                                        <small class="form-text text-muted error">{{ errors.first('name') }}</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">{{ $t('route.phone') }}</label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            :data-vv-as="this.$t('route.phone')"
+                                            v-model="phone"
+                                            v-validate="{
+                                                    required: true,
+                                                    numeric: true
+                                            }"
+                                            :placeholder="this.$t('route.enter_phone')">
+                                        <small class="form-text text-muted error">{{ errors.first('phone') }}</small>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -220,6 +252,8 @@
 <script>
     import { mapState } from 'vuex'
     import datePicker from 'vue-bootstrap-datetimepicker'
+    import Rating from '@plugins/Rating.vue'
+    import ModalRating from '@route/ModalRating.vue'
 
     export default {
         data: function() {
@@ -228,16 +262,12 @@
                 numberOfSeat: 0,
                 seatIsBookeds: [],
                 seatYouBooks: [],
-                numberLevel: 0,
-                numberRow: 0,
-                numberColumn: 0,
                 seatChecks: [],
-                placeStart: '',
                 otherPlaceStart: '',
-                placeDestination: '',
                 otherPlaceDestination: '',
                 name: '',
-                phone: ''
+                phone: '',
+                statusModal: 'false'
             }
         },
         computed: {
@@ -250,35 +280,52 @@
             },
             totalPrice: function () {
                 return Number(this.busRoute.price * this.seatYouBooks.length).toLocaleString()
+            },
+            numberLevel: function () {
+                return this.busRoute.bus.number_level;
+            }, 
+            numberRow: function () {
+                return this.busRoute.bus.number_row;
+            }, 
+            numberColumn: function () {
+                return this.busRoute.bus.number_column;
+            }, 
+            placeStart: function () {
+                return this.busRoute.route.start_station.address;
+            }, 
+            placeDestination: function () {
+                return this.busRoute.route.destination_station.address;
             }
         },
         watch: {
-            busRoute: function () {
-                this.date = this.$route.params.start_date ? this.$route.params.date : this.busRoute.route.start_date;
-                this.numberLevel = this.busRoute.bus.number_level;
-                this.numberRow = this.busRoute.bus.number_row;
-                this.numberColumn = this.busRoute.bus.number_column;
-                this.placeStart = this.busRoute.route.start_station.address;
-                this.placeDestination = this.busRoute.route.destination_station.address;
-            },
             date: function () {
-                let seats = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date] : [];
-                let count = seats.length;
-                this.numberOfSeat = this.busRoute.bus.number_of_seats - count;
-
-                let data = [];
-
-                seats.filter(function (value) {
-                    data[value.seat_number] = true;
-                })
-                this.seatIsBookeds = data;
-                this.seatChecks = data.slice(0);
+                this.setSeatIsBookeds();
+            },
+            busRoute: function () {
+                this.date = this.$route.params.date ? this.$route.params.date : this.busRoute.route.start_date; 
             },
             seatChecks: function () {
                 this.seatYouBooks = _.difference(this.getKeys(this.seatChecks), this.getKeys(this.seatIsBookeds));
             }
         },
         methods: {
+            showRatingModal: function () {
+                this.statusModal = !this.statusModal;
+            },
+            setSeatIsBookeds: function() {
+                let seats = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date] : [];
+                let count = seats.length;
+                this.numberOfSeat = this.busRoute.bus.number_of_seats - count;
+
+                let data = [];
+                seats.filter(function (value) {
+                    JSON.parse(value.seat_number).filter(function (seat) {
+                        data[seat] = true;
+                    });
+                })
+                this.seatIsBookeds = data;
+                this.seatChecks = data.slice(0);
+            },
             id: function(level, column, row) {
                 return ((level - 1) * this.numberRow * this.numberColumn) + ((column - 1) * this.numberRow + row);
             },
@@ -301,13 +348,13 @@
                     if (valid && this.seatYouBooks.length) {
                         var params = {
                             check: true,
-                            seat_you_books: this.seatYouBooks,
+                            seat_number: this.seatYouBooks,
                             destination_place: this.placeDestination ? '' : this.otherPlaceDestination,
                             start_place: this.placeStart ? '' : this.otherPlaceStart,
-                            totalPrice: this.totalPrice,
+                            total_price: this.totalPrice,
                             phone: this.phone,
                             name: this.name,
-                            date: this.date
+                            date_away: this.date
                         }
 
                         this.$router.push({
@@ -322,8 +369,10 @@
             }
         },
         components: {
-            datePickerComponent: datePicker
-        },
+            datePickerComponent: datePicker,
+            ratingComponent: Rating,
+            modalRatingComponent: ModalRating
+        }
     }
 </script>
 
@@ -345,7 +394,7 @@
         background: #fff;
     }
 
-    .top-detail .col-md-4 {
+    .top-detail .col-md-4, .top-detail .col-md-6, .top-detail .col-md-8, .top-detail .col-md-12 {
         padding: 2px;
     }
 

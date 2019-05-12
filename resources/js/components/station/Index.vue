@@ -37,7 +37,7 @@
                                                     <div class="tg-guidecontent">
                                                         <div class="tg-guidecontenthead">
                                                             <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
-                                                                <h3>{{ busStation.name }}</h3>
+                                                                <h3 :title="busStation.name">{{ busStation.name }}</h3>
                                                             </router-link>
                                                             <h4>{{ busStation.address }}</h4>
                                                         </div>
@@ -78,13 +78,12 @@
             ])
         },
         methods: {
-        ...mapActions('bus_station', [
+            ...mapActions('bus_station', [
                 'setBusStations'
             ]),
         },
         watch: {
             '$route' (to, from) {
-                console.log(this.busStations);
                 this.setBusStations(this.$route.query);
             }
         }
@@ -108,5 +107,23 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        line-height: 22px !important;
+    }
+
+    .tg-guidecontenthead {
+        padding-right: 0px !important;
+        padding-bottom: 15px !important;
+    }
+
+    .tg-guidecontenthead h4 {
+        line-height: 20px !important;
+        height: 40px;
+    }
+
+    .tg-guidecontenthead h3 {
+        padding-bottom: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 </style>

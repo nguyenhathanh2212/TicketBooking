@@ -13,7 +13,9 @@ class Route extends Model
         'destination_station_id',
         'start_time',
         'destination_time',
-        'number_preset_date'
+        'number_preset_date',
+        'phone',
+        'reservation',
     ];
 
     protected $appends = [

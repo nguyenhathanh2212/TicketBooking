@@ -30,8 +30,10 @@ Route::group(['namespace' => 'API'], function () {
     Route::group(['middleware' => 'auth:api'], function() {
         Route::post('company/{id}/rating', 'CompanyController@rate')->name('company.rating.rate');
         Route::post('bus-route/{id}/rating', 'BusRouteController@rate')->name('bus-route.rating.rate');
+        Route::post('ticket', 'TicketController@store')->name('ticket.store');
+        Route::get('ticket/{id}', 'TicketController@show')->name('ticket.show');
+        Route::get('my-bookings', 'TicketController@getAuthBookings')->name('ticket.get_auth_bookings');
     });
-
     // Auth
     Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
         Route::get('/redirect/{social}', 'SocialAuthController@redirect');

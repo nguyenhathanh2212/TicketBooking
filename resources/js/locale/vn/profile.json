@@ -15,5 +15,9 @@
     "old_password": "Mật khẩu củ",
     "new_password": "Mật khẩu mới",
     "confirm_password": "Xác nhận mật khẩu",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "route": "Tuyến đường",
+    "price": "Tổng tiền",
+    "action": "Thao tác",
+    "status": "Trạng thái"
 }

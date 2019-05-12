@@ -19,9 +19,14 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->string('name');
             $table->string('phone');
-            $table->tinyInteger('seat_number');
+            $table->string('start_place')->nullable();
+            $table->string('destination_place')->nullable();
+            $table->string('seat_number');
+            $table->tinyInteger('status')->default(1);
             $table->tinyInteger('quantity');
-            $table->dateTime('date_away');
+            $table->tinyInteger('payment_method')->default(01);
+            $table->date('date_away');
+            $table->double('total_price');
             $table->timestamps();
         });
     }

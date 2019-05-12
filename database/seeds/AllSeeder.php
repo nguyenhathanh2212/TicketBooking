@@ -28,12 +28,10 @@ class AllSeeder extends Seeder
 
         User::truncate();
         Bus::truncate();
-        BusRoute::truncate();
         Company::truncate();
         Image::truncate();
         Rating::truncate();
         Route::truncate();
-        Station::truncate();
         Ticket::truncate();
         UserCompany::truncate();
 
@@ -50,67 +48,65 @@ class AllSeeder extends Seeder
         ]);
 
         $users = factory(User::class, 25)->create();
-
-        //station
-        $stations = factory(Provincial::class, 10)->create()->each(function($provincial) use ($faker) {
-            $stations = factory(Station::class, 3)->create([
-                'provincial_id' => $provincial->id,
-            ]);
-        });
-
-        //permision
-//        $permisions = Permision::create([
-//            'name' => 'Super admin',
-//        ]);
-
+        $stations = Station::all();
         // company
-        $companies = factory(Company::class, 10)->create([
-            'station_id' => $stations->random()->id
-        ])->each(function($company) use ($faker, $stations, $users) {
-            $buses = factory(Bus::class, 5)->create([
-                'company_id' => $company->id,
-            ]);
 
-            $startStation = $stations->random()->id;
-            $destinationStation = $stations->random()->id;
+        foreach ($stations as $station) {
+            $companies = factory(Company::class, 1)->create([
+                'station_id' => $station->id
+            ])->each(function($company) use ($faker, $stations, $station, $users) {
+                $buses = factory(Bus::class, 2)->create([
+                    'company_id' => $company->id,
+                ]);
 
-            while($destinationStation == $startStation) {
-                $destinationStation = $stations->random()->id;
-            }
+//                factory(Rating::class, 5)->create([
+//                    'ratingable_id' => $company->id,
+//                    'user_id' => $users->random()->id,
+//                    'ratingable_type' => 'App\Models\Company',
+//                ]);
+//
+//                factory(Image::class, 3)->create([
+//                    'imageable_id' => $company->id,
+//                    'imageable_type' => 'App\Models\Company',
+//                ]);
 
-            factory(Route::class, 3)->create([
-                'company_id' => $company->id,
-                'start_station_id' => $startStation,
-                'destination_station_id' => $destinationStation,
-            ])->each(function($route) use ($faker, $buses) {
-                $route->busRoutes()->create([
-                    'bus_id' => $buses->random()->id,
-                    'price' => rand(100000, 200000),
-                    'phone' => $faker->tollFreePhoneNumber(),
-                ])->each(function($busStation) use ($faker) {
-                    factory(Ticket::class, rand(30, 50))->create([
-                        'bus_route_id' => $busStation->id,
-                    ]);
+                $startStation = $station->id;
+                $stationsIdDn = Station::where('provincial_id', 1)->pluck('id')->all();
+
+                if (in_array($startStation, $stationsIdDn)) {
+                    $destinationStation = $stations->random()->id;
+
+                    while(in_array($destinationStation, $stationsIdDn)) {
+                        $destinationStation = $stations->random()->id;
+                    }
+                } else {
+                    $destinationStation = Station::where('provincial_id', 1)->get()->random()->id;
+                }
+
+                factory(Route::class, 2)->create([
+                    'company_id' => $company->id,
+                    'start_station_id' => $destinationStation,
+                    'destination_station_id' => $startStation,
+                ])->each(function($route) use ($faker, $buses) {
+                    $route->busRoutes()->create([
+                        'bus_id' => $buses->random()->id,
+                        'price' => rand(100000, 200000),
+                        'phone' => $faker->tollFreePhoneNumber(),
+                    ])->each(function($busStation) use ($faker) {
+                       factory(Ticket::class, rand(5, 10))->create([
+                           'user_id' => User::inRandomOrder()->first()->id,
+                           'bus_route_id' => $busStation->id,
+                       ]);
+                    });
                 });
             });
-
-            factory(Rating::class, 10)->create([
-                'ratingable_id' => $company->id,
-                'user_id' => $users->random()->id,
-                'ratingable_type' => 'App\Models\Company',
-            ]);
-
-            factory(Image::class, 3)->create([
-                'imageable_id' => $company->id,
-                'imageable_type' => 'App\Models\Company',
-            ]);
-        });
-
-        foreach ($companies as $company) {
-            $company->userCompanies()->create([
-                'user_id' => $users->random()->id,
-                'role' => rand(0,1),
-            ]);
         }
+
+//        foreach ($companies as $company) {
+//            $company->userCompanies()->create([
+//                'user_id' => $users->random()->id,
+//                'role' => rand(0,1),
+//            ]);
+//        }
     }
 }

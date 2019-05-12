@@ -15,15 +15,42 @@ class Ticket extends Model
         'seat_number',
         'quantity',
         'date_away',
+        'status',
+        'total_price',
     ];
 
     protected $appends = [
-        'date'
+        'date',
+        'status_str',
+        'check_cancel',
     ];
 
     public function getDateAttribute()
     {
         return Carbon::parse($this->date_away)->format(trans('main.date_format'));
+    }
+
+    public function getCheckCancelAttribute()
+    {
+        if ($this->attributes['status'] == config('setting.ticket.status.active') && Carbon::parse($this->date_away)->gt(Carbon::now()->addHour(config('setting.number_hours_preset')))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getStatusStrAttribute()
+    {
+        return trans('ticket.status')[$this->status];
+    }
+
+    public function getStatusAttribute()
+    {
+        if ($this->attributes['status'] == config('setting.ticket.status.active') && Carbon::parse($this->date_away)->lt(Carbon::now())) {
+            return config('setting.ticket.status.close');
+        }
+
+        return $this->attributes['status'];
     }
 
     public function user() {

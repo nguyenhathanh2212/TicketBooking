@@ -17,6 +17,7 @@ class CreateStationsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('provincial_id');
             $table->string('name');
+            $table->string('phone');
             $table->string('address');
             $table->float('latitude');
             $table->float('longitude');
