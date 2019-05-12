@@ -56,14 +56,22 @@
     import Rating from '../plugins/Rating.vue'
 
     export default {
+        data: function () {
+            return {
+                parallax: '',
+            }
+        },
         components: {
             ratingComponent: Rating
         },
         mounted() {
-            $('.tg-parallax1').parallax({imageSrc: '/images/parallax/bgparallax-01.jpg'});
+            this.parallax = $('.tg-parallax1').parallax({imageSrc: '/images/parallax/bgparallax-01.jpg'});
         },
         updated() {
             this.setSlider();
+            setTimeout(function() {
+                jQuery(window).trigger('resize').trigger('scroll');
+            }, 1000);
         },
         computed: {
             ...mapState('company', [
@@ -111,18 +119,21 @@
 </script>
 
 <style scoped>
-    section.tg-parallax.tg-parallax1 {
-        height: 720px;
-    }
-
-    .tg-populartourcontent .tg-description {
-        max-height: 72px;
-        overflow: hidden;
-    }
-
     .tg-populartourtitle h3 {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+
+    .tg-populartourcontent .tg-description > p {
+        display: block;
+        display: -webkit-box;
+        height: 46px;
+        margin: 0 auto;
+        line-height: 23px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>

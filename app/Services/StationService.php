@@ -35,6 +35,7 @@ class StationService extends BaseService {
     {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
+        $query->with('provincial')->withCount('companies');
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }

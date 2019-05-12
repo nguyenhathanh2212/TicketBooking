@@ -35,7 +35,40 @@ export const setBusRoute = ({ commit}, busRouteId) => {
     })
 }
 
+export const setRatings = ({ commit }, params) => {
+    var path = `bus-route/${params.bus_route_id}/rating?`;
+
+    for (let param in params.data) {
+        path += `${param}=${params.data[param]}&`;
+    }
+
+    return new Promise((resolve, reject) => {
+        get(path)
+            .then(response => {
+                commit(types.SET_RATINGS, response.data);
+                resolve(response.data.code);
+            })
+            .catch(error => {
+                reject(error);
+            })
+    })
+}
+
+export const rate = ({ commit }, params) => {
+    return new Promise((resolve, reject) => {
+        post(`bus-route/${params.bus_route_id}/rating`, params.data)
+            .then(response => {
+                resolve(response.data.code);
+            })
+            .catch(error => {
+                reject(error);
+            })
+    })
+}
+
 export default {
     setBusRoutes,
-    setBusRoute
+    setBusRoute,
+    setRatings,
+    rate
 }

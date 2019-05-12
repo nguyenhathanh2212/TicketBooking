@@ -43,12 +43,6 @@
         <div id="app">
             <master-component></master-component>
         </div>
-        @if (isset($data))
-            <script>
-                localStorage.setItem('authSocial', {!! json_encode($data)  !!});
-                console.log(1, window.Laravel.authSocial);
-            </script>
-        @endif
         {{ Html::script(asset('vendor/jquery/dist/jquery.min.js')) }}
         {{ Html::script(asset('vendor/jquery-ui-dist/jquery-ui.min.js')) }}
         {{ Html::script(asset('vendor/bootstrap/dist/js/bootstrap.min.js')) }}

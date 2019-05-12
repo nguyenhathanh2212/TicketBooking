@@ -19,7 +19,6 @@ class Company extends Model
         'rating',
         'first_image',
         'list_images',
-        'number_of_review'
     ];
 
     public function station() {
@@ -64,9 +63,5 @@ class Company extends Model
     public function getListImagesAttribute()
     {
         return $this->images->count() ? $this->images : ['url' => config('setting.image_company_default')];
-    }
-
-    public function getNumberOfReviewAttribute() {
-        return $this->ratings()->count();
     }
 }

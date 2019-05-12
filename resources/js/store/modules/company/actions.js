@@ -46,8 +46,6 @@ export const setRatings = ({ commit }, params) => {
         get(path)
             .then(response => {
                 commit(types.SET_RATINGS, response.data);
-
-                console.log(response.data);
                 resolve(response.data.code);
             })
             .catch(error => {

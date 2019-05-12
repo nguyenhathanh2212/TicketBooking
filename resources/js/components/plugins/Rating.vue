@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <span class="tg-stars"><span :class="className"></span></span>
-    </div>
+    <span class="tg-stars"><span :class="className"></span></span>
 </template>
 
 <script>

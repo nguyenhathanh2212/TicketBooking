@@ -55,11 +55,25 @@
                         </div>
                         <div id="tg-guidesslider" class="tg-guidesslider tg-guides owl-carousel">
                             <div class="item tg-guide" v-for="(busStation, index) in busStations.data" :key="index">
-                                <figure>
-                                    <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
-                                        <img :src="busStation.first_image" alt="image destination">
-                                    </router-link>
-                                </figure>
+                                <div class="tg-topdestination">
+                                    <figure>
+                                        <router-link
+                                                tag="a"
+                                                class="tg-btnviewall"
+                                                :to="{ name: 'company.index', query: { station: busStation.id }}">
+                                            View All Tours
+                                        </router-link>
+                                        <router-link
+                                                tag="a"
+                                                :to="{ name: 'company.index', query: { station: busStation.id }}">
+                                            <img :src="busStation.first_image" alt="image destination">
+                                        </router-link>
+                                        <figcaption>
+                                            <h2>{{ busStation.provincial.name }}</h2>
+                                            <span class="tg-totaltours">{{ busStation.companies_count }} {{ $t('main.companies') }}</span>
+                                        </figcaption>
+                                    </figure>
+                                </div>
                                 <div class="tg-guidecontent">
                                     <div class="tg-guidecontenthead">
                                         <router-link :to="{ name: 'company.index', query: { station: busStation.id }}">
@@ -121,3 +135,19 @@
         }
     }
 </script>
+
+<style scoped>
+    .tg-topdestination figure a img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        height: 270px;
+    }
+
+    .tg-topdestination figure figcaption h2 {
+        width: 73%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
