@@ -13,7 +13,7 @@
         </ol>
     </section>
     <!-- Main content -->
-    <section class="content-header">
+    <section class="content">
         @yield('main_content')
     </section>
     <!-- /.content -->

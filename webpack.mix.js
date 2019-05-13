@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/vendor', 'public/vendor')
+    .copyDirectory('resources/assets/admin', 'public/admin')
     .copyDirectory('node_modules/bootstrap', 'public/vendor/bootstrap')
     .copyDirectory('node_modules/jquery', 'public/vendor/jquery')
     .copyDirectory('node_modules/jquery-ui-dist', 'public/vendor/jquery-ui-dist')
@@ -24,6 +25,8 @@ mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('node_modules/eonasdan-bootstrap-datetimepicker', 'public/vendor/datetimepicker')
     .copyDirectory('node_modules/moment', 'public/vendor/moment')
     .copyDirectory('node_modules/bootstrap-rating', 'public/vendor/bootstrap-rating')
+    .copyDirectory('node_modules/select2', 'public/vendor/select2')
+    .copyDirectory('node_modules/icheck', 'public/vendor/icheck')
     .version(['public/css/*.css', 'public/js/*.js']);
 
 mix.webpackConfig({

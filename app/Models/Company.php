@@ -12,7 +12,8 @@ class Company extends Model
         'address',
         'phone',
         'latitude',
-        'longitude'
+        'longitude',
+        'status'
     ];
 
     protected $appends = [
@@ -25,7 +26,7 @@ class Company extends Model
         return $this->belongsTo(Station::class);
     }
 
-    public function userCompany() {
+    public function userCompanies() {
         return $this->hasMany(UserCompany::class, 'company_id', 'id');
     }
 

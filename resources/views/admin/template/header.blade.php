@@ -9,9 +9,13 @@
     {{ Html::style(asset('vendor/bootstrap/dist/css/bootstrap.min.css')) }}
     <!-- Font Awesome -->
     {{ Html::style(asset('vendor/font-awesome/css/font-awesome.min.css')) }}
+    {{ Html::style(asset('vendor/datetimepicker/build/css/bootstrap-datetimepicker.min.css')) }}
+    {{ Html::style(asset('vendor/select2/dist/css/select2.min.css')) }}
+    {{ Html::style(asset('vendor/icheck/skins/all.css')) }}
     {{ Html::style(asset('admin/css/AdminLTE.min.css')) }}
     {{ Html::style(asset('admin/css/skins/_all-skins.min.css')) }}
-    {{ Html::style(asset('vendor/datetimepicker/build/css/bootstrap-datetimepicker.min.css')) }}
+    {{ Html::style(asset('admin/css/style.css')) }}
+    @stack('style')
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>

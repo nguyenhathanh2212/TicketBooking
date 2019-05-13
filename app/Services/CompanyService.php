@@ -36,11 +36,20 @@ class CompanyService extends BaseService {
 
         if (!empty($params['provincial'])) {
             $stationsID = Station::where('provincial_id', $params['provincial'])->pluck('id');
-            $query = $query->whereIn('station_id', $stationsID);
+            $query->whereIn('station_id', $stationsID);
         }
 
         if (!empty($params['station'])) {
-            $query = $query->where('station_id', $params['station']);
+            $query->where('station_id', $params['station']);
+        }
+
+        if (!empty($params['keyword'])) {
+            $query->where(function($subQuery) use ($params) {
+                $subQuery->orWhere('id', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('name', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('address', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('phone', 'like', '%' . $params['keyword'] . '%');
+            });
         }
 
         $query->with(['images', 'ratings'])->withCount(['routes', 'ratings']);
