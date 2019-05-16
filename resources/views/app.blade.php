@@ -15,8 +15,8 @@
                 'csrfToken' => csrf_token(),
                 'locale' => config('app.locale'),
                 'url' => url('/'),
-                'languages' => config('settings.locale'),
                 'fallbackLocale' => config('app.fallback_locale'),
+                'setting' => config('setting'),
             ]) !!};
             localStorage.setItem('locale', window.Laravel.locale);
         </script>

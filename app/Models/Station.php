@@ -11,7 +11,8 @@ class Station extends Model
         'provincial_id',
         'location_name',
         'latitude',
-        'longitude'
+        'longitude',
+        'phone',
     ];
 
     public function provincial()

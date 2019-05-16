@@ -17,5 +17,10 @@
   "total": "Tổng tiền",
   "continue": "Tiếp tục",
   "company": "Hãng xe",
-  "ticket_price": "Giá một vé"
+  "ticket_price": "Giá một vé",
+  "your_info": "Thông tin của bạn",
+  "pay_method": "Phương thức thanh toán",
+  "driver_name": "Lái xe",
+  "lisense_plate": "Biển số xe",
+  "cancel": "Hủy"
 }

@@ -25,7 +25,12 @@
 
     export default {
         created() {
-            this.setBusRoute(this.$route.params.id);
+            this.setBusRoute(this.$route.params.id)
+                .catch(error => {
+                    this.$router.push({
+                        name: '404'
+                    })
+                });
         },
         components: {
             banerComponent: Banner,

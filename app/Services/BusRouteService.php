@@ -84,6 +84,12 @@ class BusRouteService extends BaseService {
 
     public function getBusRoute($id)
     {
-        return $this->model->with(['route', 'bus', 'ratings', 'tickets'])->find($id);
+        $busRoute = $this->model->with(['route', 'bus', 'ratings', 'tickets'])->find($id);
+
+        if (!$busRoute) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $busRoute;
     }
 }

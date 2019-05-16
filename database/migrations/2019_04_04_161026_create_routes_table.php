@@ -20,6 +20,9 @@ class CreateRoutesTable extends Migration
             $table->unsignedInteger('destination_station_id');
             $table->time('start_time');
             $table->time('destination_time');
+            $table->string('phone')->nullable();
+            $table->tinyInteger('reservation')->default(1);
+            $table->tinyInteger('direct_payment')->default(1);
             $table->unsignedInteger('number_preset_date')->default(10);
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ import bus_route from './modules/bus_route'
 import bus_station from './modules/bus_station'
 import provincial from './modules/provincial'
 import route from './modules/route'
+import ticket from './modules/ticket'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         bus_route,
         bus_station,
         provincial,
-        route
+        route,
+        ticket
     }
 });

@@ -14,5 +14,7 @@
     "update_profile_success": "Cập nhật thông tin thành công",
     "no_reviews_yet": "Chưa có đánh giá nào",
     "must_login_to_rate": "Bạn phải đăng nhập để đánh giá",
-    "rating_record": "Đánh giá của bạn đã được ghi lại"
+    "rating_record": "Đánh giá của bạn đã được ghi lại",
+    "booking_success": "Đặt vé xe thành công!",
+    "booking_error": "Đặt vé xe thất bại, hãy thử lại!"
 }

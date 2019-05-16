@@ -21,6 +21,24 @@ return [
         ],
     ],
     'number_hours_preset' => 3,
+    'ticket' => [
+        'status' => [
+            'cancel' => 0,
+            'active' => 1,
+            'close' => 2,
+        ],
+        'payment_method' => [
+            'direct' => 1,
+        ],
+    ],
+    'reservation' => [
+        'disallow' => 0,
+        'allow' => 1,
+    ],
+    'direct_payment' => [
+        'disallow' => 0,
+        'allow' => 1,
+    ],
     'number_of_records_pagination' => [
         '10' => 10,
         '25' => 25,

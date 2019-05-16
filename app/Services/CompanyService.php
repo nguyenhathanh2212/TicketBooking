@@ -64,6 +64,12 @@ class CompanyService extends BaseService {
      */
     public function getCompany($id)
     {
-        return $this->model->with(['images', 'routes'])->withCount(['routes', 'ratings'])->find($id);
+        $company = $this->model->with(['images', 'routes'])->withCount(['routes', 'ratings'])->find($id);
+
+        if (!$company) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $company;
     }
 }
