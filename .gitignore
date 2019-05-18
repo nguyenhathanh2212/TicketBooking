@@ -19,3 +19,6 @@ yarn-error.log
 
 /storage/logs
 /storage/debugbar
+
+/.idea/
+/.vscode/

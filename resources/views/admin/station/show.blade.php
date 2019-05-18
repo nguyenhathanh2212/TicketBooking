@@ -3,7 +3,7 @@
 @section('main_content')
     <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title">@lang('company.company_information')</h3>
+            <h3 class="box-title">@lang('station.station_information')</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div>
@@ -15,43 +15,43 @@
                     <form role="form">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="status">@lang('company.station')</label>
-                                {{ Form::select('station', $stations->pluck('name', 'id'), $company->station_id,[
+                                <label for="status">@lang('station.provincial')</label>
+                                {{ Form::select('provincial', $provincials->pluck('name', 'id'), $station->provincial_id,[
                                     'class' => 'form-control',
                                 ]) }}
                             </div>
                             <div class="form-group">
-                                <label for="name">@lang('company.name')</label>
-                                {{ Form::text('name', $company->name, [
+                                <label for="name">@lang('station.name')</label>
+                                {{ Form::text('name', $station->name, [
                                     'class' => 'form-control',
-                                    'placeholder' => trans('company.name'),
+                                    'placeholder' => trans('station.name'),
                                 ]) }}
                             </div>
                             <div class="form-group">
-                                <label for="address">@lang('company.address')</label>
-                                {{ Form::text('address', $company->address, [
+                                <label for="address">@lang('station.address')</label>
+                                {{ Form::text('address', $station->address, [
                                     'class' => 'form-control',
-                                    'placeholder' => trans('company.address'),
+                                    'placeholder' => trans('station.address'),
                                 ]) }}
                             </div>
                             <div class="form-group">
-                                <label for="phone">@lang('company.phone')</label>
-                                {{ Form::text('phone', $company->phone, [
+                                <label for="phone">@lang('station.phone')</label>
+                                {{ Form::text('phone', $station->phone, [
                                     'class' => 'form-control',
-                                    'placeholder' => trans('company.phone'),
+                                    'placeholder' => trans('station.phone'),
                                 ]) }}
                             </div>
-                            <div class="form-group">
-                                <label for="status">@lang('company.status')</label>
-                                {{ Form::select('status', $statuses, $company->status,[
+                            {{-- <div class="form-group">
+                                <label for="status">@lang('station.status')</label>
+                                {{ Form::select('status', $statuses, $station->status, [
                                     'class' => 'form-control',
                                 ]) }}
-                            </div>
+                            </div> --}}
                             <div class="form-group">
-                                <label for="description">@lang('company.description')</label>
-                                <textarea class="textarea" placeholder="Place some text here"
-                                    style="width: 100%; height: 200px; font-size: 14px;
-                                    line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $company->description }}</textarea>
+                                <label for="status">@lang('station.companies')</label>    
+                                <a href="{{ route('company.index', ['station_id' => $station->id]) }}">
+                                    <label style="cursor: pointer" class="label label-info">{{ $station->companies_count }} @lang('station.companies')</label>
+                                </a>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -67,11 +67,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $(document).ready(function() {
-            $('.textarea').wysihtml5()
-        })
-    </script>
-@endpush

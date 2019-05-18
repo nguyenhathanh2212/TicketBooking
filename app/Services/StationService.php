@@ -35,8 +35,43 @@ class StationService extends BaseService {
     {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
+
+        if (!empty($params['keyword'])) {
+            $query->where(function($subQuery) use ($params) {
+                $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('address', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('phone', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+
+        if (!empty($params['provincial_id'])) {
+            $query->where('provincial_id', $params['provincial_id']);
+        }
+
         $query->with('provincial')->withCount('companies');
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
+    }
+
+    public function getStation($id)
+    {
+        $station = $this->model->withCount('companies')->find($id);
+
+        if (!$station) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $station;
+    }
+
+    public function getAll()
+    {
+        $stations = $this->model->all();
+
+        if (!$stations) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $stations;
     }
 }

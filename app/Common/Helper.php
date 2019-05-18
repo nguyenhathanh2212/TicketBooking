@@ -33,3 +33,16 @@ if (!function_exists('getSortIcon')) {
         return 'fa-sort';
     }
 }
+
+if (!function_exists('getSizeBarActive')) {
+    function getSizeBarActive($routeNames)
+    {
+        $current = Route::currentRouteName();
+
+        if (in_array($current, $routeNames)) {
+            return 'active';
+        }
+
+        return '';
+    }
+}

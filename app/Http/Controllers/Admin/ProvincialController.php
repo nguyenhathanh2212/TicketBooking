@@ -4,26 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\CompanyService;
-use App\Services\StationService;
+use App\Services\ProvincialService;
 use Exception;
 
-class CompanyController extends Controller
+class ProvincialController extends Controller
 {
-    protected $companyService;
-    protected $stationService;
+    protected $provincialService;
 
-    /**
-     * CompanyController constructor.
-     * @param CompanyService $companyService
-     * @param RatingService $ratingService
-     */
     public function __construct(
-        CompanyService $companyService,
-        StationService $stationService
+        ProvincialService $provincialService
     ) {
-        $this->companyService = $companyService;
-        $this->stationService = $stationService;
+        $this->provincialService = $provincialService;
     }
     /**
      * Display a listing of the resource.
@@ -38,12 +29,10 @@ class CompanyController extends Controller
                 'sort_field',
                 'sort_type',
                 'keyword',
-                'station_id',
             ]);
+            $provincials = $this->provincialService->search($params);
 
-            $companies = $this->companyService->search($params);
-
-            return view('admin.company.index', compact('companies'));
+            return view('admin.provincial.index', compact('provincials'));
         } catch (Exception $e) {
             report($e);
             abort(404);
@@ -79,19 +68,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        try {
-            $company = $this->companyService->getCompany($id);
-            $statuses = $this->companyService->getListStatuses();
-            $stations = $this->stationService->getAll();
-
-            return view('admin.company.show', compact('company',
-                'statuses',
-                'stations'
-            ));
-        } catch (Exception $e) {
-            report($e);
-            abort(404);
-        }
+        //
     }
 
     /**

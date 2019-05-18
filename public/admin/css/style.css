@@ -17,3 +17,9 @@ div.dataTables_length label {
     text-align: left;
     white-space: nowrap;
 }
+
+.avatar-user-detail {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}

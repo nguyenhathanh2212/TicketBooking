@@ -18,4 +18,6 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
+    Route::resource('station', 'StationController');
+    Route::resource('provincial', 'ProvincialController');
 });

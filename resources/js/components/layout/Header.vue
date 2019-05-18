@@ -80,9 +80,9 @@
                                             {{ $t('main.station') }}
                                         </router-link>
                                     </li>
-                                    <li><a href="javascript:void(0);">pages</a></li>
+                                    <!-- <li><a href="javascript:void(0);">pages</a></li>
                                     <li><a href="shop.html">shop</a></li>
-                                    <li><a href="blog.html">blog</a></li>
+                                    <li><a href="blog.html">blog</a></li> -->
                                 </ul>
                             </div>
                         </nav>

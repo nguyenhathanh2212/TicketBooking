@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
+use Exception;
 
 class UserController extends Controller
 {
@@ -28,11 +29,14 @@ class UserController extends Controller
                 'size',
                 'sort_field',
                 'sort_type',
+                'role',
+                'keyword',
             ]);
 
+            $listRoles = $this->userService->getListRoles();
             $users = $this->userService->search($params);
 
-            return view('admin.user.index', compact('users'));
+            return view('admin.user.index', compact('users', 'listRoles'));
         } catch (Exception $e) {
             report($e);
             abort(404);
@@ -68,7 +72,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $user = $this->userService->getUser($id);
+            $listRoles = $this->userService->getListRoles();
+
+            return view('admin.user.show', compact('user', 'listRoles'));
+        } catch (Exception $e) {
+            report($e);
+            abort(404);
+        }
     }
 
     /**
