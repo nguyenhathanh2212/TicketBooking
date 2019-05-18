@@ -91,6 +91,7 @@ $factory->define(App\Models\Ticket::class, function (Faker $faker) {
         'phone' => $faker->tollFreePhoneNumber(),
         'seat_number' => '[' . $faker->numberBetween(1, 42) . ']',
         'quantity' => 1,
+        'total_price' => 100000,
         'date_away' => Carbon::now()->addDays(rand(0, 10))->addMinutes(rand(0, 60 * 23))->addSeconds(rand(0, 60)),
     ];
 });

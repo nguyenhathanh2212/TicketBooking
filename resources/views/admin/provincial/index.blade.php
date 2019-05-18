@@ -5,9 +5,9 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">@lang('main.manage_company')</h3>
+                <h3 class="box-title">@lang('main.manage_provincial')</h3>
                 <div class="box-tools">
-                    {{ Form::open(['url' => route('company.index'), 'method' => 'get']) }}
+                    {{ Form::open(['url' => route('provincial.index'), 'method' => 'get']) }}
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control pull-right" placeholder="Search">
                             <div class="input-group-btn">
@@ -26,38 +26,24 @@
                                 <input type="checkbox" class="flat-red choice-all">
                             </th>
                             <th>No.</th>
-                            <th>@lang('company.name')
+                            <th>@lang('station.name')
                                 <a href="{{ route(Route::currentRouteName(),
                                     array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'name'))) }}" data-test="">
                                     <i class="icon-sort fa {{ getSortIcon(Request::all(), 'name') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('company.address')
-                                <a href="{{ route(Route::currentRouteName(),
-                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'address'))) }}" data-test="">
-                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'address') }}"></i>
-                                </a>
-                            </th>
-                            <th>@lang('company.phone')</th>
-                            <th>@lang('company.route')</th>
-                            <th>@lang('company.review')</th>
-                            <th>@lang('company.status')</th>
+                            <th>@lang('main.stations')</th>
+                            <th>@lang('station.status')</th>
+                            <th>@lang('station.action')</th>
                         </tr>
-                        @foreach ($companies as $company)
+                        @foreach ($provincials as $provincial)
                             <tr>
-                                <td><input type="checkbox" value="{{ $company->id }}" name="companies_choice[]" class="choice-item flat-red"></td>
+                                <td><input type="checkbox" value="{{ $provincial->id }}" name="provincial_choice[]" class="choice-item flat-red"></td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('company.show', $company->id) }}">{{ $company->name }}</a></td>
-                                <td>{{ $company->address }}</td>
-                                <td>{{ $company->phone }}</td>
+                                <td><a href="{{ route('provincial.show', $provincial->id) }}">{{ $provincial->name }}</a></td>
                                 <td>
-                                    <a href="">
-                                        <label class="label label-info">{{ $company->routes->count() }}</label> @lang('company.route')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="">
-                                        <label class="label label-warning">{{ $company->ratings->count() }}</label> @lang('company.review')
+                                    <a href="{{ route('station.index', ['provincial_id' => $provincial->id]) }}">
+                                        <label class="label label-info">{{ $provincial->stations_count }}</label> @lang('main.stations')
                                     </a>
                                 </td>
                                 <td>
@@ -65,6 +51,12 @@
                                         <button type="button" class="btn btn-success btn-xs" title="@lang('company.change_status')">Active</button>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-success btn-xs" title="@lang('company.change_status')">Active</button>
+                                    </div>
+                                </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -92,18 +84,10 @@
                     </div>
                 </div>
                 <div class="text-right col-md-9">
-                    {{ $companies->appends(Request::except('page'))->links() }}
+                    {{ $provincials->appends(Request::except('page'))->links() }}
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-@push('script')
-    <script>
-        $(document).ready(function() {
-            
-        })
-    </script>
-@endpush

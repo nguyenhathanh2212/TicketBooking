@@ -4,30 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\CompanyService;
 use App\Services\StationService;
+use App\Services\ProvincialService;
 use Exception;
 
-class CompanyController extends Controller
+class StationController extends Controller
 {
-    protected $companyService;
     protected $stationService;
+    protected $provincialService;
 
-    /**
-     * CompanyController constructor.
-     * @param CompanyService $companyService
-     * @param RatingService $ratingService
-     */
     public function __construct(
-        CompanyService $companyService,
-        StationService $stationService
+        StationService $stationService,
+        ProvincialService $provincialService
     ) {
-        $this->companyService = $companyService;
         $this->stationService = $stationService;
+        $this->provincialService = $provincialService;
     }
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -38,12 +35,11 @@ class CompanyController extends Controller
                 'sort_field',
                 'sort_type',
                 'keyword',
-                'station_id',
+                'provincial_id',
             ]);
+            $stations = $this->stationService->search($params);
 
-            $companies = $this->companyService->search($params);
-
-            return view('admin.company.index', compact('companies'));
+            return view('admin.station.index', compact('stations'));
         } catch (Exception $e) {
             report($e);
             abort(404);
@@ -80,14 +76,10 @@ class CompanyController extends Controller
     public function show($id)
     {
         try {
-            $company = $this->companyService->getCompany($id);
-            $statuses = $this->companyService->getListStatuses();
-            $stations = $this->stationService->getAll();
+            $station = $this->stationService->getStation($id);
+            $provincials = $this->provincialService->getAll();
 
-            return view('admin.company.show', compact('company',
-                'statuses',
-                'stations'
-            ));
+            return view('admin.station.show', compact('station', 'provincials'));
         } catch (Exception $e) {
             report($e);
             abort(404);

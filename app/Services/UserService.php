@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Exception;
 
 class UserService extends BaseService {
     /**
@@ -38,6 +39,33 @@ class UserService extends BaseService {
         $params = $this->setParams($params);
         $query = $this->model->newQuery();
 
+        if (!empty($params['role']) && $params['role']) {
+            $query->where('role', $params['role']);
+        }
+
+        if (!empty($params['keyword'])) {
+            $query->where(function($subQuery) use ($params) {
+                $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('email', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
+    }
+
+    public function getListRoles()
+    {
+        return array_combine(config('setting.user.role'), trans('user.role_value'));
+    }
+
+    public function getUser($id)
+    {
+        $user = $this->model->find($id);
+
+        if (!$user) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $user;
     }
 }

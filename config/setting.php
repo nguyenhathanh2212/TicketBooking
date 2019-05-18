@@ -11,13 +11,14 @@ return [
     'avatar_default' => '/images/avatar_default.png',
     'user' => [
         'role' => [
-            'super_admin' => 0,
-            'admin' => 1,
-            'user' => 2,
+            'all' => 0,
+            'super_admin' => 1,
+            'admin' => 2,
+            'user' => 3,
         ],
         'role_company' => [
-            'super_manager' => 0,
-            'manager' => 1,
+            'super_manager' => 1,
+            'manager' => 2,
         ],
     ],
     'number_hours_preset' => 3,
@@ -44,4 +45,10 @@ return [
         '25' => 25,
         '50' => 50,
     ],
+    'company' => [
+        'status' => [
+            'block' => 0,
+            'active' => 1,
+        ]
+    ]
 ];

@@ -45,7 +45,31 @@ $(document).ready(function () {
             $('.choice-all').iCheck('uncheck')
         }
     })
+
+    if ($('.filter-list').length) {
+        $(document).on('change', '.filter-list', function () {
+            filterTypeRecord($(this).val());
+        })
+    }
 })
+
+function filterTypeRecord(number) {
+    var oldSearchValue = location.search.replace(/^\?/, '');
+    oldSearchValue = (oldSearchValue + '&').replace(/role=\d*&/ig, '').replace(/page=\d*&/ig, '').replace(/&$/, '');
+
+    var url = location.origin;
+    var pathName = location.pathname;
+
+    if (pathName != '' && pathName != '/' && pathName != 'undefined') {
+        url = url + pathName;
+    }
+
+    if (oldSearchValue) {
+        window.location.href = url + `?${oldSearchValue}&role=${number}`;
+    } else {
+        window.location.href = url + `?role=${number}`;
+    }
+}
 
 function showNumberRecord(number) {
     var oldSearchValue = location.search.replace(/^\?/, '');

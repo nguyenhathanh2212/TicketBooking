@@ -10,6 +10,7 @@
     <!-- Font Awesome -->
     {{ Html::style(asset('vendor/font-awesome/css/font-awesome.min.css')) }}
     {{ Html::style(asset('vendor/datetimepicker/build/css/bootstrap-datetimepicker.min.css')) }}
+    {{ Html::style(asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')) }}
     {{ Html::style(asset('vendor/select2/dist/css/select2.min.css')) }}
     {{ Html::style(asset('vendor/icheck/skins/all.css')) }}
     {{ Html::style(asset('admin/css/AdminLTE.min.css')) }}

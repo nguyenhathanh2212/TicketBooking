@@ -25,28 +25,81 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview {{ getSizeBarActive([
+                'company.index',
+                'company.show',
+            ]) }}">
                 <a href="#">
-                <i class="fa fa-dashboard"></i> <span>@lang('main.manage_company')</span>
-                <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                    <i class="fa fa-dashboard"></i>
+                    <span>@lang('main.manage_company')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{ route('company.index') }}"><i class="fa fa-circle-o"></i> @lang('main.companies')</a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    <li class="active">
+                        <a href="{{ route('company.index') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.companies')
+                        </a>
+                    </li>
+                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ getSizeBarActive([
+                'user.index',
+                'user.show',
+            ]) }}">
                 <a href="#">
-                <i class="fa fa-dashboard"></i> <span>@lang('main.manage_user')</span>
-                <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                    <i class="fa fa-dashboard"></i> <span>@lang('main.manage_user')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> @lang('main.users')</a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    <li>
+                        <a href="{{ route('user.index') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.users')
+                        </a>
+                    </li>
+                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
+                </ul>
+            </li>
+            <li class="treeview {{ getSizeBarActive([
+                'station.index',
+                'station.show',
+            ]) }}">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>@lang('main.manage_station')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('station.index') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.stations')
+                        </a>
+                    </li>
+                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
+                </ul>
+            </li>
+            <li class="treeview {{ getSizeBarActive([
+                'provincial.index',
+                'provincial.show',
+            ]) }}">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>@lang('main.manage_provincials')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('provincial.index') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.provincials')
+                        </a>
+                    </li>
+                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
                 </ul>
             </li>
         </ul>

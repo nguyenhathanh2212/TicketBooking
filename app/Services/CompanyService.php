@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Company;
 use App\Models\Station;
+use Exception;
 
 class CompanyService extends BaseService {
     /**
@@ -45,11 +46,14 @@ class CompanyService extends BaseService {
 
         if (!empty($params['keyword'])) {
             $query->where(function($subQuery) use ($params) {
-                $subQuery->orWhere('id', 'like', '%' . $params['keyword'] . '%')
-                    ->orWhere('name', 'like', '%' . $params['keyword'] . '%')
+                $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%')
                     ->orWhere('address', 'like', '%' . $params['keyword'] . '%')
                     ->orWhere('phone', 'like', '%' . $params['keyword'] . '%');
             });
+        }
+
+        if (!empty($params['station_id'])) {
+            $query->where('station_id', $params['station_id']);
         }
 
         $query->with(['images', 'ratings'])->withCount(['routes', 'ratings']);
@@ -71,5 +75,10 @@ class CompanyService extends BaseService {
         }
 
         return $company;
+    }
+
+    public function getListStatuses()
+    {
+        return array_combine(config('setting.company.status'), trans('company.status_value'));
     }
 }

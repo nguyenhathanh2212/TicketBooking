@@ -12,6 +12,8 @@
     {{ Html::script(asset('vendor/jquery-ui-dist/jquery-ui.min.js')) }}
     {{ Html::script(asset('vendor/bootstrap/dist/js/bootstrap.min.js')) }}
     {{ Html::script(asset('vendor/select2/dist/js/select2.full.min.js')) }}
+    {{ Html::script(asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')) }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js"></script>
     {{ Html::script(asset('vendor/icheck/icheck.min.js')) }}
     {{ Html::script(asset('vendor/moment/min/moment.min.js')) }}
     {{ Html::script(asset('vendor/datetimepicker/build/js/bootstrap-datetimepicker.min.js')) }}
