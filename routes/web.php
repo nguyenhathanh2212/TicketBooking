@@ -15,7 +15,16 @@ Route::get('/', function () {
     return view('app');
 })->name('home');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+// auth
+Route::group(['namespace' => 'Auth', 'prefix' => 'admin-page'], function () {
+    Route::get('/logout', 'LoginController@logout')->name('logout');
+    Route::get('/login', 'LoginController@index')->name('login');
+    Route::post('/login', 'LoginController@login')->name('login');
+});
+
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin-page'], function () {
+    Route::get('/', 'HomeController@index')->name('admin');
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
     Route::resource('station', 'StationController');
