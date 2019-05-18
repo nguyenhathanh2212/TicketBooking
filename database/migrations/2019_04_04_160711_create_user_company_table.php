@@ -17,7 +17,7 @@ class CreateUserCompanyTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('company_id');
-            $table->tinyInteger('role')->default(config('setting.user.role.user'));
+            $table->tinyInteger('role')->default(config('setting.user.role_company.super_manager'));
             $table->timestamps();
         });
     }

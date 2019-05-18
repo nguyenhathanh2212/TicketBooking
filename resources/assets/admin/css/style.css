@@ -23,3 +23,9 @@ div.dataTables_length label {
     height: 200px;
     object-fit: contain;
 }
+
+.user-panel .pull-left.info p {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

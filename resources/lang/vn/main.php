@@ -13,4 +13,6 @@ return [
     'delete' => 'Xóa',
     'show' => 'Hiển thị',
     'entries' => 'mục',
+    'profile' => 'Trang cá nhân',
+    'logout' => 'Đăng xuất',
 ];
