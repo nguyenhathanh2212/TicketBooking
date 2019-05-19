@@ -5,10 +5,9 @@ export const createTicket = ({ commit }, params) => {
     return new Promise((resolve, reject) => {
         post(`ticket`, params)
             .then(response => {
-                resolve(response.data.code);
+                resolve(response.data);
             })
             .catch(error => {
-                console.log(error.response)
                 reject(error);
             })
     })

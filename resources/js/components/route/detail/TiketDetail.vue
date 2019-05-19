@@ -35,7 +35,7 @@
                                                             <li>
                                                                 <span>{{ $t('route.number_of_seats') }}:</span>
                                                                 <em>{{ ticket.seat_number.length }}
-                                                                    ( <template v-for="(seat, index) in ticket.seat_number">
+                                                                    ( <template v-for="(seat, index) in JSON.parse(ticket.seat_number)">
                                                                         <label class="label label-info" :key="index">{{ seat }}</label>&nbsp;
                                                                     </template>)</em>
                                                             </li>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\BusRouteService;
 use App\Services\TicketService;
 use Auth;
+use Exception;
 
 class TicketController extends BaseController
 {
@@ -56,6 +57,7 @@ class TicketController extends BaseController
                 'destination_place',
                 'name',
                 'phone',
+                'email',
                 'seat_number',
                 'payment_method',
             ]);
@@ -67,7 +69,7 @@ class TicketController extends BaseController
         } catch (Exception $e) {
             report($e);
 
-            return $this->responseErrors($e->getCode(), $e->getMessage());
+            return $this->responseErrors($e->getCode(), $e->getMessage(), 400);
         }
     }
 
