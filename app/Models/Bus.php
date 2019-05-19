@@ -14,6 +14,7 @@ class Bus extends Model
         'number_level',
         'number_row',
         'number_column',
+        'status',
     ];
 
     public function company() {

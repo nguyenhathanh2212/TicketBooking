@@ -19,6 +19,7 @@ class CreateBusRouteTable extends Migration
             $table->unsignedInteger('route_id');
             $table->double('price');
             $table->text('phone');
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }

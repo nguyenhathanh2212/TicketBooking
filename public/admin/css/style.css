@@ -23,3 +23,21 @@ div.dataTables_length label {
     height: 200px;
     object-fit: contain;
 }
+
+.user-panel .pull-left.info p {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.select-status {
+    width: 115px;
+}
+
+.bg-change-select {
+    background: #fcff7d !important;
+}
+
+label.help-block {
+    font-weight: 400;
+}

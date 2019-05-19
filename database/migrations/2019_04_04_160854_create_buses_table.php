@@ -22,6 +22,7 @@ class CreateBusesTable extends Migration
             $table->tinyInteger('number_row');
             $table->tinyInteger('number_column');
             $table->tinyInteger('number_level');
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }

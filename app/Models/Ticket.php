@@ -17,6 +17,7 @@ class Ticket extends Model
         'date_away',
         'status',
         'total_price',
+        'email',
     ];
 
     protected $appends = [

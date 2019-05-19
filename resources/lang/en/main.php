@@ -14,4 +14,11 @@ return [
     'delete' => 'Delete',
     'show' => 'Show',
     'entries' => 'entries',
+    'status' => 'Status',
+    'status_value' => [
+        0 => 'All',
+        1 => 'Block',
+        2 => 'Active',
+    ],
+    'create' => 'Create',
 ];

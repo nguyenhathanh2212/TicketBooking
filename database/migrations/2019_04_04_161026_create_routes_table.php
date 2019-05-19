@@ -24,6 +24,7 @@ class CreateRoutesTable extends Migration
             $table->tinyInteger('reservation')->default(1);
             $table->tinyInteger('direct_payment')->default(1);
             $table->unsignedInteger('number_preset_date')->default(10);
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }

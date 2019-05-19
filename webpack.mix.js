@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -10,6 +11,12 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.webpackConfig({
+    plugins:
+    [
+        new WebpackShellPlugin({onBuildStart:['php artisan lang:js --quiet'], onBuildEnd:[]})
+    ]
+});
 
 mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('resources/assets/images', 'public/images')
@@ -27,6 +34,8 @@ mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('node_modules/bootstrap-rating', 'public/vendor/bootstrap-rating')
     .copyDirectory('node_modules/select2', 'public/vendor/select2')
     .copyDirectory('node_modules/icheck', 'public/vendor/icheck')
+    .copyDirectory('node_modules/sweetalert', 'public/vendor/sweetalert')
+    .copyDirectory('node_modules/jquery-validation/', 'public/vendor/jquery-validation')
     .version(['public/css/*.css', 'public/js/*.js']);
 
 mix.webpackConfig({

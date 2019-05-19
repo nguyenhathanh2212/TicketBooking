@@ -13,6 +13,7 @@ class Station extends Model
         'latitude',
         'longitude',
         'phone',
+        'status',
     ];
 
     public function provincial()

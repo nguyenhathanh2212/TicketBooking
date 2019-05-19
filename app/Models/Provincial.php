@@ -8,6 +8,7 @@ class Provincial extends Model
 {
     protected $fillable = [
         'name',
+        'status',
     ];
 
     public function stations()

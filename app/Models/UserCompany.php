@@ -12,6 +12,7 @@ class UserCompany extends Model
         'user_id',
         'company_id',
         'role',
+        'status',
     ];
 
     public function user() {

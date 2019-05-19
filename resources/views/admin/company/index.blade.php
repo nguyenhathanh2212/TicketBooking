@@ -6,8 +6,16 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">@lang('main.manage_company')</h3>
+                <div class="box-tools" style="right: 180px;">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        {{ Form::select('status', $statuses, Request::get('status'), [
+                            'class' => 'form-control',
+                            'form' => 'form-search'
+                        ])}}
+                    </div>
+                </div>
                 <div class="box-tools">
-                    {{ Form::open(['url' => route('company.index'), 'method' => 'get']) }}
+                    {{ Form::open(['url' => route('company.index'), 'method' => 'get', 'id' => 'form-search']) }}
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control pull-right" placeholder="Search">
                             <div class="input-group-btn">
@@ -18,8 +26,9 @@
                 </div>
             </div>
             <!-- /.box-header -->
+            @include('admin.template.notice')
             <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
+                <table class="table table-hover table-record">
                     <tbody>
                         <tr>
                             <th>
@@ -41,9 +50,12 @@
                             <th>@lang('company.phone')</th>
                             <th>@lang('company.route')</th>
                             <th>@lang('company.review')</th>
-                            <th>@lang('company.status')</th>
+                            <th>@lang('main.status')</th>
                         </tr>
-                        @foreach ($companies as $company)
+                        @php
+                            unset($statuses[0]);    
+                        @endphp
+                        @forelse ($companies as $company)
                             <tr>
                                 <td><input type="checkbox" value="{{ $company->id }}" name="companies_choice[]" class="choice-item flat-red"></td>
                                 <td>{{ $loop->iteration }}</td>
@@ -62,11 +74,20 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-success btn-xs" title="@lang('company.change_status')">Active</button>
+                                        {{ Form::select('status', $statuses, $company->status,[
+                                            'class' => 'form-control select-status',
+                                            'data-id' => $company->id,
+                                        ]) }}
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="8">
+                                    <span>@lang('message.data_not_found')</span>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -75,9 +96,23 @@
                     <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
                     <span class="fa fa-caret-down"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">@lang('company.change_status')</a></li>
-                        <li><a href="#">@lang('main.delete')</a></li>
+                        <li>
+                            <a href="#" data-message="@lang('message.warning_delete_company')" class="btn-delete-multy">@lang('main.delete')</a>
+                            {{ Form::open(['method' => 'delete', 'url' => route('company.delete_multy'), 'class' => 'form-delete-multy']) }}
+                                {{ Form::hidden('data', '', ['class' => 'data-id-delete']) }}
+                            {{ Form::close() }}
+                        </li>
                     </ul>
+                </div>
+                <div class="input-group-btn text-right">
+                    {{ Form::open(['method' => 'post', 'url' => route('company.update_multy_status'), 'class' => 'form-change-multy-status']) }}
+                        {{ Form::hidden('data', '', ['class' => 'data-change-status']) }}
+                        <button type="button"
+                            class="btn btn-info btn-sm btn-change-multy-status"
+                            data-message="@lang('message.warning_change_status_company')">
+                            @lang('company.change_status')
+                        </button>
+                    {{ Form::close() }}
                 </div>
             </div>
             <div class="box-footer clearfix">
