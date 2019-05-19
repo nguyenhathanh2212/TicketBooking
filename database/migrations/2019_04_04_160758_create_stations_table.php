@@ -21,6 +21,7 @@ class CreateStationsTable extends Migration
             $table->string('address');
             $table->float('latitude');
             $table->float('longitude');
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }

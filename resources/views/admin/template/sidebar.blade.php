@@ -28,6 +28,7 @@
             <li class="treeview {{ getSizeBarActive([
                 'company.index',
                 'company.show',
+                'company.create'
             ]) }}">
                 <a href="#">
                     <i class="fa fa-dashboard"></i>
@@ -37,12 +38,21 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active">
+                    <li class="{{ getSizeBarActive([
+                        'company.index',
+                        'company.show',
+                    ]) }}">
                         <a href="{{ route('company.index') }}">
                             <i class="fa fa-circle-o"></i> @lang('main.companies')
                         </a>
                     </li>
-                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
+                    <li class="{{ getSizeBarActive([
+                        'company.create',
+                    ]) }}">
+                        <a href="{{ route('company.create') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.create')
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="treeview {{ getSizeBarActive([

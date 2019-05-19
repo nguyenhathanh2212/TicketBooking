@@ -29,3 +29,15 @@ div.dataTables_length label {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+.select-status {
+    width: 115px;
+}
+
+.bg-change-select {
+    background: #fcff7d !important;
+}
+
+label.help-block {
+    font-weight: 400;
+}

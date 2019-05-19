@@ -15,4 +15,11 @@ return [
     'entries' => 'mục',
     'profile' => 'Trang cá nhân',
     'logout' => 'Đăng xuất',
+    'status' => 'Trạng thái',
+    'status_value' => [
+        0 => 'Tất cả',
+        1 => 'Khóa',
+        2 => 'Hoạt động',
+    ],
+    'create' => 'Thêm mới',
 ];

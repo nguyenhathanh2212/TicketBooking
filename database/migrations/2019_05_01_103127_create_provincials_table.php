@@ -16,6 +16,7 @@ class CreateProvincialsTable extends Migration
         Schema::create('provincials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
             $table->tinyInteger('role')->default(config('setting.user.role.user'));
+            $table->integer('status')->default(config('setting.status.active'));
             $table->rememberToken();
             $table->timestamps();
         });

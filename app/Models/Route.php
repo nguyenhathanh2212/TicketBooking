@@ -26,6 +26,7 @@ class Route extends Model
         'company_name',
         'number_of_buses',
         'start_date',
+        'status',
     ];
 
     public function getStartDateAttribute()

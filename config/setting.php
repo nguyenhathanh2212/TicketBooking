@@ -45,10 +45,9 @@ return [
         '25' => 25,
         '50' => 50,
     ],
-    'company' => [
-        'status' => [
-            'block' => 0,
-            'active' => 1,
-        ]
+    'status' => [
+        'all' => 0,
+        'block' => 1,
+        'active' => 2,
     ]
 ];

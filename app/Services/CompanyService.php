@@ -56,6 +56,10 @@ class CompanyService extends BaseService {
             $query->where('station_id', $params['station_id']);
         }
 
+        if (!empty($params['status'])) {
+            $query->where('status', $params['status']);
+        }
+
         $query->with(['images', 'ratings'])->withCount(['routes', 'ratings']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
@@ -75,10 +79,5 @@ class CompanyService extends BaseService {
         }
 
         return $company;
-    }
-
-    public function getListStatuses()
-    {
-        return array_combine(config('setting.company.status'), trans('company.status_value'));
     }
 }

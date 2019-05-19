@@ -13,6 +13,7 @@ class BusRoute extends Model
         'bus_id',
         'route_id',
         'price',
+        'status',
     ];
 
     protected $appends = [

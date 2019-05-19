@@ -24,7 +24,8 @@
         "vue-axios": "^2.1.4",
         "vue-loader": "^15.7.0",
         "vue-router": "^3.0.2",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "webpack-shell-plugin": "^0.5.0"
     },
     "dependencies": {
         "bootstrap-rating": "0.0.1",
@@ -32,15 +33,17 @@
         "css-loader": "^2.1.1",
         "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "font-awesome": "^4.7.0",
-        "icheck": "^1.0.2",
         "hellojs": "^1.18.1",
+        "icheck": "^1.0.2",
         "jquery-ui-dist": "^1.12.1",
+        "jquery-validation": "^1.19.0",
         "module-alias": "^2.2.0",
         "moment": "^2.24.0",
         "normalize.css": "^8.0.1",
         "packery": "^2.1.2",
         "scrolltofixed": "^1.0.6",
         "select2": "^4.0.3",
+        "sweetalert": "^2.1.2",
         "sweetalert2": "^8.10.1",
         "v-autocomplete": "^1.8.2",
         "vee-validate": "^2.2.4",

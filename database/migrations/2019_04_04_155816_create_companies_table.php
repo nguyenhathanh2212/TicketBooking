@@ -22,7 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->text('phone');
             $table->float('latitude');
             $table->float('longitude');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });
     }
