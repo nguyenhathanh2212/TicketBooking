@@ -2,6 +2,7 @@
 
 return [
     'date_format' => 'd/m/Y',
+    'date_format_view' => 'DD/MM/YYYY',
     'companies' => 'Nhà xe',
     'manage_company' => 'Quản lý nhà xe',
     'users' => 'Người dùng',
@@ -9,7 +10,8 @@ return [
     'stations' => 'Bến xe',
     'manage_station' => 'Quản lý bến xe',
     'provincials' => 'Tỉnh thành',
-    'manage_provincials' => 'Quản lý tỉnh thành',
+    'manage_provincial' => 'Quản lý tỉnh thành',
+    'manage_tickets' => 'Quản lý vé xe',
     'delete' => 'Xóa',
     'show' => 'Hiển thị',
     'entries' => 'mục',
@@ -18,8 +20,12 @@ return [
     'status' => 'Trạng thái',
     'status_value' => [
         0 => 'Tất cả',
-        1 => 'Khóa',
-        2 => 'Hoạt động',
+        1 => 'Hoạt động',
+        2 => 'Khóa',
     ],
     'create' => 'Thêm mới',
+    'bus' => 'Xe bus',
+    'route' => 'Tuyến đường',
+    'list' => 'Danh sách',
+    'detail' => 'Chi tiết',
 ];

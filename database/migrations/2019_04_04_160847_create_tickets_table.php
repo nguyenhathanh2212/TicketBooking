@@ -23,10 +23,10 @@ class CreateTicketsTable extends Migration
             $table->string('start_place')->nullable();
             $table->string('destination_place')->nullable();
             $table->string('seat_number');
-            $table->tinyInteger('status')->default(config('setting.status.active'));
+            $table->tinyInteger('status')->default(1);
             $table->tinyInteger('quantity');
             $table->tinyInteger('payment_method')->default(01);
-            $table->date('date_away');
+            $table->dateTime('date_away');
             $table->double('total_price');
             $table->timestamps();
         });

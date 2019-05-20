@@ -2,7 +2,7 @@
 
 @section('header')
 <h1>
-    @lang('main.manage_company')
+    @lang('main.manage_tickets')
     <small>@lang('main.list')</small>
 </h1>
 @endsection
@@ -12,8 +12,33 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">@lang('main.manage_company')</h3>
-                <div class="box-tools" style="right: 180px;">
+            </div>
+            <div class="block-search">
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        {{ Form::select('route_id', $routes, Request::get('route_id'), [
+                            'class' => 'form-control',
+                            'form' => 'form-search'
+                        ])}}
+                    </div>
+                </div>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        {{ Form::select('bus_id', $busLisenses, Request::get('bus_id'), [
+                            'class' => 'form-control',
+                            'form' => 'form-search'
+                        ])}}
+                    </div>
+                </div>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm date-picker" style="width: 150px;">
+                        <input type='text' value="{{ Request::get('date_away') }}" name="date_away" class="form-control" form="form-search" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="box-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         {{ Form::select('status', $statuses, Request::get('status'), [
                             'class' => 'form-control',
@@ -22,7 +47,7 @@
                     </div>
                 </div>
                 <div class="box-tools">
-                    {{ Form::open(['url' => route('company.index'), 'method' => 'get', 'id' => 'form-search']) }}
+                    {{ Form::open(['url' => route('ticket.index'), 'method' => 'get', 'id' => 'form-search']) }}
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control pull-right" placeholder="Search">
                             <div class="input-group-btn">
@@ -42,55 +67,51 @@
                                 <input type="checkbox" class="flat-red choice-all">
                             </th>
                             <th>No.</th>
-                            <th>@lang('company.name')
+                            <th>@lang('ticket.name')
                                 <a href="{{ route(Route::currentRouteName(),
                                     array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'name'))) }}" data-test="">
                                     <i class="icon-sort fa {{ getSortIcon(Request::all(), 'name') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('company.address')
+                            <th>@lang('ticket.phone')</th>
+                            <th>@lang('ticket.email')
                                 <a href="{{ route(Route::currentRouteName(),
-                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'address'))) }}" data-test="">
-                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'address') }}"></i>
+                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'email'))) }}" data-test="">
+                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'email') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('company.phone')</th>
-                            <th>@lang('company.route')</th>
-                            <th>@lang('company.review')</th>
+                            <th>@lang('ticket.payment_method')</th>
+                            <th>@lang('ticket.date_away')</th>
+                            <th>@lang('ticket.quantity')</th>
+                            <th>@lang('ticket.total_price')</th>
                             <th>@lang('main.status')</th>
                         </tr>
-                        @php
-                            unset($statuses[0]);    
-                        @endphp
-                        @forelse ($companies as $company)
+                        @forelse ($tickets as $ticket)
                             <tr>
-                                <td><input type="checkbox" value="{{ $company->id }}" name="companies_choice[]" class="choice-item flat-red"></td>
+                                <td><input type="checkbox" value="{{ $ticket->id }}" name="companies_choice[]" class="choice-item flat-red"></td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('company.show', $company->id) }}">{{ $company->name }}</a></td>
-                                <td>{{ $company->address }}</td>
-                                <td>{{ $company->phone }}</td>
+                                <td><a href="{{ route('ticket.show', $ticket->id) }}">{{ $ticket->name }}</a></td>
+                                <td>{{ $ticket->phone }}</td>
+                                <td>{{ $ticket->email }}</td>
                                 <td>
-                                    <a href="">
-                                        <label class="label label-info">{{ $company->routes->count() }}</label> @lang('company.route')
-                                    </a>
+                                    {{ $ticket->payment_method_str }}
                                 </td>
                                 <td>
-                                    <a href="">
-                                        <label class="label label-warning">{{ $company->ratings->count() }}</label> @lang('company.review')
-                                    </a>
+                                    {{ $ticket->date }}
                                 </td>
                                 <td>
-                                    <div class="form-group">
-                                        {{ Form::select('status', $statuses, $company->status,[
-                                            'class' => 'form-control select-status',
-                                            'data-id' => $company->id,
-                                        ]) }}
-                                    </div>
+                                    {{ $ticket->quantity }}
+                                </td>
+                                <td>
+                                    {{ $ticket->price_format }}đ
+                                </td>
+                                <td>
+                                    <span class="label label-info">{{ $ticket->status_str }}</span>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8">
+                                <td colspan="10">
                                     <span>@lang('message.data_not_found')</span>
                                 </td>
                             </tr>
@@ -112,14 +133,14 @@
                     </ul>
                 </div>
                 <div class="input-group-btn text-right">
-                    {{ Form::open(['method' => 'post', 'url' => route('company.update_multy_status'), 'class' => 'form-change-multy-status']) }}
+                    {{-- {{ Form::open(['method' => 'post', 'url' => route('company.update_multy_status'), 'class' => 'form-change-multy-status']) }}
                         {{ Form::hidden('data', '', ['class' => 'data-change-status']) }}
                         <button type="button"
                             class="btn btn-info btn-sm btn-change-multy-status"
                             data-message="@lang('message.warning_change_status_company')">
                             @lang('company.change_status')
                         </button>
-                    {{ Form::close() }}
+                    {{ Form::close() }} --}}
                 </div>
             </div>
             <div class="box-footer clearfix">
@@ -134,7 +155,7 @@
                     </div>
                 </div>
                 <div class="text-right col-md-9">
-                    {{ $companies->appends(Request::except('page'))->links() }}
+                    {{ $tickets->appends(Request::except('page'))->links() }}
                 </div>
             </div>
         </div>
@@ -145,7 +166,6 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            
         })
     </script>
 @endpush

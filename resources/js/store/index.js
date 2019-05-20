@@ -19,5 +19,15 @@ export default new Vuex.Store({
         provincial,
         route,
         ticket
-    }
+    },
+    // #root state
+    state: {
+        loading: false,
+    },
+    // #root mutations
+    mutations: {
+        SET_LOADING(state, loading) {
+            state.loading = loading
+        },
+    },
 });

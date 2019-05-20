@@ -200,6 +200,21 @@
                                             :placeholder="this.$t('route.enter_phone')">
                                         <small class="form-text text-muted error">{{ errors.first('phone') }}</small>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="phone">{{ $t('profile.email') }}</label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            :data-vv-as="this.$t('profile.email')"
+                                            v-model="email"
+                                            v-validate="{
+                                                required: true,
+                                                email: true
+                                            }"
+                                            :placeholder="this.$t('route.enter_email')">
+                                        <small class="form-text text-muted error">{{ errors.first('email') }}</small>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -267,7 +282,10 @@
                 otherPlaceDestination: '',
                 name: '',
                 phone: '',
-                statusModal: 'false'
+                email: '',
+                statusModal: 'false',
+                placeStart: '',
+                placeDestination: '',
             }
         },
         computed: {
@@ -289,12 +307,6 @@
             }, 
             numberColumn: function () {
                 return this.busRoute.bus.number_column;
-            }, 
-            placeStart: function () {
-                return this.busRoute.route.start_station.address;
-            }, 
-            placeDestination: function () {
-                return this.busRoute.route.destination_station.address;
             }
         },
         watch: {
@@ -302,6 +314,8 @@
                 this.setSeatIsBookeds();
             },
             busRoute: function () {
+                this.placeStart = this.busRoute.route.start_station.address;
+                this.placeDestination = this.busRoute.route.destination_station.address;
                 this.date = this.$route.params.date ? this.$route.params.date : this.busRoute.route.start_date; 
             },
             seatChecks: function () {
@@ -354,6 +368,7 @@
                             total_price: this.totalPrice,
                             phone: this.phone,
                             name: this.name,
+                            email: this.email,
                             date_away: this.date
                         }
 

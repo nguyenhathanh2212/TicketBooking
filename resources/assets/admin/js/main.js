@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    Lang.setLocale(document.getElementsByTagName('html')[0].getAttribute('lang'));
     if ($('input[type="checkbox"].flat-red').length) {
         $('input[type="checkbox"].flat-red').iCheck({
             checkboxClass: 'icheckbox_flat-green',
@@ -134,6 +135,12 @@ $(document).ready(function () {
 
     if ($('.textarea').length) {
         $('.textarea').wysihtml5()
+    }
+
+    if ($('.date-picker').length) {
+        $('.date-picker').datetimepicker({
+            format: Lang.get('main.date_format_view')
+        });
     }
 })
 

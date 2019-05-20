@@ -20,7 +20,8 @@
                                                             <li class="tg-personprice">
                                                                 <div>
                                                                     <span>{{ $t('route.name') }}:</span><em>{{ data.name }}</em><br><br>
-                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ data.phone }}</em>
+                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ data.phone }}</em><br><br>
+                                                                    <span>{{ $t('profile.email') }}:</span><em>{{ data.email }}</em>
                                                                 </div>
                                                             </li>
                                                             <li><span>{{ $t('route.company') }}:</span><em>{{ busRoute.route.company_name }}</em></li>
@@ -163,6 +164,15 @@
                             text: this.$t('message.booking_success'),
                             type: 'success',
                             confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.value) {
+                                this.$router.push({
+                                    name: 'ticket.detail',
+                                    params: {
+                                        id: success.ticket.id
+                                    }
+                                })
+                            }
                         });
                     })
                     .catch(error => {

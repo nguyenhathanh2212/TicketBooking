@@ -18,12 +18,17 @@ class Ticket extends Model
         'status',
         'total_price',
         'email',
+        'start_place',
+        'destination_place',
+        'payment_method',
     ];
 
     protected $appends = [
         'date',
         'status_str',
         'check_cancel',
+        'payment_method_str',
+        'price_format',
     ];
 
     public function getDateAttribute()
@@ -48,7 +53,7 @@ class Ticket extends Model
     public function getStatusAttribute()
     {
         if ($this->attributes['status'] == config('setting.ticket.status.active') && Carbon::parse($this->date_away)->lt(Carbon::now())) {
-            return config('setting.ticket.status.close');
+            return config('setting.ticket.status.finish');
         }
 
         return $this->attributes['status'];
@@ -60,5 +65,15 @@ class Ticket extends Model
 
     public function busRoute() {
         return $this->belongsTo(BusRoute::class, 'bus_route_id');
+    }
+    
+    public function getPaymentMethodStrAttribute()
+    {
+        return trans('ticket.payment_method_value')[$this->attributes['payment_method']];
+    }
+
+    public function getPriceFormatAttribute()
+    {
+        return number_format($this->total_price, 2);
     }
 }
