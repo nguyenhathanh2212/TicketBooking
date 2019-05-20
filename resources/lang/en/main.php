@@ -17,8 +17,8 @@ return [
     'status' => 'Status',
     'status_value' => [
         0 => 'All',
-        1 => 'Block',
-        2 => 'Active',
+        1 => 'Active',
+        2 => 'Block',
     ],
     'create' => 'Create',
 ];

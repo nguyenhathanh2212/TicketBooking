@@ -47,7 +47,7 @@ return [
     ],
     'status' => [
         'all' => 0,
-        'block' => 1,
-        'active' => 2,
+        'active' => 1,
+        'block' => 2,
     ]
 ];

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Ticket;
 use Carbon\Carbon;
+use Exception;
 
 class TicketService extends BaseService {
     /**
@@ -49,9 +50,26 @@ class TicketService extends BaseService {
     public function createTicket($busRoute, $data)
     {
         $data['quantity'] = count($data['seat_number']);
-        $data['seat_number'] = json_encode($data['seat_number']);
+        $data['status'] = config('setting.ticket.status.active');
         $data['date_away'] = Carbon::createFromFormat(trans('main.date_format'), $data['date_away']);
         $data['total_price'] = $busRoute->price * $data['quantity'];
+        $checkSeat = true;
+        $ticketSeat = $busRoute->tickets()->whereDay('date_away', $data['date_away'])->pluck('seat_number')->all();
+
+        foreach($ticketSeat as $seats) {
+            $seats = json_decode($seats);
+
+            if (count(array_unique(array_merge($seats, $data['seat_number']))) < count($data['seat_number']) + count($seats)) {
+                $checkSeat = false;
+                break;
+            }
+        }
+
+        if (!$checkSeat) {
+            throw new Exception("Seat is ordered!", 1000);
+        }
+
+        $data['seat_number'] = json_encode($data['seat_number']);
 
         return $busRoute->tickets()->create($data);
     }

@@ -23,6 +23,13 @@
                         {{ $t('main.routes') }}
                     </router-link>
                 </li>
+                <li>
+                    <router-link
+                            :to="{ name: 'bus_station' }"
+                            tag="a">
+                        {{ $t('main.station') }}
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </div>

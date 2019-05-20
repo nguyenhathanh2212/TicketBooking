@@ -16,6 +16,7 @@ class Route extends Model
         'number_preset_date',
         'phone',
         'reservation',
+        'status',
     ];
 
     protected $appends = [
@@ -26,7 +27,6 @@ class Route extends Model
         'company_name',
         'number_of_buses',
         'start_date',
-        'status',
     ];
 
     public function getStartDateAttribute()

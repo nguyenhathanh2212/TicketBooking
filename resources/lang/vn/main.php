@@ -18,8 +18,8 @@ return [
     'status' => 'Trạng thái',
     'status_value' => [
         0 => 'Tất cả',
-        1 => 'Khóa',
-        2 => 'Hoạt động',
+        1 => 'Hoạt động',
+        2 => 'Khóa',
     ],
     'create' => 'Thêm mới',
 ];
