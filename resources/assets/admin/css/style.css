@@ -41,3 +41,18 @@ div.dataTables_length label {
 label.help-block {
     font-weight: 400;
 }
+
+.block-search .box-tools {
+    display: inline-block;
+}
+
+.block-search {
+    text-align: right;
+    padding-right: 10px; 
+}
+
+.form-ticket input.form-control {
+    width: 65%;
+    display: inline-block;
+    float: right;
+}  

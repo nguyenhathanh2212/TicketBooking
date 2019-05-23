@@ -18,7 +18,7 @@ class CompanyController extends Controller
     protected $stationService;
     protected $busService;
     protected $routeService;
-    protected $busRouteService;
+    protected $busBookingService;
 
     /**
      * CompanyController constructor.
@@ -59,6 +59,7 @@ class CompanyController extends Controller
 
             return view('admin.company.index', compact('companies', 'statuses'));
         } catch (Exception $e) {
+            dd($e);
             report($e);
             abort(404);
         }

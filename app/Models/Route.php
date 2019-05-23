@@ -27,6 +27,7 @@ class Route extends Model
         'company_name',
         'number_of_buses',
         'start_date',
+        'name_route',
     ];
 
     public function getStartDateAttribute()
@@ -84,5 +85,10 @@ class Route extends Model
     public function getCompanyNameAttribute()
     {
         return $this->company->name;
+    }
+
+    public function getNameRouteAttribute()
+    {
+        return "{$this->start_station_name}({$this->start_time_format}) -> {$this->destination_station_name}({$this->destination_time_format})";
     }
 }

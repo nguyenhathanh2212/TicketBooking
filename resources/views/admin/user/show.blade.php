@@ -1,5 +1,12 @@
 @extends('admin.template.master')
 
+@section('header')
+<h1>
+    @lang('main.manage_company')
+    <small>@lang('main.detail')</small>
+</h1>
+@endsection
+
 @section('main_content')
 <div class="box box-default">
     <div class="box-header with-border">

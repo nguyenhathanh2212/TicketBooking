@@ -8,6 +8,7 @@ use App\Services\BusRouteService;
 use App\Services\TicketService;
 use Auth;
 use Exception;
+Use App\Jobs\SendBookingEmail;
 
 class TicketController extends BaseController
 {
@@ -64,6 +65,7 @@ class TicketController extends BaseController
             $data['user_id'] = Auth::user()->id;
             $busRoute = $this->busRouteService->getBusRoute($busRouteId);
             $ticket = $this->ticketService->createTicket($busRoute, $data);
+            $this->dispatch(new SendBookingEmail($ticket));
 
             return $this->responseSuccess(compact('ticket'));
         } catch (Exception $e) {

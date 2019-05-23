@@ -1,5 +1,12 @@
 @extends('admin.template.master')
 
+@section('header')
+<h1>
+    @lang('main.manage_company')
+    <small>@lang('main.list')</small>
+</h1>
+@endsection
+
 @section('main_content')
 <div class="row">
     <div class="col-xs-12">

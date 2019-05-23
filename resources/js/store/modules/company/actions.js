@@ -3,6 +3,7 @@ import * as types from './mutation-types'
 
 export const setCompanies = ({ commit }, params) => {
     var path = 'company?';
+    commit('SET_LOADING', false, { root: true })
     params.size = params.size ? params.size : 9;
     params.page = params.page ? params.page : 1;
 

@@ -158,7 +158,6 @@
                 this.data['payment_method'] = this.paymentMethod;
                 this.createTicket(this.data)
                     .then(success => {
-                        console.log(success.ticket.id);
                         this.bookingSuccess = true;
                         Swal.fire({
                             title: 'Success!',

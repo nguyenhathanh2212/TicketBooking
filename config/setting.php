@@ -24,9 +24,10 @@ return [
     'number_hours_preset' => 3,
     'ticket' => [
         'status' => [
-            'cancel' => 0,
+            'all' => 0,
             'active' => 1,
-            'close' => 2,
+            'finish' => 2,
+            'cancel' => 3,
         ],
         'payment_method' => [
             'direct' => 1,

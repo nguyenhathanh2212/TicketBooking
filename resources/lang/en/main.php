@@ -2,6 +2,7 @@
 
 return [
     'date_format' => 'm/d/Y',
+    'date_format_view' => 'MM/DD/YYYY',
     'company' => 'Company',
     'companies' => 'Bus companies',
     'manage_company' => 'Manage bus company',
@@ -10,7 +11,8 @@ return [
     'stations' => 'Stations',
     'manage_station' => 'Manage stations',
     'provincials' => 'Rrovincials',
-    'manage_provincials' => 'Manage provincials',
+    'manage_provincial' => 'Manage provincials',
+    'manage_tickets' => 'Manage tickets',
     'delete' => 'Delete',
     'show' => 'Show',
     'entries' => 'entries',
@@ -21,4 +23,10 @@ return [
         2 => 'Block',
     ],
     'create' => 'Create',
+    'bus' => 'Bus',
+    'route' => 'Route',
+    'list' => 'List',
+    'detail' => 'Detail',
+    'information_ticket' => 'Information ticket',
+    'thank_use' => 'Thanks for using TicketBooking!',
 ];

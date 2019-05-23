@@ -31,4 +31,5 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin-page', 'middleware' => 
     Route::resource('user', 'UserController');
     Route::resource('station', 'StationController');
     Route::resource('provincial', 'ProvincialController');
+    Route::resource('ticket', 'TicketController');
 });

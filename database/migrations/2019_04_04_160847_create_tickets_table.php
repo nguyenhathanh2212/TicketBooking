@@ -26,7 +26,7 @@ class CreateTicketsTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('quantity');
             $table->tinyInteger('payment_method')->default(01);
-            $table->date('date_away');
+            $table->dateTime('date_away');
             $table->double('total_price');
             $table->timestamps();
         });
