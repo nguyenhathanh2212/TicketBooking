@@ -15,6 +15,7 @@ return [
         'validation',
         'message',
         'main',
+        'company',
     ],
 
     /*

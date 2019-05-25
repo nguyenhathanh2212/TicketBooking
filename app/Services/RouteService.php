@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Route;
+use Exception;
 
 class RouteService extends BaseService {
     /**
@@ -41,5 +42,21 @@ class RouteService extends BaseService {
         }
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
+    }
+
+    public function getRoute($id)
+    {
+        $route = $this->model->find($id);
+
+        if (!$route) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $route;
+    }
+
+    public function getAllRouteByStationId($id)
+    {
+        return $this->model->whereIn('start_station_id', array_wrap($id))->orWhere('destination_station_id', array_wrap($id))->get();
     }
 }

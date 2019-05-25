@@ -32,6 +32,7 @@
         "countdown": "^2.6.0",
         "css-loader": "^2.1.1",
         "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+        "file-upload-with-preview": "^4.0.2",
         "font-awesome": "^4.7.0",
         "hellojs": "^1.18.1",
         "icheck": "^1.0.2",

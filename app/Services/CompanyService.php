@@ -80,4 +80,49 @@ class CompanyService extends BaseService {
 
         return $company;
     }
+
+    public function createCompany($data)
+    {
+        $company = $this->model->create($data);
+        $company->userCompanies()->create([
+            'user_id' => $data['super_manager'],
+            'role' => config('setting.user.role_company.super_manager'),
+        ]);
+
+        $dataEmployee = [];
+
+        foreach($data['employee'] as $id) {
+            $dataEmployee[] = [
+                'role' => config('setting.user.role_company.manager'),
+                'user_id' => $id,
+            ];
+        }
+
+        $company->userCompanies()->createMany($dataEmployee);
+
+        return $company;
+    }
+    
+    public function updateCompany($id, $data)
+    {
+        $company = $this->model->find($id);
+        $company->update($data);
+        $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->update([
+            'user_id' => $data['super_manager']
+        ]);
+
+        $companyManagerId = $company->userCompanies()->where('role', config('setting.user.role_company.manager'))->pluck('user_id')->all();
+        $deleteIds = array_diff($companyManagerId, $data['employee']);
+        $createIds = array_diff($data['employee'], $companyManagerId);
+        $company->userCompanies()->whereIn('user_id', $deleteIds)->delete();
+
+        foreach($createIds as $id) {
+            $company->userCompanies()->create([
+                'user_id' => $id,
+                'role' => config('setting.user.role_company.manager'),
+            ]);
+        }
+
+        return $company;
+    }
 }

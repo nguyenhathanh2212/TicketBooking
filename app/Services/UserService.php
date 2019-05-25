@@ -45,9 +45,14 @@ class UserService extends BaseService {
 
         if (!empty($params['keyword'])) {
             $query->where(function($subQuery) use ($params) {
-                $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%')
+                $subQuery->orWhere('first_name', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('last_name', 'like', '%' . $params['keyword'] . '%')
                     ->orWhere('email', 'like', '%' . $params['keyword'] . '%');
             });
+        }
+
+        if (!empty($params['filter_id'])) {
+            $query->whereNotIn('id', $params['filter_id']);
         }
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);

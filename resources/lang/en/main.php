@@ -13,6 +13,7 @@ return [
     'provincials' => 'Rrovincials',
     'manage_provincial' => 'Manage provincials',
     'manage_tickets' => 'Manage tickets',
+    'manage_route' => 'Manage routes',
     'delete' => 'Delete',
     'show' => 'Show',
     'entries' => 'entries',

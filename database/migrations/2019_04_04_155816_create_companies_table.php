@@ -17,11 +17,9 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('station_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('address');
-            $table->text('phone');
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->string('phone');
             $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });

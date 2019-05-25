@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Station;
+use Exception;
 
 class StationService extends BaseService {
     /**
@@ -48,6 +49,10 @@ class StationService extends BaseService {
             $query->where('provincial_id', $params['provincial_id']);
         }
 
+        if (!empty($params['status'])) {
+            $query->where('status', $params['status']);
+        }
+
         $query->with('provincial')->withCount('companies');
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
@@ -73,5 +78,18 @@ class StationService extends BaseService {
         }
 
         return $stations;
+    }
+
+    public function createStation($data)
+    {
+        return $this->model->create($data);
+    }
+
+    public function updateStation($id, $data)
+    {
+        $station = $this->model->find($id);
+        $station->update($data);
+        
+        return $station;
     }
 }

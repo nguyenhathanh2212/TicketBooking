@@ -13,4 +13,5 @@ return [
     'action' => 'Action',
     'station_information' => 'Thông tin bến xe',
     'provincial' => 'Tỉnh thành',
+    'add_company' => 'Thêm hãng xe',
 ];

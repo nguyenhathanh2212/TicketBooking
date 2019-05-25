@@ -17,7 +17,7 @@
     {{ Html::script(asset('vendor/icheck/icheck.min.js')) }}
     {{ Html::script(asset('vendor/moment/min/moment.min.js')) }}
     {{ Html::script(asset('vendor/sweetalert/dist/sweetalert.min.js')) }}
-    {{ Html::script('messages.js') }}
+    {{ Html::script(asset('messages.js')) }}
     {{ Html::script(asset('vendor/datetimepicker/build/js/bootstrap-datetimepicker.min.js')) }}
     {{ Html::script(asset('admin/js/adminlte.min.js')) }}
     {{ Html::script(asset('admin/js/main.js')) }}

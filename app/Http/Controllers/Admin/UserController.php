@@ -116,4 +116,33 @@ class UserController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        if (!$request->ajax()) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        try {
+            $params = $request->only([
+                'keyword',
+                'filter_id',
+            ]);
+            
+            $result = true;
+
+            $users = $this->userService->search($params);
+        } catch (Exception $e) {
+            $result = false;
+            $users = [];
+            report($e);
+        }
+
+        return response()->json([
+            'success' => $result,
+            'users' => $users,
+        ]);
+    }
 }

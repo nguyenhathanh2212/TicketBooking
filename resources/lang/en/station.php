@@ -13,4 +13,5 @@ return [
     'action' => 'action',
     'station_information' => 'Station information',
     'provincial' => 'Provincial',
+    'add_company' => 'Add company',
 ];

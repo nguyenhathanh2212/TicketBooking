@@ -181,7 +181,7 @@ function showNumberRecord(number) {
 }
 
 function getAllChoice() {
-    return $('input[name="companies_choice[]"]:checked').map(function (index, element) {
+    return $('input[name="item_choice[]"]:checked').map(function (index, element) {
         return $(element).val();
     }).get();
 }

@@ -16,16 +16,21 @@
             </div>
         </div>
         <!-- /.box-header -->
+        @include('admin.template.notice')
         <div class="box-body">
-            @include('admin.company.form')
+            <div class="box-body">
+                {{ Form::open(['class' => 'form-company',
+                    'url' => route('company.update', $company->id),
+                    'method' => 'PUT',
+                    'enctype'=>'multipart/form-data']) }}
+                    @include('admin.company.form')
+                {{ Form::close() }}
+            </div>
         </div>
     </div>
 @endsection
 
 @push('script')
-    <script>
-        $(document).ready(function() {
-            
-        })
-    </script>
+    {{ Html::script(asset('admin/js/company.js')) }}
 @endpush
+    
