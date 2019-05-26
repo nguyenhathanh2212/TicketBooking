@@ -45,8 +45,6 @@ $factory->define(App\Models\Company::class, function (Faker $faker) {
         'description' => $faker->text(400),
         'phone' => $faker->tollFreePhoneNumber(),
         'address' => $faker->name,
-        'latitude' => $faker->latitude(9, 22),
-        'longitude' => $faker->longitude(103, 109),
     ];
 });
 

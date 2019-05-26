@@ -15,7 +15,7 @@
                         <em>({{ company.number_of_review }} {{ $t('company.reviews') }})</em>
                     </div>
                     <div class="tg-description">
-                        <p>{{ company.description }}</p>
+                        <p v-html="company.description"></p>
                     </div>
                 </div>
             </div>

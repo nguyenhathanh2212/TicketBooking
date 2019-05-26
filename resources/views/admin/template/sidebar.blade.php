@@ -85,12 +85,21 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="{{ getSizeBarActive([
+                        'station.index',
+                        'station.show',
+                    ]) }}">
                         <a href="{{ route('station.index') }}">
                             <i class="fa fa-circle-o"></i> @lang('main.stations')
                         </a>
                     </li>
-                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
+                    <li class="{{ getSizeBarActive([
+                        'station.create',
+                    ]) }}">
+                        <a href="{{ route('station.create') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.create')
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="treeview {{ getSizeBarActive([
@@ -98,7 +107,7 @@
                 'provincial.show',
             ]) }}">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>@lang('main.manage_provincials')</span>
+                    <i class="fa fa-dashboard"></i> <span>@lang('main.manage_provincial')</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>

@@ -16,6 +16,8 @@
     {{ Html::style(asset('admin/css/AdminLTE.min.css')) }}
     {{ Html::style(asset('admin/css/skins/_all-skins.min.css')) }}
     {{ Html::style(asset('admin/css/style.css')) }}
+    {{ Html::style(asset('vendor/file-upload-with-preview/dist/file-upload-with-preview.min.css')) }}
+    {{ Html::script(asset('vendor/file-upload-with-preview/dist/file-upload-with-preview.min.js')) }}
     @stack('style')
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

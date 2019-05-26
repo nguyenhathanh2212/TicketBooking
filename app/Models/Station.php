@@ -9,11 +9,15 @@ class Station extends Model
     protected $fillable = [
         'name',
         'provincial_id',
-        'location_name',
         'latitude',
         'longitude',
         'phone',
         'status',
+        'address',
+    ];
+
+    protected $appends = [
+        'first_image',
     ];
 
     public function provincial()
@@ -25,10 +29,6 @@ class Station extends Model
     {
         return $this->hasMany(Company::class);
     }
-
-    protected $appends = [
-        'first_image',
-    ];
 
     public function images() {
         return $this->morphMany(Image::class, 'imageable');

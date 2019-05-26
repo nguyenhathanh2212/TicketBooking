@@ -16,44 +16,17 @@
             </div>
         </div>
         <!-- /.box-header -->
+        @include('admin.template.notice')
         <div class="box-body">
-            @include('admin.company.form')
-            <!-- /.row -->
+            {{ Form::open(['class' => 'form-company',
+                'url' => route('company.store'),
+                'enctype'=>'multipart/form-data']) }}
+                @include('admin.company.form')
+            {{ Form::close() }}
         </div>
     </div>
 @endsection
 
 @push('script')
-    <script>
-        $(document).ready(function() {
-            var form = $('.form-company');
-            var validator = form.validate({
-                debug: false,
-                invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        validator.errorList[0].element.focus();
-                    }
-                },
-                rules: {
-                    name: {
-                        required: true,
-                    }
-                },
-                messages: {
-                    name: {
-                        required: Lang.get('validation.required', {attribute: Lang.get('company.name')}),
-                    }
-                },
-                highlight: function (element) {
-                    $(element).closest('.form-group').addClass('has-error');
-                },
-                unhighlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                }
-            });
-
-            // form.valid();
-        })
-    </script>
+    {{ Html::script(asset('admin/js/company.js')) }}
 @endpush

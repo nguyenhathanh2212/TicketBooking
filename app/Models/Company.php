@@ -11,15 +11,16 @@ class Company extends Model
         'description',
         'address',
         'phone',
-        'latitude',
-        'longitude',
-        'status'
+        'status',
+        'station_id',
     ];
 
     protected $appends = [
         'rating',
         'first_image',
         'list_images',
+        'latitude',
+        'longitude',
     ];
 
     public function station() {
@@ -64,5 +65,13 @@ class Company extends Model
     public function getListImagesAttribute()
     {
         return $this->images->count() ? $this->images : ['url' => config('setting.image_company_default')];
+    }
+
+    public function getLatitudeAttribute() {
+        return $this->station->latitude;
+    }
+
+    public function getLongitudeAttribute() {
+        return $this->station->longitude;
     }
 }

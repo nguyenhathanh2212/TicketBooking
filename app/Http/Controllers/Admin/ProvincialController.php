@@ -30,9 +30,10 @@ class ProvincialController extends Controller
                 'sort_type',
                 'keyword',
             ]);
+            $statuses = $this->provincialService->getListStatuses();
             $provincials = $this->provincialService->search($params);
 
-            return view('admin.provincial.index', compact('provincials'));
+            return view('admin.provincial.index', compact('provincials', 'statuses'));
         } catch (Exception $e) {
             report($e);
             abort(404);

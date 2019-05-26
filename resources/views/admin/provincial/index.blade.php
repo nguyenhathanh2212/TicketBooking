@@ -29,20 +29,22 @@
                 <table class="table table-hover">
                     <tbody>
                         <tr>
-                            <th>
+                            <th width="5%">
                                 <input type="checkbox" class="flat-red choice-all">
                             </th>
-                            <th>No.</th>
-                            <th>@lang('station.name')
+                            <th width="5%">No.</th>
+                            <th width="30%">@lang('station.name')
                                 <a href="{{ route(Route::currentRouteName(),
                                     array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'name'))) }}" data-test="">
                                     <i class="icon-sort fa {{ getSortIcon(Request::all(), 'name') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('main.stations')</th>
-                            <th>@lang('station.status')</th>
-                            <th>@lang('station.action')</th>
+                            <th width="30%">@lang('main.stations')</th>
+                            <th width="30%">@lang('station.status')</th>
                         </tr>
+                        @php
+                            unset($statuses[0]);    
+                        @endphp
                         @foreach ($provincials as $provincial)
                             <tr>
                                 <td><input type="checkbox" value="{{ $provincial->id }}" name="provincial_choice[]" class="choice-item flat-red"></td>
@@ -55,15 +57,12 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-success btn-xs" title="@lang('company.change_status')">Active</button>
+                                        {{ Form::select('status', $statuses, $provincial->status,[
+                                            'class' => 'form-control select-status',
+                                            'data-id' => $provincial->id,
+                                        ]) }}
                                     </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-success btn-xs" title="@lang('company.change_status')">Active</button>
-                                    </div>
-                                </td>
-                                
+                                </td>                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -74,9 +73,18 @@
                     <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
                     <span class="fa fa-caret-down"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">@lang('company.change_status')</a></li>
                         <li><a href="#">@lang('main.delete')</a></li>
                     </ul>
+                </div>
+                <div class="input-group-btn text-right">
+                    {{ Form::open(['method' => 'post', 'url' => route('company.update_multy_status'), 'class' => 'form-change-multy-status']) }}
+                        {{ Form::hidden('data', '', ['class' => 'data-change-status']) }}
+                        <button type="button"
+                            class="btn btn-info btn-sm btn-change-multy-status"
+                            data-message="@lang('message.warning_change_status_provincial')">
+                            @lang('company.change_status')
+                        </button>
+                    {{ Form::close() }}
                 </div>
             </div>
             <div class="box-footer clearfix">

@@ -14,4 +14,6 @@ return [
     'delete_fail' => 'Xóa dữ liệu thất bại, thử lại!',
     'information_ticket' => 'Thông tin vé xe',
     'thank_use' => 'Cảm ơn bạn vì đã sử dụng TicketBooking!',
+    'admin_company' => 'Quản lý',
+    'employee_company' => 'Nhân viên',
 ];

@@ -25,11 +25,24 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'admin-page'], function () {
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin-page', 'middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('admin');
+    //company
     Route::post('company/update-multy-status', 'CompanyController@updateMultyStatus')->name('company.update_multy_status');
     Route::delete('company/delete-multy', 'CompanyController@deleteMulty')->name('company.delete_multy');
     Route::resource('company', 'CompanyController');
+    //user
+    Route::get('user/search', 'UserController@search')->name('user.search');
     Route::resource('user', 'UserController');
+    //station
+    Route::post('station/update-multy-status', 'StationController@updateMultyStatus')->name('station.update_multy_status');
+    Route::delete('station/delete-multy', 'StationController@deleteMulty')->name('station.delete_multy');
     Route::resource('station', 'StationController');
+    //provincial
     Route::resource('provincial', 'ProvincialController');
+    // ticket
     Route::resource('ticket', 'TicketController');
+
+    //route
+    Route::post('route/update-multy-status', 'RouteController@updateMultyStatus')->name('route.update_multy_status');
+    Route::delete('route/delete-multy', 'RouteController@deleteMulty')->name('route.delete_multy');
+    Route::resource('route', 'RouteController');
 });

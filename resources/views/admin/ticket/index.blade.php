@@ -12,6 +12,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
+                <h3 class="box-title">@lang('main.manage_tickets')</h3>
             </div>
             <div class="block-search">
                 <div class="box-tools">

@@ -3,7 +3,7 @@
 @section('header')
 <h1>
     @lang('main.manage_station')
-    <small>@lang('main.detail')</small>
+    <small>@lang('main.create')</small>
 </h1>
 @endsection
 
@@ -19,16 +19,14 @@
         @include('admin.template.notice')
         <div class="box-body">
             {{ Form::open(['class' => 'form-station',
-                'url' => route('station.update', $station->id),
-                'method' => 'PUT',
+                'url' => route('station.store'),
                 'enctype'=>'multipart/form-data']) }}
                 @include('admin.station.form')
             {{ Form::close() }}
-            <!-- /.row -->
         </div>
     </div>
 @endsection
 
-@push('script') 
+@push('script')
     {{ Html::script(asset('admin/js/station.js')) }}
 @endpush
