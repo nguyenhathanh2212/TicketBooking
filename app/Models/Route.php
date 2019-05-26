@@ -17,6 +17,7 @@ class Route extends Model
         'phone',
         'reservation',
         'status',
+        'direct_payment'
     ];
 
     protected $appends = [

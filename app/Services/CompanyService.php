@@ -81,6 +81,17 @@ class CompanyService extends BaseService {
         return $company;
     }
 
+    public function getAll()
+    {
+        $companies = $this->model->all();
+
+        if (!$companies) {
+            throw new Exception("Moldel not found", 1);
+        }
+
+        return $companies;
+    }
+
     public function createCompany($data)
     {
         $company = $this->model->create($data);

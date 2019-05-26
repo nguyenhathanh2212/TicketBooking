@@ -152,3 +152,11 @@ span.remove-user {
     color: #f00;
     cursor: pointer;
 }
+
+.help-block {
+    display: block !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    min-height: 15px;
+    color: #737373;
+}

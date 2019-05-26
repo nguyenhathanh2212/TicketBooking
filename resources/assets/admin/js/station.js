@@ -19,7 +19,17 @@ $(document).ready(function () {
         }
 
         if (form.valid()) {
-            form.submit();
+            swal({
+                title: 'Are you sure?',
+                text: form.data('message'),
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then((ok) => {
+                if (ok) {
+                    form.submit();
+                }
+            });
         }
     })
 })

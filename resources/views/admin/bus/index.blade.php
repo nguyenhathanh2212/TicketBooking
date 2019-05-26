@@ -2,7 +2,7 @@
 
 @section('header')
 <h1>
-    @lang('main.manage_company')
+    @lang('main.manage_bus')
     <small>@lang('main.list')</small>
 </h1>
 @endsection
@@ -12,24 +12,34 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">@lang('main.manage_company')</h3>
-                <div class="box-tools" style="right: 180px;">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        {{ Form::select('status', $statuses, Request::get('status'), [
-                            'class' => 'form-control',
-                            'form' => 'form-search'
-                        ])}}
-                    </div>
-                </div>
-                <div class="box-tools">
-                    {{ Form::open(['url' => route('company.index'), 'method' => 'get', 'id' => 'form-search']) }}
+                <h3 class="box-title">@lang('main.manage_bus')</h3>
+                <div class="block-search">
+                    <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control pull-right" placeholder="Search">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
+                            {{ Form::select('company_id', $listCompanies, Request::get('company_id'), [
+                                'class' => 'form-control',
+                                'form' => 'form-search'
+                            ])}}
                         </div>
-                    {{ Form::close() }}
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            {{ Form::select('status', $statuses, Request::get('status'), [
+                                'class' => 'form-control',
+                                'form' => 'form-search'
+                            ])}}
+                        </div>
+                    </div>
+                    <div class="box-tools">
+                        {{ Form::open(['url' => route('bus.index'), 'method' => 'get', 'id' => 'form-search']) }}
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="keyword" value="{{ Request::get('keyword') }}" class="form-control pull-right" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        {{ Form::close() }}
+                    </div>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -42,55 +52,48 @@
                                 <input type="checkbox" class="flat-red choice-all">
                             </th>
                             <th>No.</th>
-                            <th>@lang('company.name')
+                            <th>@lang('bus.lisense_plate')
                                 <a href="{{ route(Route::currentRouteName(),
-                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'name'))) }}" data-test="">
-                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'name') }}"></i>
+                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'lisense_plate'))) }}" data-test="">
+                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'lisense_plate') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('company.address')
+                            <th>@lang('bus.driver_name')
                                 <a href="{{ route(Route::currentRouteName(),
-                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'address'))) }}" data-test="">
-                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'address') }}"></i>
+                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'driver_name'))) }}" data-test="">
+                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'driver_name') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('company.phone')</th>
-                            <th>@lang('company.route')</th>
-                            <th>@lang('company.review')</th>
+                            <th>@lang('bus.number_of_seats')
+                                <a href="{{ route(Route::currentRouteName(),
+                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'number_of_seats'))) }}" data-test="">
+                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'number_of_seats') }}"></i>
+                                </a>
+                            </th>
                             <th>@lang('main.status')</th>
                         </tr>
                         @php
                             unset($statuses[0]);    
                         @endphp
-                        @forelse ($companies as $company)
+                        @forelse ($buses as $bus)
                             <tr>
-                                <td><input type="checkbox" value="{{ $company->id }}" name="item_choice[]" class="choice-item flat-red"></td>
+                                <td><input type="checkbox" value="{{ $bus->id }}" name="item_choice[]" class="choice-item flat-red"></td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a href="{{ route('company.show', $company->id) }}">{{ $company->name }}</a></td>
-                                <td>{{ $company->address }}</td>
-                                <td>{{ $company->phone }}</td>
-                                <td>
-                                    <a href="{{ route('route.index', ['company_id' => $company->id]) }}">
-                                        <label class="label label-info">{{ $company->routes->count() }}</label> @lang('company.route')
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="">
-                                        <label class="label label-warning">{{ $company->ratings->count() }}</label> @lang('company.review')
-                                    </a>
-                                </td>
+                                <td><a href="{{ route('bus.show', $bus->id) }}">{{ $bus->lisense_plate }}</a></td>
+                                <td>{{ $bus->driver_name }}</td>
+                                <td>{{ $bus->number_of_seats }}</td>
                                 <td>
                                     <div class="form-group">
-                                        {{ Form::select('status', $statuses, $company->status,[
+                                        {{ Form::select('status', $statuses, $bus->status,[
                                             'class' => 'form-control select-status',
-                                            'data-id' => $company->id,
+                                            'data-id' => $bus->id,
                                         ]) }}
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8">
+                                <td colspan="6">
                                     <span>@lang('message.data_not_found')</span>
                                 </td>
                             </tr>
@@ -98,26 +101,26 @@
                     </tbody>
                 </table>
             </div>
-            @if ($companies->total())
+            @if ($buses->total())
                 <div class="box-footer clearfix">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
                         <span class="fa fa-caret-down"></span></button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#" data-message="@lang('message.warning_delete_company')" class="btn-delete-multy">@lang('main.delete')</a>
-                                {{ Form::open(['method' => 'delete', 'url' => route('company.delete_multy'), 'class' => 'form-delete-multy']) }}
+                                <a href="#" data-message="@lang('message.warning_delete_bus')" class="btn-delete-multy">@lang('main.delete')</a>
+                                {{ Form::open(['method' => 'delete', 'url' => route('bus.delete_multy'), 'class' => 'form-delete-multy']) }}
                                     {{ Form::hidden('data', '', ['class' => 'data-id-delete']) }}
                                 {{ Form::close() }}
                             </li>
                         </ul>
                     </div>
                     <div class="input-group-btn text-right">
-                        {{ Form::open(['method' => 'post', 'url' => route('company.update_multy_status'), 'class' => 'form-change-multy-status']) }}
+                        {{ Form::open(['method' => 'post', 'url' => route('bus.update_multy_status'), 'class' => 'form-change-multy-status']) }}
                             {{ Form::hidden('data', '', ['class' => 'data-change-status']) }}
                             <button type="button"
                                 class="btn btn-info btn-sm btn-change-multy-status"
-                                data-message="@lang('message.warning_change_status_company')">
+                                data-message="@lang('message.warning_change_status_bus')">
                                 @lang('company.change_status')
                             </button>
                         {{ Form::close() }}
@@ -135,7 +138,7 @@
                         </div>
                     </div>
                     <div class="text-right col-md-9">
-                        {{ $companies->appends(Request::except('page'))->links() }}
+                        {{ $buses->appends(Request::except('page'))->links() }}
                     </div>
                 </div>
             @endif

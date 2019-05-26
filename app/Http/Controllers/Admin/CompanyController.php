@@ -140,6 +140,7 @@ class CompanyController extends Controller
     {
         try {
             $company = $this->companyService->getCompany($id);
+            $this->authorize('view', $company);
             $statuses = $this->companyService->getListStatuses();
             $stations = $this->stationService->getAll();
             unset($statuses[0]);

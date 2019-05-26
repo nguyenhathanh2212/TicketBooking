@@ -16,6 +16,10 @@ return [
         'message',
         'main',
         'company',
+        'station',
+        'route',
+        'ticket',
+        'bus',
     ],
 
     /*

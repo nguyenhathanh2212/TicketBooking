@@ -14,30 +14,14 @@
             <div class="box-header">
                 <h3 class="box-title">@lang('main.manage_route')</h3>
                 <div class="block-search">
-                    {{-- <div class="box-tools">
+                    <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            {{ Form::select('route_id', $routes, Request::get('route_id'), [
+                            {{ Form::select('company_id', $listCompanies, Request::get('company_id'), [
                                 'class' => 'form-control',
                                 'form' => 'form-search'
                             ])}}
                         </div>
-                    </div> --}}
-                    {{-- <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            {{ Form::select('bus_id', $busLisenses, Request::get('bus_id'), [
-                                'class' => 'form-control',
-                                'form' => 'form-search'
-                            ])}}
-                        </div>
-                    </div> --}}
-                    {{-- <div class="box-tools">
-                        <div class="input-group input-group-sm date-picker" style="width: 150px;">
-                            <input type='text' value="{{ Request::get('date_away') }}" name="date_away" class="form-control" form="form-search" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div> --}}
+                    </div>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             {{ Form::select('status', $statuses, Request::get('status'), [

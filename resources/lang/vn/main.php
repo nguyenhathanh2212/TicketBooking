@@ -13,6 +13,7 @@ return [
     'manage_provincial' => 'Quản lý tỉnh thành',
     'manage_tickets' => 'Quản lý vé xe',
     'manage_route' => 'Quản lý tuyến đường',
+    'manage_bus' => 'Quản lý xe',
     'delete' => 'Xóa',
     'show' => 'Hiển thị',
     'entries' => 'mục',

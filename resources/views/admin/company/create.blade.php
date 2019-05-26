@@ -20,7 +20,8 @@
         <div class="box-body">
             {{ Form::open(['class' => 'form-company',
                 'url' => route('company.store'),
-                'enctype'=>'multipart/form-data']) }}
+                'enctype'=>'multipart/form-data',
+                'data-message' => trans('message.confirm_create_company')]) }}
                 @include('admin.company.form')
             {{ Form::close() }}
         </div>
