@@ -29,7 +29,18 @@ $(document).ready(function() {
             });
             form.find('.super-manager').val(userManageId);
             form.find('.employee').val(JSON.stringify(userEmployeeIds));
-            form.submit();
+            
+            swal({
+                title: 'Are you sure?',
+                text: form.data('message'),
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then((ok) => {
+                if (ok) {
+                    form.submit();
+                }
+            });
         }
     })
 })

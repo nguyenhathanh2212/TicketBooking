@@ -41,6 +41,10 @@ class RouteService extends BaseService {
             $query = $query->where('company_id', $params['company_id']);
         }
 
+        if (!empty($params['status'])) {
+            $query->where('status', $params['status']);
+        }
+
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
@@ -58,5 +62,29 @@ class RouteService extends BaseService {
     public function getAllRouteByStationId($id)
     {
         return $this->model->whereIn('start_station_id', array_wrap($id))->orWhere('destination_station_id', array_wrap($id))->get();
+    }
+
+    public function processData($data)
+    {
+        $data['direct_payment'] = isset($data['direct_payment']) ? config('setting.direct_payment.allow') : config('setting.direct_payment.disallow');
+        $data['reservation'] = isset($data['reservation']) ? config('setting.reservation.allow') : config('setting.reservation.disallow');
+        
+        return $data;
+    }
+
+    public function updateRoute($id, $data)
+    {
+        $data = $this->processData($data);
+        $route = $this->model->find($id);
+        $route->update($data);
+        
+        return $route;
+    }
+
+    public function createRoute($data)
+    {
+        $data = $this->processData($data);
+        
+        return $this->model->create($data);
     }
 }

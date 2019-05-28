@@ -142,6 +142,12 @@ $(document).ready(function () {
             format: Lang.get('main.date_format_view')
         });
     }
+
+    if ($('.time-picker').length) {
+        $('.time-picker').datetimepicker({
+            format: 'HH:mm'
+        });
+    }
 })
 
 // function filterTypeRecord(number) {

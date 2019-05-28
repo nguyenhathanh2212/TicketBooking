@@ -14,6 +14,7 @@ return [
     'manage_provincial' => 'Manage provincials',
     'manage_tickets' => 'Manage tickets',
     'manage_route' => 'Manage routes',
+    'manage_bus' => 'Manage buses',
     'delete' => 'Delete',
     'show' => 'Show',
     'entries' => 'entries',

@@ -21,7 +21,8 @@
             {{ Form::open(['class' => 'form-station',
                 'url' => route('station.update', $station->id),
                 'method' => 'PUT',
-                'enctype'=>'multipart/form-data']) }}
+                'enctype'=>'multipart/form-data',
+                'data-message' => trans('message.confirm_update_station')]) }}
                 @include('admin.station.form')
             {{ Form::close() }}
             <!-- /.row -->

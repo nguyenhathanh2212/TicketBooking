@@ -22,7 +22,8 @@
                 {{ Form::open(['class' => 'form-company',
                     'url' => route('company.update', $company->id),
                     'method' => 'PUT',
-                    'enctype'=>'multipart/form-data']) }}
+                    'enctype'=>'multipart/form-data',
+                    'data-message' => trans('message.confirm_update_company')]) }}
                     @include('admin.company.form')
                 {{ Form::close() }}
             </div>

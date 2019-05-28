@@ -2,7 +2,7 @@
 
 @section('header')
 <h1>
-    @lang('main.manage_station')
+    @lang('main.manage_route')
     <small>@lang('main.create')</small>
 </h1>
 @endsection
@@ -10,7 +10,7 @@
 @section('main_content')
     <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title">@lang('station.station_information')</h3>
+            <h3 class="box-title">@lang('route.route_information')</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div>
@@ -18,16 +18,17 @@
         <!-- /.box-header -->
         @include('admin.template.notice')
         <div class="box-body">
-            {{ Form::open(['class' => 'form-station',
-                'url' => route('station.store'),
-                'enctype'=>'multipart/form-data',
-                'data-message' => trans('message.confirm_create_station')]) }}
-                @include('admin.station.form')
+            {{ Form::open(['class' => 'form-route',
+                'url' => route('route.store'),
+                'method' => 'POST',
+                'data-message' => trans('message.confirm_create_route')]) }}
+                @include('admin.route.form')
             {{ Form::close() }}
+            <!-- /.row -->
         </div>
     </div>
 @endsection
 
-@push('script')
-    {{ Html::script(asset('admin/js/station.js')) }}
+@push('script') 
+    {{ Html::script(asset('admin/js/route.js')) }}
 @endpush

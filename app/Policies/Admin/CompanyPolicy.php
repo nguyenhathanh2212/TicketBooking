@@ -3,23 +3,22 @@
 namespace App\Policies\Admin;
 
 use App\Models\User;
-use App\Company;
+use App\Models\Company;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CompannyPolicy
+class CompanyPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the company.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Company  $company
-     * @return mixed
-     */
+    public function viewListRoute(User $user, Company $company)
+    {
+        dd(1);
+        return in_array($user->id, $company->userCompanies->pluck('user_id')->all());
+    }
+
     public function view(User $user, Company $company)
     {
-        //
+        return in_array($user->id, $company->userCompanies->pluck('user_id')->all());
     }
 
     /**
@@ -79,5 +78,15 @@ class CompannyPolicy
     public function forceDelete(User $user, Company $company)
     {
         //
+    }
+
+    public function before($user, $company)
+    {
+        if (in_array($user->role, [
+            config('setting.user.role.super_admin'),
+            config('setting.user.role.admin'),
+        ])) {
+            return true;
+        }
     }
 }

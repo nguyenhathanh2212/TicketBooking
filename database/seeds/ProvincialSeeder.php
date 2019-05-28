@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Provincial;
 use App\Models\Station;
+use App\Models\TypeBus;
 
 class ProvincialSeeder extends Seeder
 {
@@ -14,6 +15,8 @@ class ProvincialSeeder extends Seeder
     public function run()
     {
         Provincial::truncate();
+        Station::truncate();
+        TypeBus::truncate();
         $provincials = [
             'Đà Nẵng' => [
                 [
@@ -198,5 +201,24 @@ class ProvincialSeeder extends Seeder
                 Station::create($item);
             }
         }
+
+        // type bus
+        TypeBus::create([
+            'name' => 'Xe ghế ngồi 29 chỗ',
+            'number_of_seats' => 29,
+            'number_row' => 7,
+            'number_level' => 1,
+            'number_column' => 5,
+            'map' => "[[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[0,0,0,0,0,0,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1]]",
+        ]);
+
+        TypeBus::create([
+            'name' => 'Xe giường nằm 46 chỗ',
+            'number_of_seats' => 46,
+            'number_row' => 7,
+            'number_level' => 2,
+            'number_column' => 5,
+            'map' => "[[1,1,1,1,1,1,1],[0,0,0,0,0,0,1],[1,1,1,1,1,1,1],[0,0,0,0,0,0,1],[1,1,1,1,1,1,1]]",
+        ]);
     }
 }
