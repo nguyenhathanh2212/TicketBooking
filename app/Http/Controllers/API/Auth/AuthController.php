@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
@@ -11,14 +12,19 @@ use Auth;
 use Lcobucci\JWT\Parser;
 use App\Services\UserService;
 use Exception;
+use App\Services\ImageService;
 
 class AuthController extends BaseController
 {
     protected $userService;
+    protected $imageService;
 
-    public function __construct(UserService $userService)
-    {
+    public function __construct(
+        UserService $userService,
+        ImageService $imageService
+    ) {
         $this->userService = $userService;
+        $this->imageService = $imageService;
     }
 
     public function login(LoginRequest $request)
@@ -47,7 +53,7 @@ class AuthController extends BaseController
         }
     }
 
-    public function register(LoginRequest $request)
+    public function register(RegisterRequest $request)
     {
         try {
             $data = $request->only([
@@ -139,6 +145,13 @@ class AuthController extends BaseController
                 'password',
             ]);
             $user->update($data);
+            
+            if ($request->avatar) {
+                $avatar = $request->avatar;  // your base64 encoded
+                $avatar = str_replace('data:image/png;base64,', '', $avatar);
+                $avatar = str_replace(' ', '+', $avatar);
+                $this->imageService->createImage($user, [base64_decode($avatar)]);
+            }
 
             return response()->json([
                 'status' => 'success',

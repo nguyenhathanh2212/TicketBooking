@@ -51,11 +51,28 @@ class UserService extends BaseService {
             });
         }
 
+        if (!empty($params['type_user']) && $params['type_user']) {
+            if ($params['type_user'] == config('setting.type_user.user')) {
+                $query->where('role', config('setting.user.role.user'))->whereDoesntHave('userCompanies');
+            } else if ($params['type_user'] == config('setting.type_user.company_admin')) {
+                $query->where('role', config('setting.user.role.user'))->whereHas('userCompanies');
+            } else {
+                $query->whereIn('role', [config('setting.user.role.super_admin'), config('setting.user.role.admin')]);
+            }
+        }
+
         if (!empty($params['filter_id'])) {
             $query->whereNotIn('id', $params['filter_id']);
         }
+        
+        $query->withCount('socialAccounts');
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
+    }
+
+    public function getListRoleStrs()
+    {
+        return array_combine(config('setting.type_user'), trans('user.type_user'));
     }
 
     public function getListRoles()
@@ -68,9 +85,17 @@ class UserService extends BaseService {
         $user = $this->model->find($id);
 
         if (!$user) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
+        return $user;
+    }
+
+    public function updateUser($id, $data)
+    {
+        $user = $this->model->find($id);
+        $user->update($data);
+        
         return $user;
     }
 }

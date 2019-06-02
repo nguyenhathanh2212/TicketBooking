@@ -14,6 +14,7 @@ use App\Services\ImageService;
 use App\Services\TicketService;
 use Exception;
 use DB;
+use Auth;
 use App\Http\Requests\CompanyRequest;
 
 class CompanyController extends Controller
@@ -270,5 +271,12 @@ class CompanyController extends Controller
             report($e);
             return back()->with('messageError', trans('message.delete_fail'));
         }
+    }
+
+    public function manage()
+    {
+        return redirect()->action(
+            'Admin\CompanyController@show', ['id' => Auth::user()->userCompanies->first()->company_id]
+        );
     }
 }

@@ -40,6 +40,7 @@ class BusRouteController extends BaseController
                 'provincial_destination',
                 'route'
             ]);
+            $params['status'] = config('setting.status.active');
 
             $busRoutes = $this->busRouteService->search($params);
 
@@ -81,7 +82,7 @@ class BusRouteController extends BaseController
     public function show($id)
     {
         try {
-            $busRoute = $this->busRouteService->getBusRoute($id);
+            $busRoute = $this->busRouteService->getBusRoute($id, config('setting.status.active'));
 
             return $this->responseSuccess(compact('busRoute'));
         } catch (Exception $e) {

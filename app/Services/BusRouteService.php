@@ -76,18 +76,22 @@ class BusRouteService extends BaseService {
             $query = $query->where('route_id', $params['route']);
         }
 
+        if (!empty($params['status'])) {
+            $query->where('status', $params['status']);
+        }
+
         $query = $query->whereIn('route_id', $routesQuery->pluck('id')->all());
         $query->with(['route', 'bus', 'ratings', 'tickets']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
-    public function getBusRoute($id)
+    public function getBusRoute($id, $status = null)
     {
         $busRoute = $this->model->with(['route', 'bus', 'ratings', 'tickets'])->find($id);
 
-        if (!$busRoute) {
-            throw new Exception("Moldel not found", 1);
+        if (!$busRoute || (!empty($status) && $busRoute->status != $status)) {
+            throw new Exception("Model not found", 1);
         }
 
         return $busRoute;

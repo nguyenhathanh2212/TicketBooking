@@ -19,8 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('provider')->nullable();
             $table->tinyInteger('role')->default(config('setting.user.role.user'));
             $table->integer('status')->default(config('setting.status.active'));
             $table->rememberToken();

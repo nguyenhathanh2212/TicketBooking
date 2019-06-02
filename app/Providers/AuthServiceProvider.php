@@ -9,9 +9,15 @@ use Carbon\Carbon;
 use App\Policies\Admin\CompanyPolicy;
 use App\Policies\Admin\RoutePolicy;
 use App\Policies\Admin\BusPolicy;
+use App\Policies\Admin\UserPolicy;
+use App\Policies\Admin\ProvincialPolicy;
+use App\Policies\Admin\StationPolicy;
 use App\Models\Company;
 use App\Models\Route;
 use App\Models\Bus;
+use App\Models\User;
+use App\Models\Provincial;
+use App\Models\Station;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         Company::class => CompanyPolicy::class,
         Route::class => RoutePolicy::class,
         Bus::class => BusPolicy::class,
+        User::class => UserPolicy::class,
+        Station::class => StationPolicy::class,
+        Provincial::class => ProvincialPolicy::class,
     ];
 
     /**

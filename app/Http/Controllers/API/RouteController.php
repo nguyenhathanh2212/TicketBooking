@@ -24,6 +24,8 @@ class RouteController extends BaseController
                 'sort_type',
                 'company_id'
             ]);
+            
+            $params['status'] = config('setting.status.active');
 
             $routes = $this->routeService->search($params);
 

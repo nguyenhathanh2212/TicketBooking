@@ -30,7 +30,7 @@
                                             </h3>
                                         </div>
                                         <div class="tg-description">
-                                            <p>{{ company.description }}</p>
+                                            <p v-html="company.description"></p>
                                         </div>
                                         <div class="tg-populartourfoot">
                                             <div class="tg-durationrating">
@@ -65,7 +65,7 @@
             ratingComponent: Rating
         },
         mounted() {
-            this.parallax = $('.tg-parallax1').parallax({imageSrc: '/images/parallax/bgparallax-01.jpg'});
+            this.parallax = $('.tg-parallax1').parallax({imageSrc: '/images/parallax/bgparallax-02.jpg'});
         },
         updated() {
             this.setSlider();

@@ -18,19 +18,27 @@ class ImageService extends BaseService
 
     public function createImage($modelMorph, $files)
     {
-        foreach ($files as $file) {
-            $a = Storage::disk('local')->put('public', $file);
-            $arrayName = explode('/', $a);
+        foreach (array_wrap($files) as $file) {
+            $image = Storage::disk('local')->put('public', $file);
+            $arrayName = explode('/', $image);
             $arrayName[0] = 'storage';
             $fileName = implode('/', $arrayName);
             $modelMorph->images()->create(['url' => "/{$fileName}"]);
         }
     }
 
-    public function deleteImageExcept($modelMorph, $oldImage)
+    public function deleteImageExcept($modelMorph, $oldImage = [])
     {
         foreach($oldImage as $key => $image) {
             $oldImage[$key] = "/storage/{$image}";
+        }
+
+        foreach($modelMorph->images()->whereNotIn('url', $oldImage)->pluck('url') as $url) {
+            $arrayName = explode('/', $url);
+            $url = end($arrayName);
+            $arrayName[0] = '/public';
+            $fileName = implode('/', $arrayName);
+            Storage::disk('local')->delete($fileName);
         }
 
         $modelMorph->images()->whereNotIn('url', $oldImage)->delete();

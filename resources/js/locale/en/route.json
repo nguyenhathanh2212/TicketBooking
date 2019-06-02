@@ -23,5 +23,8 @@
     "pay_method": "Payment methods",
     "driver_name": "Driver name",
     "lisense_plate": "Lisense plate",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "start_station": "Start station",
+    "destination_station": "Destination station",
+    "quantity": "Quantity"
 }

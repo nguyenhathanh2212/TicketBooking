@@ -61,6 +61,7 @@ class TicketController extends BaseController
                 'email',
                 'seat_number',
                 'payment_method',
+                'quantity',
             ]);
             $data['user_id'] = Auth::user()->id;
             $busRoute = $this->busRouteService->getBusRoute($busRouteId);

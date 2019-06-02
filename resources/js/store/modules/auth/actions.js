@@ -68,7 +68,11 @@ export const register = ({ commit }, data) => {
 
 export const update = ({ commit }, data) => {
     return new Promise((resolve, reject) => {
-        patch('auth/update', data)
+        patch('auth/update', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             .then(response => {
                 commit(types.SET_USER, response.data.data.user);
                 resolve(response.status);

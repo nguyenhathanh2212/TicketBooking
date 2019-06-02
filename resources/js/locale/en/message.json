@@ -16,5 +16,6 @@
     "must_login_to_rate": "You must be logged in to rate",
     "rating_record": "Your rating has been recorded",
     "booking_success": "Booking ticket successfully!",
-    "booking_error": "Booking ticket failed, try again!"
+    "booking_error": "Booking ticket failed, try again!",
+    "not_allow_reservation" : "This route does not allow reservations"
 }

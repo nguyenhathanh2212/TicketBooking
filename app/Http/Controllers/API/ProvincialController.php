@@ -23,7 +23,7 @@ class ProvincialController extends BaseController
     public function index()
     {
         try {
-            $allProvincials = $this->provincialService->getAll();
+            $allProvincials = $this->provincialService->getAll(config('setting.status.active'));
 
             return $this->responseSuccess(compact('allProvincials'));
         } catch (Exception $e) {
@@ -102,7 +102,7 @@ class ProvincialController extends BaseController
     public function popular()
     {
         try {
-            $popularProvincials = $this->provincialService->getPopulars();
+            $popularProvincials = $this->provincialService->getPopulars(config('setting.status.active'));
 
             return $this->responseSuccess(compact('popularProvincials'));
         } catch (Exception $e) {

@@ -56,12 +56,12 @@ class BusService extends BaseService {
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
-    public function getBus($id)
+    public function getBus($id, $status = null)
     {
         $bus = $this->model->find($id);
 
-        if (!$bus) {
-            throw new Exception("Moldel not found", 1);
+        if (!$bus || (!empty($status) && $bus->status != $status)) {
+            throw new Exception("Model not found", 1);
         }
 
         return $bus;

@@ -43,7 +43,7 @@ class TicketController extends Controller
                 'bus_id',
                 'route_id'
             ]);
-            $params['company_id'] = 18;
+            $params['company_id'] = 1;
             $company = $this->companyService->getCompany($params['company_id']);
             $busLisenses = $company->buses()->pluck('lisense_plate', 'id')->all();
             $busLisenses = [0 => trans('main.bus')] + $busLisenses;

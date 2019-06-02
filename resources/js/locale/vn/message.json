@@ -16,5 +16,6 @@
     "must_login_to_rate": "Bạn phải đăng nhập để đánh giá",
     "rating_record": "Đánh giá của bạn đã được ghi lại",
     "booking_success": "Đặt vé xe thành công!",
-    "booking_error": "Đặt vé xe thất bại, hãy thử lại!"
+    "booking_error": "Đặt vé xe thất bại, hãy thử lại!",
+    "not_allow_reservation" : "Tuyến này không cho phép đặt chỗ trước"
 }

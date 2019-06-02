@@ -26,7 +26,7 @@
                                     <div class="form-group">
                                         <div class="tg-select">
                                             <select class="my-selectpicker" v-model="provincial_destination" data-live-search="true" data-width="100%">
-                                                <option value="" selected disabled data-hidden="true">{{ $t('main.enter_start') }}</option>
+                                                <option value="" selected disabled data-hidden="true">{{ $t('main.enter_destination') }}</option>
                                                 <option v-for="(item, index) in allProvincials"
                                                     :key="index"
                                                     :value="item.id"
@@ -104,9 +104,9 @@
                 this.provincial_start = temp;
             },
             addVide: function() {
-                $('#vide1').vide({ poster: '/images/slider/img-01.jpg' }, { position: '0% 50%' });
-                $('#vide2').vide({ poster: '/images/slider/img-02.jpg' }, { position: '0% 50%' });
-                $('#vide3').vide({ poster: '/images/slider/img-03.jpg' }, { position: '0% 50%' });
+                $('#vide1').vide({ poster: '/images/slider/home_slide1.jpg' }, { position: '0% 50%' });
+                $('#vide2').vide({ poster: '/images/slider/home_slide2.jpg' }, { position: '0% 50%' });
+                $('#vide3').vide({ poster: '/images/slider/home_slide3.jpg' }, { position: '0% 50%' });
             },
             addSlider: function() {
                 var _tg_homeslider = jQuery('#tg-homeslider');
