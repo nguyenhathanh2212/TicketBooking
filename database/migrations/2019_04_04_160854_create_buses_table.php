@@ -20,9 +20,6 @@ class CreateBusesTable extends Migration
             $table->string('lisense_plate');
             $table->string('driver_name');
             $table->tinyInteger('number_of_seats')->nullable();
-            $table->tinyInteger('number_row');
-            $table->tinyInteger('number_column');
-            $table->tinyInteger('number_level');
             $table->integer('status')->default(config('setting.status.active'));
             $table->timestamps();
         });

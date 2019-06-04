@@ -327,7 +327,9 @@
                                                                     <td>@lang('ticket.quantity')</td>
                                                                     <td class="alignright">
                                                                         {{ $ticket->quantity }}
-                                                                        ({{ implode(', ', json_decode($ticket->seat_number)) }})
+                                                                        @if (count(json_decode($ticket->seat_number)))
+                                                                            ({{ implode(', ', json_decode($ticket->seat_number)) }})
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -366,7 +368,7 @@
                                         </tr>
                                         <tr>
                                             <td class="content-block aligncenter">
-                                                <a href="http://www.mailgun.com">View detail</a>
+                                                {{-- <a href="/ticket/{{ $ticket->id }}">View detail</a> --}}
                                             </td>
                                         </tr>
                                         <tr>

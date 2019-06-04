@@ -49,6 +49,7 @@ class User extends Authenticatable
     protected $appends = [
         'avatar',
         'full_name',
+        'role_str',
     ];
 
     public function socialAccounts()
@@ -87,5 +88,14 @@ class User extends Authenticatable
         return $this->first_name || $this->last_name
             ? $this->first_name . ' ' . $this->last_name
             : $this->email;
+    }
+
+    public function getRoleStrAttribute()
+    {
+        if ($this->role == config('setting.type_user.user') && $this->userCompanies()->count()) {
+            return trans('user.type_user')[config('setting.type_user.company_admin')];
+        }
+        
+        return trans('user.role_value')[$this->role];
     }
 }

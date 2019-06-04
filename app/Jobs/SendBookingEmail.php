@@ -37,7 +37,7 @@ class SendBookingEmail implements ShouldQueue
         try {
             Mail::send('admin.email.index', $data, function($message){
                 $message->from('thanhtdk2212@gmail.com', 'Ticket booking');
-                $message->to('thanhtdk2212@gmail.com')->subject('Ticket booking');
+                $message->to($this->ticket->email)->subject('Ticket booking');
             });
         } catch(\Exception $e) {
             report($e);

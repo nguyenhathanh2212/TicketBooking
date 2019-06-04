@@ -18,4 +18,12 @@ return [
     'user_information' => 'Thông tin người dùng',
     'last_name' => 'Họ',
     'first_name' => 'Tên',
+    'type_user' => [
+        0 => 'All',
+        1 => 'Admin',
+        2 => 'Company Admin',
+        3 => 'User',
+    ],
+    'password' => 'Mật khẩu',
+    'confirm_password' => 'Xắc nhận mật khẩu',
 ];

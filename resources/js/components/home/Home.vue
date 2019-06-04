@@ -6,7 +6,7 @@
             <feature-conponent></feature-conponent>
             <company-slider-conponent></company-slider-conponent>
             <provincial-conponent></provincial-conponent>
-            <station-conponent></station-conponent>
+            <!-- <station-conponent></station-conponent> -->
         </main>
     </div>
 </template>

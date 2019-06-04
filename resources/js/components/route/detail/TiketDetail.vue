@@ -20,7 +20,8 @@
                                                             <li class="tg-personprice">
                                                                 <div>
                                                                     <span>{{ $t('route.name') }}:</span><em>{{ ticket.name }}</em><br><br>
-                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ ticket.phone }}</em>
+                                                                    <span>{{ $t('route.phone') }}:</span><em>{{ ticket.phone }}</em><br><br>
+                                                                    <span>{{ $t('profile.email') }}:</span><em>{{ ticket.email }}</em>
                                                                 </div>
                                                             </li>
                                                             <li><span>{{ $t('route.company') }}:</span><em>{{ ticket.bus_route.route.company_name }}</em></li>
@@ -34,14 +35,20 @@
                                                             <li><span>{{ $t('company.start_time') }}:</span><em>{{ ticket.bus_route.route.start_time }} - {{ ticket.date }}</em></li>
                                                             <li>
                                                                 <span>{{ $t('route.number_of_seats') }}:</span>
-                                                                <em>{{ ticket.seat_number.length }}
+                                                                <template v-if="JSON.parse(ticket.seat_number).length">
+                                                                    <em>{{ JSON.parse(ticket.seat_number).length }}
                                                                     ( <template v-for="(seat, index) in JSON.parse(ticket.seat_number)">
                                                                         <label class="label label-info" :key="index">{{ seat }}</label>&nbsp;
                                                                     </template>)</em>
+                                                                </template>
+                                                                <template v-else>
+                                                                    <em>{{ ticket.quantity }}</em>
+                                                                </template>
                                                             </li>
                                                             <li><span>{{ $t('route.ticket_price') }}:</span><em>{{ Number(ticket.bus_route.price).toLocaleString() }}đ</em></li>
                                                             <li class="tg-totalprice">
-                                                                <div class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * ticket.seat_number.length).toLocaleString() }}đ</em></div>
+                                                                <div v-if="JSON.parse(ticket.seat_number).length" class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * JSON.parse(ticket.seat_number).length).toLocaleString() }}đ</em></div>
+                                                                <div v-else class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * ticket.quantity).toLocaleString() }}đ</em></div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -142,9 +149,9 @@
                 });
         },
         watch: {
-            ticket: function() {
-                console.log(this.ticket);
-            }
+            '$route' (to, from) {
+                this.setTicket(this.$route.params.id);
+            },
         },
         components: {
             banerComponent: Banner

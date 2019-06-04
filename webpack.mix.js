@@ -36,6 +36,7 @@ mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('node_modules/icheck', 'public/vendor/icheck')
     .copyDirectory('node_modules/sweetalert', 'public/vendor/sweetalert')
     .copyDirectory('node_modules/jquery-validation/', 'public/vendor/jquery-validation')
+    .copyDirectory('node_modules/ionicons/', 'public/vendor/ionicons')
     .copyDirectory('node_modules/file-upload-with-preview', 'public/vendor/file-upload-with-preview')
     .version(['public/css/*.css', 'public/js/*.js']);
 

@@ -35,14 +35,20 @@
                                                             <li><span>{{ $t('company.start_time') }}:</span><em>{{ busRoute.route.start_time }} - {{ data.date_away }}</em></li>
                                                             <li>
                                                                 <span>{{ $t('route.number_of_seats') }}:</span>
-                                                                <em>{{ data.seat_number.length }}
+                                                                <template v-if="data.seat_number.length">
+                                                                    <em>{{ data.seat_number.length }}
                                                                     ( <template v-for="(seat, index) in data.seat_number">
                                                                         <label class="label label-info" :key="index">{{ seat }}</label>&nbsp;
                                                                     </template>)</em>
+                                                                </template>
+                                                                <template v-else>
+                                                                    <em>{{ data.quantity }}</em>
+                                                                </template>
                                                             </li>
                                                             <li><span>{{ $t('route.ticket_price') }}:</span><em>{{ Number(busRoute.price).toLocaleString() }}đ</em></li>
                                                             <li class="tg-totalprice">
-                                                                <div class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(busRoute.price * data.seat_number.length).toLocaleString() }}đ</em></div>
+                                                                <div v-if="data.seat_number.length" class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(busRoute.price * data.seat_number.length).toLocaleString() }}đ</em></div>
+                                                                <div v-else class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(busRoute.price * data.quantity).toLocaleString() }}đ</em></div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -59,7 +65,7 @@
                                                 <div id="tg-accordion" class="tg-accordion" role="tablist" aria-multiselectable="true">
                                                     <div v-if="busRoute.route.direct_payment == directPayment.allow" class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
+                                                            <input type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
                                                             <label for="bank-transfer">Direct Bank Transfer</label>
                                                         </h4>
                                                         <div class="tg-panelcontent">
@@ -70,7 +76,7 @@
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="cash" name="paymenttype">
+                                                            <input type="radio" id="cash" name="paymenttype">
                                                             <label for="cash">Cash On Delivery</label>
                                                         </h4>
                                                         <div class="tg-panelcontent">
@@ -81,7 +87,7 @@
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="paypal" name="paymenttype">
+                                                            <input type="radio" id="paypal" name="paymenttype">
                                                             <label for="paypal">PayPal Express Checkout </label>
                                                             <img src="images/paypal.jpg" alt="image description">
                                                         </h4>
@@ -93,7 +99,7 @@
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input :disabled="bookingSuccess" type="radio" id="creditcard" name="paymenttype">
+                                                            <input type="radio" id="creditcard" name="paymenttype">
                                                             <label for="creditcard"> Credit Card (Stripe)</label>
                                                             <img src="images/visastrip.jpg" alt="image description">
                                                         </h4>
@@ -105,7 +111,7 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                            <fieldset v-if="!bookingSuccess">
+                                            <fieldset>
                                                 <button @click="bookingTicket" class="tg-btn" type="submit"><span>place order</span></button>
                                             </fieldset>
                                         </div>
@@ -129,8 +135,7 @@
             return {
                 directPayment: window.Laravel.setting.direct_payment,
                 paymentMethodSetting: window.Laravel.setting.ticket.payment_method,
-                paymentMethod: window.Laravel.setting.ticket.payment_method.direct,
-                bookingSuccess: false
+                paymentMethod: window.Laravel.setting.ticket.payment_method.direct
             }
         },
         computed: {
@@ -158,7 +163,6 @@
                 this.data['payment_method'] = this.paymentMethod;
                 this.createTicket(this.data)
                     .then(success => {
-                        this.bookingSuccess = true;
                         Swal.fire({
                             title: 'Success!',
                             text: this.$t('message.booking_success'),

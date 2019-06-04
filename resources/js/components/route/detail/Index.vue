@@ -38,6 +38,11 @@
         },
         methods: {
             ...mapActions('bus_route', ['setBusRoute'])
+        },
+        watch: {
+            '$route' (to, from) {
+                this.setBusRoute(this.$route.params.id);
+            },
         }
     }
 </script>

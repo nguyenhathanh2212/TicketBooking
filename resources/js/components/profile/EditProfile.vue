@@ -8,9 +8,17 @@
                 <div class="tg-dashboardcontent">
                     <div class="tg-imgholder">
                         <figure>
-                            <figure><img :src="user.avatar" class="img-avatar" alt="image description"></figure>
+                            <figure>
+                                <img :src="avatar" class="img-avatar" id="show-avatar" alt="image description">
+                            </figure>
                         </figure>
-                        <a class="tg-btn" href="#">Change Profile Picture</a>
+                        <a class="tg-btn btn-change-avatar"
+                            @click.prevent="openPopupChangeAvatar"
+                            href="#">Change Avatar</a>
+                        <input class="file-image-input"
+                            @change="getFileAvatar"
+                            type="file" name="avatar"
+                            accept="image/x-png,image/gif,image/jpeg" />
                     </div>
                     <div class="tg-content">
                         <fieldset>
@@ -43,7 +51,9 @@
             return {
                 firstName: '',
                 lastName: '',
-                email: ''
+                email: '',
+                avatar: '',
+                file: '',
             }
         },
         computed: {
@@ -53,13 +63,15 @@
             this.firstName = this.user.first_name;
             this.lastName = this.user.last_name;
             this.email = this.user.email;
+            this.avatar = this.user.avatar;
         },
         methods: {
             ...mapActions('auth', ['update']),
             updateProfile: function () {
                 this.update({
                     first_name: this.firstName,
-                    last_name: this.lastName
+                    last_name: this.lastName,
+                    avatar: this.file.toString('base64'),
                 })
                 .then(success => {
                     Swal.fire({
@@ -77,6 +89,13 @@
                         confirmButtonText: 'Ok'
                     })
                 });
+            },
+            openPopupChangeAvatar: function () {
+                $('.file-image-input').click();
+            },
+            getFileAvatar: function(e) {
+                this.file = e.target.files[0];
+                this.avatar = window.URL.createObjectURL(e.target.files[0]);
             }
         }
     }
@@ -86,5 +105,9 @@
     .img-avatar {
         width: 87px !important;
         height: 87px !important;
+    }
+
+    .file-image-input {
+        display: none;
     }
 </style>

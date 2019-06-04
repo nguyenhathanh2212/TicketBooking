@@ -49,9 +49,12 @@
                                 :rating="busRoute.rating"></rating-component>
                         </div>
                     </div>
+                    <div>
+                        <em>{{ busRoute.ratings.length }} {{ $t('company.reviews') }}</em>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-12 text-center height-item">
+            <div class="col-md-2 col-sm-12 text-center height-item btn-order">
                 <router-link
                     :to="{ name: 'route.show', params: { id: busRoute.id, date: date } }"
                     class="btn btn-warning"
@@ -78,9 +81,14 @@
         props: ['busRoute'],
         computed: {
             numberOfSeat: function () {
-                let count = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date].length : 0;
+                let seats = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date] : [];
+                let count = 0;
 
-                return this.busRoute.bus.number_of_seats - count;
+                for (var index = 0; index < seats.length; index ++) {
+                    count += seats[index].quantity;
+                }
+ 
+                return this.busRoute.bus.seats - count;
             }
         },
         components: {
@@ -171,6 +179,10 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+    }
+
+    .btn-order {
+        line-height: 50px;
     }
 
     /* @media (max-width: 992px) { */

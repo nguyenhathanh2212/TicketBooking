@@ -31,9 +31,6 @@ $factory->define(App\Models\Bus::class, function (Faker $faker) {
         'lisense_plate' => $faker->swiftBicNumber(),
         'driver_name' => $faker->name,
         'number_of_seats' => 42,
-        'number_row' => 7,
-        'number_column' => 3,
-        'number_level' => 2,
     ];
 });
 

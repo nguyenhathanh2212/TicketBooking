@@ -46,12 +46,6 @@ $(document).ready(function () {
             $('.choice-all').iCheck('uncheck')
         }
     })
-
-    if ($('.filter-list').length) {
-        $(document).on('change', '.filter-list', function () {
-            filterTypeRecord($(this).val());
-        })
-    }
     
     $(document).on('change', '.select-status', function () {
         var defaultSelected = 0;

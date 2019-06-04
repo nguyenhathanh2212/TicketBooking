@@ -16,51 +16,38 @@
         </div>
     </div>
     <!-- /.box-header -->
+    @include('admin.template.notice')
     <div class="box-body">
-        <div class="row">
-            <div class="col-md-8">
-                <form role="form">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="first_name">@lang('user.first_name')</label>
-                            {{ Form::text('first_name', $user->first_name, [
-                                'class' => 'form-control',
-                                'placeholder' => trans('user.first_name'),
-                            ]) }}
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name">@lang('user.last_name')</label>
-                            {{ Form::text('last_name', $user->last_name, [
-                                'class' => 'form-control',
-                                'placeholder' => trans('user.last_name'),
-                            ]) }}
-                        </div>
-                        <div class="form-group">
-                            <label for="email">@lang('user.email')</label>
-                            {{ Form::text('email', $user->email, [
-                                'class' => 'form-control',
-                                'placeholder' => trans('user.email'),
-                                'disabled' => true
-                            ]) }}
-                        </div>
-                        <div class="form-group">
-                            <label for="email">@lang('user.role')</label>
-                            {{ Form::select('role', $listRoles, $user->role,[
-                                'class' => 'form-control',
-                                'disabled' => true
-                            ]) }}
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <img class="avatar-user-detail" src="{{ $user->avatar }}" alt="">
-            </div>
-        </div>
+        {{ Form::open(['class' => 'form-user',
+            'url' => route('user.update', $user->id),
+            'method' => 'PUT',
+            'enctype'=>'multipart/form-data',
+            'data-message' => trans('message.confirm_update_user')]) }}
+            @include('admin.user.form')
+        {{ Form::close() }}
         <!-- /.row -->
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            var form = $('.form-user');
+
+            $(document).on('click', '.btn-user', function () {
+                swal({
+                    title: 'Are you sure?',
+                    text: form.data('message'),
+                    icon: 'info',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((ok) => {
+                    if (ok) {
+                        form.submit();
+                    }
+                });
+            })
+        }) 
+    </script>
+@endpush

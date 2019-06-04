@@ -11,6 +11,7 @@ return [
     'stations' => 'Stations',
     'manage_station' => 'Manage stations',
     'provincials' => 'Rrovincials',
+    'ticket' => 'ticket',
     'manage_provincial' => 'Manage provincials',
     'manage_tickets' => 'Manage tickets',
     'manage_route' => 'Manage routes',
@@ -31,4 +32,5 @@ return [
     'detail' => 'Detail',
     'information_ticket' => 'Information ticket',
     'thank_use' => 'Thanks for using TicketBooking!',
+    'dashboard' => 'Dashboard',
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Hash;
+use Auth;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -25,8 +26,10 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         if (isset($this->is_change_password) && $this->is_change_password) {
+            $oldPassRequired = Auth::user()->password ? 'required|between:6,20' : '';
+
             $rules = [
-                'old_password' => 'required|between:6,20',
+                'old_password' => $oldPassRequired,
                 'password' => 'required|between:6,20',
                 'confirm_password' => 'required|between:6,20|same:password',
             ];
@@ -39,7 +42,7 @@ class UpdateUserRequest extends FormRequest
 
     public function withValidator($validator)
     {
-        if (isset($this->is_change_password) && $this->is_change_password) {
+        if (Auth::user()->password && isset($this->is_change_password) && $this->is_change_password) {
             $validator->after(function ($validator) {
                 if (!Hash::check($this->old_password, $this->user()->password) ) {
                     $validator->errors()->add('old_password', trans('message.password_in_correct'));

@@ -53,7 +53,7 @@ class RouteService extends BaseService {
         $route = $this->model->find($id);
 
         if (!$route) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $route;

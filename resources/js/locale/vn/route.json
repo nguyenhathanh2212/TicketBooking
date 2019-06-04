@@ -23,5 +23,8 @@
   "pay_method": "Phương thức thanh toán",
   "driver_name": "Lái xe",
   "lisense_plate": "Biển số xe",
-  "cancel": "Hủy"
+  "cancel": "Hủy",
+  "start_station": "Bến xe khởi hành",
+  "destination_station": "Bến xe đích",
+  "quantity": "Số lượng vé"
 }

@@ -7,53 +7,37 @@
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <div class="tg-footercolumn tg-widget tg-widgettext">
                                 <div class="tg-widgettitle">
-                                    <h3>About Travlu</h3>
+                                    <h3>About Ticketbooking</h3>
                                 </div>
                                 <div class="tg-widgetcontent">
                                     <div class="tg-description">
                                         <p>Nunc cursus liero purs ac cogue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque</p>
                                     </div>
-                                    <span>1-800-321-6543</span>
-                                    <a href="mailto:info@travlu.com">info@travlu.com</a>
-                                    <ul class="tg-socialicons tg-socialiconsvtwo">
-                                        <li><a href="javascript:void(0);"><i class="icon-facebook-logo-outline"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="icon-instagram-social-outlined-logo"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="icon-twitter-social-outlined-logo"></i></a></li>
-                                    </ul>
+                                    <span>(0511) 3767 679</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <div class="tg-footercolumn tg-widget tg-widgettravelunews">
                                 <div class="tg-widgettitle">
-                                    <h3>Travelu News</h3>
+                                    <h3>Ticketbooking</h3>
                                 </div>
                                 <div class="tg-widgetcontent">
                                     <ul>
-                                        <li>
-                                            <figure>
-                                                <a href="javascript:void(0);"><img src="/images/thumbnail/img-01.jpg" alt="image destinations"></a>
-                                            </figure>
-                                            <div class="tg-newcontent">
-                                                <h4><a href="javascript:void(0);">Bungee Jumping Trip</a></h4>
-                                                <div class="tg-description">
-                                                    <p>Nunc cursus libero purus congue arcu vitae pulvinar</p>
+                                        <template v-for="(company, index) in companies.data">
+                                            <li v-if="index < 2" :key="index">
+                                                <figure>
+                                                    <img class="img-footer" :src="company.first_image" alt="image destinations">
+                                                </figure>
+                                                <div class="tg-newcontent">
+                                                    <h4>
+                                                        <router-link :to="{ name: 'company.show', params: { id: company.id }}">
+                                                            {{ company.name }}
+                                                        </router-link>
+                                                    </h4>
                                                 </div>
-                                                <time datetime="2017-06-06">Feb 22, 2017</time>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <figure>
-                                                <a href="javascript:void(0);"><img src="/images/thumbnail/img-02.jpg" alt="image destinations"></a>
-                                            </figure>
-                                            <div class="tg-newcontent">
-                                                <h4><a href="javascript:void(0);">Trip to White Castle</a></h4>
-                                                <div class="tg-description">
-                                                    <p>Nunc cursus libero purus congue arcu vitae pulvinar</p>
-                                                </div>
-                                                <time datetime="2017-06-06">Feb 22, 2017</time>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        </template>
                                     </ul>
                                 </div>
                             </div>
@@ -61,15 +45,24 @@
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <div class="tg-footercolumn tg-widget tg-widgetdestinations">
                                 <div class="tg-widgettitle">
-                                    <h3>Top Destinations</h3>
+                                    <h3>{{ $t('home.popular_provincial') }}</h3>
                                 </div>
                                 <div class="tg-widgetcontent">
                                     <ul>
-                                        <li><a href="javascript:void(0);">Bayonne, Melbourne</a></li>
-                                        <li><a href="javascript:void(0);">Greenville, New Jersey</a></li>
-                                        <li><a href="javascript:void(0);">The Heights, London</a></li>
-                                        <li><a href="javascript:void(0);">West Side, New York</a></li>
-                                        <li><a href="javascript:void(0);">Upper East Side, New York</a></li>
+                                        <template v-for="(provincial, index) in popularProvincials">
+                                            <li :key="index" v-if="index < 4">
+                                                <router-link
+                                                    tag="a"
+                                                    :to="{
+                                                        name: 'company.index',
+                                                        query: {
+                                                            provincial: provincial.id
+                                                        }
+                                                    }">
+                                                    {{ provincial.name }}
+                                                </router-link>
+                                            </li>
+                                        </template>
                                     </ul>
                                 </div>
                             </div>
@@ -108,7 +101,36 @@
 </template>
 
 <script>
-    export default {
+    import { mapState, mapActions } from 'vuex'
 
+    export default {
+        created() {
+            this.setPopularProvincials();
+            this.setCompanies({
+                size: 4,
+                page: 1
+            });
+        },
+        computed: {
+            ...mapState('provincial', ['popularProvincials']),
+            ...mapState('company', ['companies'])
+        },
+        methods: {
+            ...mapActions('provincial', ['setPopularProvincials']),
+            ...mapActions('company', ['setCompanies'])
+        }
     }
 </script>
+
+<style scoped>
+    img.img-footer {
+        width: 60px;
+        height: 40px;
+        object-fit: cover;
+    }
+
+    .tg-widgettravelunews .tg-widgetcontent ul li + li {
+        padding-top: 8px;
+    }
+</style>
+

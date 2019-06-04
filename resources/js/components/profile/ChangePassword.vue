@@ -17,7 +17,7 @@
                                        placeholder=""
                                        :data-vv-as="this.$t('profile.old_password')"
                                        v-validate="{
-                                           required: true,
+                                           required: !!this.user.password,
                                            max: 20,
                                            min: 6
                                        }">
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import { mapState, mapActions } from 'vuex'
 
     export default {
         data: function () {
@@ -82,6 +82,9 @@
                     confirmPassword: ''
                 }
             }
+        },
+        computed: {
+            ...mapState('auth', ['user'])
         },
         methods: {
             ...mapActions('auth', ['update']),

@@ -27,7 +27,7 @@ class StationController extends BaseController
                 'sort_field',
                 'sort_type',
             ]);
-
+            $params['status'] = config('setting.status.active');
             $busStations = $this->stationService->search($params);
 
             return $this->responseSuccess(compact('busStations'));

@@ -12,7 +12,6 @@ class CompanyPolicy
 
     public function viewListRoute(User $user, Company $company)
     {
-        dd(1);
         return in_array($user->id, $company->userCompanies->pluck('user_id')->all());
     }
 
@@ -44,40 +43,9 @@ class CompanyPolicy
         //
     }
 
-    /**
-     * Determine whether the user can delete the company.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Company  $company
-     * @return mixed
-     */
-    public function delete(User $user, Company $company)
+    public function viewList(User $user)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the company.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Company  $company
-     * @return mixed
-     */
-    public function restore(User $user, Company $company)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the company.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Company  $company
-     * @return mixed
-     */
-    public function forceDelete(User $user, Company $company)
-    {
-        //
+        return false;
     }
 
     public function before($user, $company)

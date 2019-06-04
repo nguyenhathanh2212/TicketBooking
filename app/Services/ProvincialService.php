@@ -41,26 +41,41 @@ class ProvincialService extends BaseService {
                 $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%');
             });
         }
+        if
+         (!empty($status)) {
+            $query->where('status', $params['status']);
+        }
 
         $query->withCount('stations');
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
-    public function getAll()
+    public function getAll($status = null)
     {
-        $provincials = $this->model->all();
+        $query = $this->model->newQuery();
+        
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $provincials = $query->get();
 
         if (!$provincials) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $provincials;
     }
 
-    public function getPopulars()
+    public function getPopulars($status = null)
     {
-        return $this->model
-            ->withCount('companies')->orderBy('companies_count', 'desc')->limit(8)->get();
+        $query = $this->model->newQuery();
+        
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+
+        return $query->withCount('companies')->orderBy('companies_count', 'desc')->limit(8)->get();
     }
 }

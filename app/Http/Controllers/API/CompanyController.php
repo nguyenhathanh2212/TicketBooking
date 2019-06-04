@@ -44,6 +44,8 @@ class CompanyController extends BaseController
                 'station'
             ]);
 
+            $params['status'] = config('setting.status.active');
+
             $companies = $this->companyService->search($params);
 
             return $this->responseSuccess(compact('companies'));
@@ -84,7 +86,7 @@ class CompanyController extends BaseController
     public function show($id)
     {
         try {
-            $company = $this->companyService->getCompany($id);
+            $company = $this->companyService->getCompany($id, config('setting.status.active'));
 
             return $this->responseSuccess(compact('company'));
         } catch (Exception $e) {

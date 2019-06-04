@@ -63,7 +63,7 @@ class StationService extends BaseService {
         $station = $this->model->withCount('companies')->find($id);
 
         if (!$station) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $station;
@@ -74,7 +74,7 @@ class StationService extends BaseService {
         $stations = $this->model->all();
 
         if (!$stations) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $stations;

@@ -99,6 +99,17 @@
                 ]) }}
                 <label for="status" class="error help-block"></span>
             </div>
+            @if (isset($company))
+                <div class="form-group">
+                    <a href="{{ route('route.index', ['company_id' => $company->id]) }}">
+                        <label style="cursor: pointer" class="label label-info">{{ $company->routes->count() }} @lang('company.route')</label>
+                    </a>
+                    
+                    <a href="{{ route('route.index', ['company_id' => $company->id]) }}">
+                        <label style="cursor: pointer" class="label label-warning">{{ $company->ratings->count() }} @lang('company.review')</label>
+                    </a>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="description">@lang('company.description')</label>
                 <textarea class="textarea" name="description" placeholder="Place some text here"

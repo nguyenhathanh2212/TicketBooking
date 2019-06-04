@@ -10,6 +10,7 @@ return [
     'stations' => 'Bến xe',
     'manage_station' => 'Quản lý bến xe',
     'provincials' => 'Tỉnh thành',
+    'ticket' => 'Vé xe',
     'manage_provincial' => 'Quản lý tỉnh thành',
     'manage_tickets' => 'Quản lý vé xe',
     'manage_route' => 'Quản lý tuyến đường',
@@ -30,4 +31,7 @@ return [
     'route' => 'Tuyến đường',
     'list' => 'Danh sách',
     'detail' => 'Chi tiết',
+    'information_ticket' => 'Thông tin vé xe',
+    'thank_use' => 'Thanks for using TicketBooking!',
+    'dashboard' => 'Dashboard',
 ];

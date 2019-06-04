@@ -21,6 +21,12 @@ return [
             'manager' => 2,
         ],
     ],
+    'type_user' => [
+        'all' => 0,
+        'admin' => 1,
+        'company_admin' => 2,
+        'user' => 3,
+    ],
     'number_hours_preset' => 3,
     'ticket' => [
         'status' => [

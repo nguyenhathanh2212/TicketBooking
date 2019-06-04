@@ -93,10 +93,10 @@ class AllSeeder extends Seeder
                         'price' => rand(100000, 200000),
                         'phone' => $faker->tollFreePhoneNumber(),
                     ])->each(function($busStation) use ($faker) {
-                       factory(Ticket::class, rand(5, 10))->create([
-                           'user_id' => User::inRandomOrder()->first()->id,
-                           'bus_route_id' => $busStation->id,
-                       ]);
+                    //    factory(Ticket::class, rand(5, 10))->create([
+                    //        'user_id' => User::inRandomOrder()->first()->id,
+                    //        'bus_route_id' => $busStation->id,
+                    //    ]);
                     });
                 });
             });

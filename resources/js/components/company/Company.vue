@@ -39,7 +39,7 @@
                                                             </h3>
                                                         </div>
                                                         <div class="tg-description">
-                                                            <p>{{ company.description }}</p>
+                                                            <p v-html="company.description"></p>
                                                         </div>
                                                     </div>
                                                 </div>

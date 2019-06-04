@@ -70,12 +70,12 @@ class CompanyService extends BaseService {
      *
      * @param string $id
      */
-    public function getCompany($id)
+    public function getCompany($id, $status = null)
     {
         $company = $this->model->with(['images', 'routes'])->withCount(['routes', 'ratings'])->find($id);
-
-        if (!$company) {
-            throw new Exception("Moldel not found", 1);
+        
+        if (!$company || (!empty($status) && $company->status != $status)) {
+            throw new Exception("Model not found", 1);
         }
 
         return $company;
@@ -86,7 +86,7 @@ class CompanyService extends BaseService {
         $companies = $this->model->all();
 
         if (!$companies) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $companies;
@@ -118,9 +118,17 @@ class CompanyService extends BaseService {
     {
         $company = $this->model->find($id);
         $company->update($data);
-        $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->update([
-            'user_id' => $data['super_manager']
-        ]);
+
+        if ($company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->count()) {
+            $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->update([
+                'user_id' => $data['super_manager'],
+            ]);
+        } else {
+            $company->userCompanies()->create([
+                'user_id' => $data['super_manager'],
+                'role' => config('setting.user.role_company.super_manager'),
+            ]);
+        }
 
         $companyManagerId = $company->userCompanies()->where('role', config('setting.user.role_company.manager'))->pluck('user_id')->all();
         $deleteIds = array_diff($companyManagerId, $data['employee']);

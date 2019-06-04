@@ -13,7 +13,8 @@
     {{ Html::style(asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')) }}
     {{ Html::style(asset('vendor/select2/dist/css/select2.min.css')) }}
     {{ Html::style(asset('vendor/icheck/skins/all.css')) }}
-    {{ Html::style(asset('admin/css/AdminLTE.min.css')) }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.0/css/ionicons.css" />
+    {{ Html::style(asset('admin/css/AdminLTE.css')) }}
     {{ Html::style(asset('admin/css/skins/_all-skins.min.css')) }}
     {{ Html::style(asset('admin/css/style.css')) }}
     {{ Html::style(asset('vendor/file-upload-with-preview/dist/file-upload-with-preview.min.css')) }}
@@ -98,7 +99,7 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">@lang('main.profile')</a>
+                                            <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">@lang('main.profile')</a>
                                         </div>
                                         <div class="pull-right">
                                             <a href="{{ route('logout') }}" class="btn btn-default btn-flat">@lang('main.logout')</a>

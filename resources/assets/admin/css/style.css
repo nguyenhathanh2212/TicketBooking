@@ -160,3 +160,16 @@ span.remove-user {
     min-height: 15px;
     color: #737373;
 }
+
+.custom-file-container__image-preview {
+    overflow: auto !important;
+}
+
+span.custom-file-container__custom-file__custom-file-control {
+    height: 30px;
+    line-height: 20px;
+}
+
+span.custom-file-container__custom-file__custom-file-control__button {
+    height: 30px;
+}

@@ -95,7 +95,6 @@ class TicketService extends BaseService {
     public function createTicket($busRoute, $data)
     {
         $startTime = $busRoute->route->start_time;
-        $data['quantity'] = count($data['seat_number']);
         $data['status'] = config('setting.ticket.status.active');
         $data['date_away'] = Carbon::createFromFormat(trans('main.date_format') . ' H:i:s', "{$data['date_away']} {$startTime}");
         $data['total_price'] = $busRoute->price * $data['quantity'];
@@ -125,7 +124,7 @@ class TicketService extends BaseService {
         $ticket = $this->model->with(['busRoute.route'])->find($id);
 
         if (!$ticket) {
-            throw new Exception("Moldel not found", 1);
+            throw new Exception("Model not found", 1);
         }
 
         return $ticket;
