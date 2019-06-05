@@ -48,8 +48,21 @@ export const setTicket = ({ commit }, ticketId) => {
     })
 }
 
+export const cancelTicket = ({ commit }, ticketId) => {
+    return new Promise((resolve, reject) => {
+        post(`cancel-ticket/${ticketId}`)
+            .then(response => {
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error);
+            })
+    })
+}
+
 export default {
     createTicket,
     setAuthBookings,
-    setTicket
+    setTicket,
+    cancelTicket
 }

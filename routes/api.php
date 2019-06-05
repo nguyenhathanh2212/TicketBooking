@@ -32,6 +32,7 @@ Route::group(['namespace' => 'API'], function () {
         Route::post('bus-route/{id}/rating', 'BusRouteController@rate')->name('bus-route.rating.rate');
         Route::post('ticket', 'TicketController@store')->name('ticket.store');
         Route::get('ticket/{id}', 'TicketController@show')->name('ticket.show');
+        Route::post('cancel-ticket/{id}', 'TicketController@cancel')->name('ticket.cancel');
         Route::get('my-bookings', 'TicketController@getAuthBookings')->name('ticket.get_auth_bookings');
     });
     // Auth
@@ -44,7 +45,7 @@ Route::group(['namespace' => 'API'], function () {
         Route::get('unauthorized', 'AuthController@unauthorized')->name('unauthorized');
         Route::group(['middleware' => 'auth:api'], function() {
             Route::get('user', 'AuthController@getUser');
-            Route::patch('update', 'AuthController@update');
+            Route::post('update', 'AuthController@update');
             Route::post('logout', 'AuthController@logout');
         });
     });

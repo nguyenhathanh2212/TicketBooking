@@ -35,7 +35,7 @@ class BusPolicy
         return in_array($user->id, $bus->company->userCompanies->pluck('user_id')->all());
     }
 
-    public function before($user, $bus)
+    public function before($user, $ticket)
     {
         if (in_array($user->role, [
             config('setting.user.role.super_admin'),

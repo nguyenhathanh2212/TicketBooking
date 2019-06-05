@@ -60,6 +60,14 @@ class CompanyService extends BaseService {
             $query->where('status', $params['status']);
         }
 
+        if (!empty($params['user_id'])) {
+            $userId = $params['user_id'];
+
+            $query->whereHas ('userCompanies', function($q) use($userId) {
+                $q->where('user_id', $userId);
+            });
+        }
+
         $query->with(['images', 'ratings'])->withCount(['routes', 'ratings']);
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);

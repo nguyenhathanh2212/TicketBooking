@@ -39,8 +39,10 @@
                                             {{ booking.status_str }}
                                         </label>
                                     </td>
-                                    <td data-title="action">
-                                        <button :disabled="booking.check_cancel" class="tg-btnview">{{ $t('route.cancel') }}</button>
+                                    <td data-title="action" style="text-align: center;">
+                                        <button
+                                            :disabled="!booking.check_cancel"
+                                            @click="cancel(booking.id)" class="btn btn-danger btn-xs">{{ $t('route.cancel') }}</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -74,13 +76,44 @@
             ...mapState('ticket', ['authBookings'])
         },
         methods: {
-            ...mapActions('ticket', ['setAuthBookings']),
+            ...mapActions('ticket', ['setAuthBookings', 'cancelTicket']),
             getClassStatus: function(booking) {
                 if (booking.status == this.statuses.active) return 'label label-success';
 
                 if (booking.status == this.statuses.cancel) return 'label label-danger';
                 
                 return 'label label-default'
+            },
+            cancel: function(id) {
+                Swal.fire({
+                    title: 'Warning!',
+                    text: this.$t('message.confirm_cancel_ticket'),
+                    type: 'warning',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.value) {
+                        this.cancelTicket(id)
+                            .then(success => {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: this.$t('message.cancel_ticket_success'),
+                                    type: 'success',
+                                    confirmButtonText: 'Ok'
+                                })
+                                var query = this.$route.query;
+                                query.size = 5;
+                                this.setAuthBookings(query);
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: this.$t('message.error_message'),
+                                    type: 'error',
+                                    confirmButtonText: 'Ok'
+                                })
+                            });
+                    }
+                });
             }
         },
         watch: {

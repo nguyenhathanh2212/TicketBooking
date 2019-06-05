@@ -25,36 +25,38 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="{{ getSizeBarActive([
-                'admin',
-            ]) }}">
-                <a href="{{ route('admin') }}">
-                    <i class="fa fa-dashboard"></i>
-                    <span>@lang('main.dashboard')</span>
-                </a>
-            </li>
-            @can('viewList', App\Models\Company::class)
-                <li class="treeview {{ getSizeBarActive([
-                    'company.index',
-                    'company.show',
-                    'company.create'
+            @can('viewList', App\Models\User::class)
+                <li class="{{ getSizeBarActive([
+                    'admin',
                 ]) }}">
-                    <a href="#">
-                        <i class="fa fa-building-o"></i>
-                        <span>@lang('main.manage_company')</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                    <a href="{{ route('admin') }}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>@lang('main.dashboard')</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li class="{{ getSizeBarActive([
-                            'company.index',
-                            'company.show',
-                        ]) }}">
-                            <a href="{{ route('company.index') }}">
-                                <i class="fa fa-circle-o"></i> @lang('main.companies')
-                            </a>
-                        </li>
+                </li>
+            @endcan
+            <li class="treeview {{ getSizeBarActive([
+                'company.index',
+                'company.show',
+                'company.create'
+            ]) }}">
+                <a href="#">
+                    <i class="fa fa-building-o"></i>
+                    <span>@lang('main.manage_company')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ getSizeBarActive([
+                        'company.index',
+                        'company.show',
+                    ]) }}">
+                        <a href="{{ route('company.index') }}">
+                            <i class="fa fa-circle-o"></i> @lang('main.companies')
+                        </a>
+                    </li>
+                    @can('viewList', App\Models\Company::class)
                         <li class="{{ getSizeBarActive([
                             'company.create',
                         ]) }}">
@@ -62,18 +64,9 @@
                                 <i class="fa fa-circle-o"></i> @lang('main.create')
                             </a>
                         </li>
-                    </ul>
-                </li>
-            @else
-                <li class="{{ getSizeBarActive([
-                    'company.manage',
-                ]) }}">
-                    <a href="{{ route('company.manage') }}">
-                        <i class="fa fa-building-o"></i>
-                        <span>@lang('main.manage_company')</span>
-                    </a>
-                </li>
-            @endcan
+                    @endcan
+                </ul>
+            </li>
             @can('viewList', App\Models\User::class)
                 <li class="treeview {{ getSizeBarActive([
                     'user.index',
@@ -158,7 +151,7 @@
                     </ul>
                 </li>
             @endcan
-            <li class="treeview {{ getSizeBarActive([
+            {{-- <li class="treeview {{ getSizeBarActive([
                 'ticket.index',
                 'ticket.show',
             ]) }}">
@@ -174,9 +167,8 @@
                             <i class="fa fa-circle-o"></i> @lang('main.ticket')
                         </a>
                     </li>
-                    {{-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> --}}
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </section>
     <!-- /.sidebar -->

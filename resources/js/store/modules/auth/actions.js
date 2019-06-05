@@ -68,11 +68,14 @@ export const register = ({ commit }, data) => {
 
 export const update = ({ commit }, data) => {
     return new Promise((resolve, reject) => {
-        patch('auth/update', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+        axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
+        var formData = new FormData(data);
+        
+        $.each(data, function(key, value) {
+            formData.append(key, value);
+        });
+        
+        post('auth/update', formData)
             .then(response => {
                 commit(types.SET_USER, response.data.data.user);
                 resolve(response.status);

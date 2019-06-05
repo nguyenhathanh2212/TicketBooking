@@ -17,5 +17,8 @@
     "rating_record": "Đánh giá của bạn đã được ghi lại",
     "booking_success": "Đặt vé xe thành công!",
     "booking_error": "Đặt vé xe thất bại, hãy thử lại!",
-    "not_allow_reservation" : "Tuyến này không cho phép đặt chỗ trước"
+    "not_allow_reservation" : "Tuyến này không cho phép đặt chỗ trước",
+    "must_login_to_book" : "Bạn phải đăng nhập để có thể đặt vé",
+    "cancel_ticket_success" : "Hủy vé xe thành công",
+    "confirm_cancel_ticket": "Bạn có chắc muốn hủy vé xe này?"
 }

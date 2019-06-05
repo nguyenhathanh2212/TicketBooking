@@ -18,8 +18,8 @@ use Carbon\Carbon;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'last_name' => $faker->name,
-        'first_name' => $faker->name,
+        'last_name' => $faker->lastName,
+        'first_name' => $faker->firstName,
         'email' => $faker->unique()->safeEmail,
         'password' => 'password', // password
         'role' => config('setting.user.role.user'),
@@ -37,10 +37,9 @@ $factory->define(App\Models\Bus::class, function (Faker $faker) {
 $factory->define(App\Models\Company::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'address' => $faker->text(200),
         'description' => $faker->text(400),
-        'address' => $faker->text(400),
-        'description' => $faker->text(400),
-        'phone' => $faker->tollFreePhoneNumber(),
+        'phone' => '0344764057',
         'address' => $faker->name,
     ];
 });
@@ -83,7 +82,7 @@ $factory->define(App\Models\Provincial::class, function (Faker $faker) {
 $factory->define(App\Models\Ticket::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'phone' => $faker->tollFreePhoneNumber(),
+        'phone' => '0344764057',
         'seat_number' => '[' . $faker->numberBetween(1, 42) . ']',
         'quantity' => 1,
         'total_price' => 100000,

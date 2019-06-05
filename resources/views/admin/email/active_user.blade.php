@@ -13,7 +13,7 @@
     <body>
         <div class="container">
             <div class="panel panel-default">
-                <div class="panel-heading">Active account</div>
+                <div class="panel-heading">Active account</div> <a href="{{ route('home')}}">TicketBooking</a>
                 <div class="panel-body">
                     <p class="font-italic">
                         <span>Tên đăng nhập: </span>
@@ -23,9 +23,11 @@
                         <span>Mật khẩu: </span>
                         <span>{{ $password }}</span>
                     </p>
-                    <p class="font-italic">
-                        <a href="{{ route('admin.profile') }}">Truy cập link sau để đổi mật khẩu</a>
-                    </p>
+                    @if ($user->role != config('setting.user.role.user'))
+                        <p class="font-italic">
+                            <a href="{{ route('admin.profile') }}">Truy cập link sau để đổi mật khẩu</a>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>

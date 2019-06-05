@@ -56,7 +56,6 @@
                     force: true
                 }).then(() => {
                     const authRes = hello(provider).getAuthResponse();
-                    console.log(authRes);
                     this.loginSocial({
                         access_token : authRes.access_token,
                         provider: provider

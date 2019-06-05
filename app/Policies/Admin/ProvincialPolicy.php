@@ -49,7 +49,7 @@ class ProvincialPolicy
         return false;
     }
 
-    public function before($user, $member)
+    public function before($user, $provincial)
     {
         if (in_array($user->role, [
             config('setting.user.role.super_admin'),

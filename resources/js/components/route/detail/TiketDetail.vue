@@ -68,47 +68,24 @@
                                                             <input disabled type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
                                                             <label for="bank-transfer">Direct Bank Transfer</label>
                                                         </h4>
-                                                        <div class="tg-panelcontent">
+                                                        <!-- <div class="tg-panelcontent">
                                                             <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
+                                                                <p>Trực tiếp thanh toán với nhà xe khi lên xe</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="tg-panel">
-                                                        <h4 class="tg-radio">
-                                                            <input disabled type="radio" id="cash" name="paymenttype">
-                                                            <label for="cash">Cash On Delivery</label>
-                                                        </h4>
-                                                        <div class="tg-panelcontent">
-                                                            <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
-                                                            </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input disabled type="radio" id="paypal" name="paymenttype">
+                                                            <input disabled type="radio" v-model="paymentMethod" :value="paymentMethodSetting.paypal" id="paypal" name="paymenttype">
                                                             <label for="paypal">PayPal Express Checkout </label>
                                                             <img src="images/paypal.jpg" alt="image description">
                                                         </h4>
-                                                        <div class="tg-panelcontent">
+                                                        <!-- <div class="tg-panelcontent">
                                                             <div class="tg-description">
                                                                 <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
-                                                    <div class="tg-panel">
-                                                        <h4 class="tg-radio">
-                                                            <input disabled type="radio" id="creditcard" name="paymenttype">
-                                                            <label for="creditcard"> Credit Card (Stripe)</label>
-                                                            <img src="images/visastrip.jpg" alt="image description">
-                                                        </h4>
-                                                        <div class="tg-panelcontent">
-                                                            <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -188,6 +165,15 @@
 
     .panel.panel-info .panel-body .col-xs-4 {
         color: #fa7550;
+    }
+
+    .tg-widgetcontent ul li span {
+        color: #333;
+        font-size: 14px;
+    }
+
+    .tg-widgetcontent ul li em {
+        font-size: 14px;
     }
 
     .row.alert.alert-danger {

@@ -9,6 +9,7 @@ import VueI18n from 'vue-i18n'
 import messages from './locale'
 import VeeValidate, { Validator } from 'vee-validate'
 import vi from 'vee-validate/dist/locale/vi'
+import en from 'vee-validate/dist/locale/en'
 import * as VueGoogleMaps from 'vue2-google-maps'
 const HelloJs = require('hellojs/dist/hello.all.min.js');
 const VueHello = require('vue-hellojs');
@@ -29,6 +30,9 @@ Vue.use(VeeValidate, {
     dictionary: {
         vi : {
             messages: vi.messages,
+        },
+        en : {
+            messages: en.messages,
         }
     }
 });

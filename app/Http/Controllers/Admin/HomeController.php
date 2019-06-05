@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
+use App\Models\User;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -20,8 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = $this->dashboardService->getStatistic();
+        try {
+            $this->authorize('viewList', User::class);
+            $data = $this->dashboardService->getStatistic();
 
-        return view('admin.dashboard.index' , compact('data'));
+            return view('admin.dashboard.index' , compact('data'));
+        } catch (Exception $e) {
+            return redirect()->route('company.index');
+        }
     }
 }

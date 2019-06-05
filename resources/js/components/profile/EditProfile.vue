@@ -71,7 +71,7 @@
                 this.update({
                     first_name: this.firstName,
                     last_name: this.lastName,
-                    avatar: this.file.toString('base64'),
+                    avatar: this.file,
                 })
                 .then(success => {
                     Swal.fire({

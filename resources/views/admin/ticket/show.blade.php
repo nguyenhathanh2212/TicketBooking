@@ -51,7 +51,14 @@
                         </div>
                         <div class="form-group">
                             <label for="quantity">@lang('ticket.quantity')</label>
-                            {{ Form::text('quantity', $ticket->quantity .  ' (' . implode(', ', json_decode($ticket->seat_number)) . ')', [
+                            @php
+                                $quantity = $ticket->quantity;
+                                
+                                if (json_decode($ticket->seat_number)) {
+                                    $quantity .= ' (' . implode(', ', json_decode($ticket->seat_number)) . ')';
+                                }
+                            @endphp
+                            {{ Form::text('quantity', $quantity, [
                                 'class' => 'form-control',
                                 'readonly' => true,
                             ]) }}

@@ -17,5 +17,8 @@
     "rating_record": "Your rating has been recorded",
     "booking_success": "Booking ticket successfully!",
     "booking_error": "Booking ticket failed, try again!",
-    "not_allow_reservation" : "This route does not allow reservations"
+    "not_allow_reservation" : "This route does not allow reservations",
+    "must_login_to_book" : "You must be logged in to be able to book ticket",
+    "cancel_ticket_success": "Cancel ticket successfully",
+    "confirm_cancel_ticket": "Are you sure you want to cancel this ticket?"
 }

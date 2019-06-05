@@ -46,6 +46,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin-page', 'middleware' => 
     Route::resource('provincial', 'ProvincialController');
     // ticket
     Route::resource('ticket', 'TicketController');
+    Route::get('ticket-export', 'TicketController@export')->name('export-tickets');
 
     //route
     Route::post('route/update-multy-status', 'RouteController@updateMultyStatus')->name('route.update_multy_status');

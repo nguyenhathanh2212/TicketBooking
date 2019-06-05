@@ -15,7 +15,19 @@
                 <h3 class="box-title">@lang('main.manage_tickets')</h3>
             </div>
             <div class="block-search">
+                <div class="box-tools" style="float: left; padding-left: 10px">
+                    <div class="input-group input-group-sm"
+                        style="width: auto; height: 30px; line-height: 30px; text-align: left">
+                        <a href="#" data-url="{{ route('export-tickets') }}"
+                            data-request="{{ json_encode(Request::all()) }}" class="btn btn-info btn-xs btn-export-excel">
+                            <i class="fa fa-download" aria-hidden="true"></i> @lang('main.export')
+                        </a>
+                    </div>
+                </div>
                 <div class="box-tools">
+                    {{ Form::hidden('company_id', Request::get('company_id'), [
+                        'form' => 'form-search'
+                    ]) }}
                     <div class="input-group input-group-sm" style="width: 150px;">
                         {{ Form::select('route_id', $routes, Request::get('route_id'), [
                             'class' => 'form-control',
@@ -167,6 +179,25 @@
 @push('script')
     <script>
         $(document).ready(function() {
+            $(document).on('click', '.btn-export-excel', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                var params = $(this).data('request');
+                var path = '';
+
+                $.each(params, function(key, value) {
+                    if (value) {
+                        path += `${key}=${value}&`;
+                    }
+                });
+
+                window.location.href = (`${url}?${path}`);
+                // $.ajax({
+                //     method: 'GET',
+                //     url: $(this).data('url'),
+                //     data: $(this).data('request')
+                // });
+            })
         })
     </script>
 @endpush

@@ -56,7 +56,7 @@
                             </th>
                             <th>@lang('company.phone')</th>
                             <th>@lang('company.route')</th>
-                            <th>@lang('company.review')</th>
+                            <th>@lang('main.ticket')</th>
                             <th>@lang('main.status')</th>
                         </tr>
                         @php
@@ -75,8 +75,8 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="">
-                                        <label class="label label-warning">{{ $company->ratings->count() }}</label> @lang('company.review')
+                                    <a href="{{ route('ticket.index', ['company_id' => $company->id]) }}" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> @lang('main.view')
                                     </a>
                                 </td>
                                 <td>

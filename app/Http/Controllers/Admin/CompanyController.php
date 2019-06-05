@@ -16,6 +16,7 @@ use Exception;
 use DB;
 use Auth;
 use App\Http\Requests\CompanyRequest;
+use App\Models\Company;
 
 class CompanyController extends Controller
 {
@@ -63,6 +64,11 @@ class CompanyController extends Controller
                 'station_id',
                 'status',
             ]);
+
+            if (Auth::user()->cannot('viewList', Company::class)) {
+                $params['user_id'] = Auth::user()->id;
+            }
+
             $statuses = $this->companyService->getListStatuses();
             $companies = $this->companyService->search($params);
 

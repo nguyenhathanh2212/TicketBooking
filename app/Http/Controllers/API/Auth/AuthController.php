@@ -147,10 +147,8 @@ class AuthController extends BaseController
             $user->update($data);
             
             if ($request->avatar) {
-                $avatar = $request->avatar;  // your base64 encoded
-                $avatar = str_replace('data:image/png;base64,', '', $avatar);
-                $avatar = str_replace(' ', '+', $avatar);
-                $this->imageService->createImage($user, [base64_decode($avatar)]);
+                $this->imageService->deleteImageExcept($user);
+                $this->imageService->createImage($user, $request->avatar);
             }
 
             return response()->json([

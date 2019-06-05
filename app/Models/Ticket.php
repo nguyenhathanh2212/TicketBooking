@@ -38,7 +38,8 @@ class Ticket extends Model
 
     public function getCheckCancelAttribute()
     {
-        if ($this->attributes['status'] == config('setting.ticket.status.active') && Carbon::parse($this->date_away)->gt(Carbon::now()->addHour(config('setting.number_hours_preset')))) {
+        if ($this->attributes['status'] == config('setting.ticket.status.active')
+            && Carbon::parse($this->date_away)->gt(Carbon::now()->addHour(config('setting.number_hours_preset')))) {
             return true;
         }
 
