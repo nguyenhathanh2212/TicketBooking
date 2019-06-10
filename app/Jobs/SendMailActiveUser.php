@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Models\User;
+use Mail;
 use Exception;
 
 class SendMailActiveUser implements ShouldQueue
@@ -16,6 +17,7 @@ class SendMailActiveUser implements ShouldQueue
 
     protected $user;
     protected $password;
+    public $tries = 3;
     /**
      * Create a new job instance.
      *
@@ -39,7 +41,7 @@ class SendMailActiveUser implements ShouldQueue
 
             Mail::send('admin.email.active_user', $data, function($message){
                 $message->from('thanhtdk2212@gmail.com', 'Ticket booking');
-                $message->to($user->email)->subject('Ticket booking');
+                $message->to($this->user->email)->subject('Ticket booking');
             });
         } catch(Exception $e) {
             report($e);

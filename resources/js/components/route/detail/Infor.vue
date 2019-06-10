@@ -333,6 +333,10 @@
         },
         computed: {
             ...mapState('bus_route', ['busRoute']),
+            ...mapState('auth', [
+                'authenticated',
+                'user'
+            ]),
             placeStartValue: function () {
                 return this.placeStart ? this.placeStart : this.otherPlaceStart;
             },
@@ -409,31 +413,41 @@
                 return jQuery.inArray(number, arrayNumberSeat) >= 0 ? true : false;
             },
             continueBooking: function () {
-                this.$validator.validate().then(valid => {
-                    if (valid && (this.seatYouBooks.length || this.quantity)) {
-                        var params = {
-                            check: true,
-                            seat_number: this.seatYouBooks,
-                            destination_place: this.placeDestination ? '' : this.otherPlaceDestination,
-                            start_place: this.placeStart ? '' : this.otherPlaceStart,
-                            total_price: this.totalPrice,
-                            phone: this.phone,
-                            name: this.name,
-                            email: this.email,
-                            date_away: this.date,
-                            quantity: this.seatYouBooks.length ? this.seatYouBooks.length : this.quantity,
+                if (!this.authenticated) {
+                     Swal.fire({
+                        title: 'Warning!',
+                        text: this.$t('message.must_login_to_book'),
+                        type: 'warning',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.value) {
+                            jQuery('#tg-loginsingup').addClass('open');
+                            jQuery('body').addClass('tg-hidescroll');
                         }
+                    });
+                } else {
+                    this.$validator.validate().then(valid => {
+                        if (valid && (this.seatYouBooks.length || this.quantity)) {
+                            var params = {
+                                check: true,
+                                seat_number: this.seatYouBooks,
+                                destination_place: this.placeDestination ? '' : this.otherPlaceDestination,
+                                start_place: this.placeStart ? '' : this.otherPlaceStart,
+                                total_price: this.totalPrice,
+                                phone: this.phone,
+                                name: this.name,
+                                email: this.email,
+                                date_away: this.date,
+                                quantity: this.quantity ? this.quantity : this.seatYouBooks.length
+                            }
 
-                        this.$router.push({
-                            name: 'route.booking',
-                            params: params
-                        })
-                    } else {
-                        $('.component-booking').animate({
-                            scrollTop: $('.component-booking').find('small.error:visible').first().offset().top - 200
-                        }, 100);
-                    }
-                });
+                            this.$router.push({
+                                name: 'route.booking',
+                                params: params
+                            })
+                        }
+                    });
+                }
             },
             getMoment(date, addDate = 0) {
                 return moment(date, this.$t('main.date_format')).add(addDate, 'days');

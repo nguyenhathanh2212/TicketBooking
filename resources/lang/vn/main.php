@@ -34,4 +34,8 @@ return [
     'information_ticket' => 'Thông tin vé xe',
     'thank_use' => 'Thanks for using TicketBooking!',
     'dashboard' => 'Dashboard',
+    'view' => 'Xem',
+    'export' => 'Tải excel',
+    'all_bus' => 'Tất cả xe bus',
+    'all_route' => 'Tất cả tuyến đường',
 ];

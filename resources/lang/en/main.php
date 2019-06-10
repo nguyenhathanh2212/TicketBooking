@@ -33,4 +33,8 @@ return [
     'information_ticket' => 'Information ticket',
     'thank_use' => 'Thanks for using TicketBooking!',
     'dashboard' => 'Dashboard',
+    'view' => 'View',
+    'export' => 'Export',
+    'all_bus' => 'All buses',
+    'all_route' => 'All routes',
 ];

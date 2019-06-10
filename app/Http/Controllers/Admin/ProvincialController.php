@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ProvincialService;
 use Exception;
+use App\Models\Provincial;
 
 class ProvincialController extends Controller
 {
@@ -24,6 +25,7 @@ class ProvincialController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->authorize('viewList', Provincial::class);
             $params = $request->only([
                 'size',
                 'sort_field',

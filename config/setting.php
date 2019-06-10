@@ -37,6 +37,7 @@ return [
         ],
         'payment_method' => [
             'direct' => 1,
+            'paypal' => 2,
         ],
     ],
     'reservation' => [

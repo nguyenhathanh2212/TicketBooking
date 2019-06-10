@@ -9,7 +9,7 @@
                     <div class="tg-content">
                         <fieldset>
                             <div class="form-group">
-                                <label>{{ $t('profile.old_password') }}<sup>*</sup></label>
+                                <label>{{ $t('profile.old_password') }}<sup v-if="!!this.user.password">*</sup></label>
                                 <input type="password"
                                        name="old_password"
                                        v-model="oldPassword"

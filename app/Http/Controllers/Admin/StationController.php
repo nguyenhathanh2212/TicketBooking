@@ -19,6 +19,7 @@ use GuzzleHttp;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\Http\Requests\StationRequest;
+use App\Models\Station;
 
 class StationController extends Controller
 {
@@ -63,6 +64,7 @@ class StationController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $params = $request->only([
                 'size',
                 'sort_field',
@@ -89,6 +91,7 @@ class StationController extends Controller
     public function create()
     {
         try {
+            $this->authorize('viewList', Station::class);
             $provincials = $this->provincialService->getAll();
             $statuses = $this->stationService->getListStatuses();
             unset($statuses[0]);
@@ -109,6 +112,7 @@ class StationController extends Controller
     public function store(StationRequest $request)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $data = $request->only([
                 'provincial_id',
                 'name',
@@ -151,6 +155,7 @@ class StationController extends Controller
     public function show($id)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $station = $this->stationService->getStation($id);
             $provincials = $this->provincialService->getAll();
             $statuses = $this->stationService->getListStatuses();
@@ -184,6 +189,7 @@ class StationController extends Controller
     public function update(StationRequest $request, $id)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $data = $request->only([
                 'station_id',
                 'name',
@@ -228,6 +234,7 @@ class StationController extends Controller
     public function updateMultyStatus(Request $request)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $data = json_decode($request->data);
             DB::beginTransaction();
 
@@ -259,6 +266,7 @@ class StationController extends Controller
     public function deleteMulty(Request $request)
     {
         try {
+            $this->authorize('viewList', Station::class);
             $dataId = json_decode($request->data);
             DB::beginTransaction();
             $this->stationService->deleteMulty($dataId);

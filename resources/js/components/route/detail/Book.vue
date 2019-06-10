@@ -68,51 +68,37 @@
                                                             <input type="radio" v-model="paymentMethod" :value="paymentMethodSetting.direct" id="bank-transfer" name="paymenttype">
                                                             <label for="bank-transfer">Direct Bank Transfer</label>
                                                         </h4>
-                                                        <div class="tg-panelcontent">
+                                                        <!-- <div class="tg-panelcontent">
                                                             <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
+                                                                <p>Trực tiếp thanh toán với nhà xe khi lên xe</p>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="tg-panel">
                                                         <h4 class="tg-radio">
-                                                            <input type="radio" id="cash" name="paymenttype">
-                                                            <label for="cash">Cash On Delivery</label>
-                                                        </h4>
-                                                        <div class="tg-panelcontent">
-                                                            <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tg-panel">
-                                                        <h4 class="tg-radio">
-                                                            <input type="radio" id="paypal" name="paymenttype">
+                                                            <input type="radio" v-model="paymentMethod" :value="paymentMethodSetting.paypal" id="paypal" name="paymenttype">
                                                             <label for="paypal">PayPal Express Checkout </label>
                                                             <img src="images/paypal.jpg" alt="image description">
                                                         </h4>
-                                                        <div class="tg-panelcontent">
+                                                        <!-- <div class="tg-panelcontent">
                                                             <div class="tg-description">
                                                                 <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tg-panel">
-                                                        <h4 class="tg-radio">
-                                                            <input type="radio" id="creditcard" name="paymenttype">
-                                                            <label for="creditcard"> Credit Card (Stripe)</label>
-                                                            <img src="images/visastrip.jpg" alt="image description">
-                                                        </h4>
-                                                        <div class="tg-panelcontent">
-                                                            <div class="tg-description">
-                                                                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue Sed non mauris vitae;erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.</p>
-                                                            </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </fieldset>
                                             <fieldset>
-                                                <button @click="bookingTicket" class="tg-btn" type="submit"><span>place order</span></button>
+                                                <button v-if="paymentMethod == paymentMethodSetting.direct" @click="bookingTicket" class="tg-btn" type="submit"><span>Order</span></button>
+                                                <div v-else style="padding: 30px 0px;">
+                                                    <PayPal
+                                                        :amount="getPriceUsd()"
+                                                        currency="USD"
+                                                        :client="credentials"
+                                                        @payment-completed="checkout"
+                                                        env="sandbox">
+                                                    </PayPal>
+                                                </div>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -129,13 +115,18 @@
 <script>
     import { mapActions, mapState } from 'vuex'
     import Banner from '@plugins/Banner.vue'
+    import PayPal from 'vue-paypal-checkout'
 
     export default {
         data: function() {
             return {
                 directPayment: window.Laravel.setting.direct_payment,
                 paymentMethodSetting: window.Laravel.setting.ticket.payment_method,
-                paymentMethod: window.Laravel.setting.ticket.payment_method.direct
+                paymentMethod: window.Laravel.setting.ticket.payment_method.direct,
+                credentials: {
+                    sandbox: process.env.MIX_PAYPAL_CLIENT_ID,
+                    production: ''
+                }
             }
         },
         computed: {
@@ -154,7 +145,8 @@
             }
         },
         components: {
-            banerComponent: Banner
+            banerComponent: Banner,
+            PayPal: PayPal
         },
         methods: {
             ...mapActions('bus_route', ['setBusRoute']),
@@ -186,7 +178,18 @@
                             type: 'error',
                             confirmButtonText: 'Ok'
                         });
-                    });;
+                    });
+            },
+            getPriceUsd: function () {
+                var price = (this.busRoute.price * this.data.quantity) / 23000;
+                price = Math.round(price * 100) / 100;
+
+                return price.toString();
+            },
+            checkout: function (response) {
+                if (response.state == 'approved') {
+                    this.bookingTicket();
+                }
             }
         },
         updated() {
@@ -218,6 +221,15 @@
 
     .panel.panel-info .panel-body .col-xs-4 {
         color: #fa7550;
+    }
+
+    .tg-widgetcontent ul li span {
+        color: #333;
+        font-size: 14px;
+    }
+
+    .tg-widgetcontent ul li em {
+        font-size: 14px;
     }
 
     .row.alert.alert-danger {

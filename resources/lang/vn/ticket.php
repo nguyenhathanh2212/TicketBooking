@@ -13,6 +13,7 @@ return [
     'payment_method' => 'PT thanh toán',
     'payment_method_value' => [
         1 => 'Trực tiếp',
+        2 => 'Paypal',
     ], 
     'quantity' => 'Số lượng',
     'total_price' => 'Tổng tiền',

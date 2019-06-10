@@ -36,9 +36,10 @@ class ImageService extends BaseService
         foreach($modelMorph->images()->whereNotIn('url', $oldImage)->pluck('url') as $url) {
             $arrayName = explode('/', $url);
             $url = end($arrayName);
-            $arrayName[0] = '/public';
-            $fileName = implode('/', $arrayName);
-            Storage::disk('local')->delete($fileName);
+            
+            if (Storage::disk('local')->exists('public\\' . $url)) {
+                Storage::disk('local')->delete('public\\' . $url);
+            }
         }
 
         $modelMorph->images()->whereNotIn('url', $oldImage)->delete();

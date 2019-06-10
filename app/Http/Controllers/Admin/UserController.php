@@ -36,6 +36,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         try {
+            $this->authorize('viewList', User::class);
             $params = $request->only([
                 'size',
                 'sort_field',

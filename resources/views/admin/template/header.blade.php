@@ -27,7 +27,7 @@
     <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="index2.html" class="logo">
+                <a href="{{ route('admin') }}" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>T</b>B</span>
                     <!-- logo for regular state and mobile devices -->
@@ -41,47 +41,36 @@
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            {{-- <li class="dropdown notifications-menu">
+                            <li class="dropdown notifications-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
+                                <span class="label label-warning number-notify">{{ Auth::user()->unreadNotifications->count() }}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
                                     <li>
                                         <!-- inner menu: contains the actual data -->
                                         <ul class="menu">
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                                page and may cause design problems
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-users text-red"></i> 5 new members joined
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                <i class="fa fa-user text-red"></i> You changed your username
-                                                </a>
-                                            </li>
+                                            @foreach (Auth::user()->notifications as $notification)
+                                                @php
+                                                    $data = $notification->data;
+                                                @endphp
+                                                <li class="{{ $notification->read_at ? '' : 'unread' }}">
+                                                    <a href="{{ route('ticket.show', [$data['ticket_id'], 'notification' => $notification->id]) }}">
+                                                        <i class="fa fa-ticket text-aqua"></i> <strong class="notification-title">{{ $data['title'] }}</strong>
+                                                        {{ $data['content'] }}<br>
+                                                        <small>{{ $data['created_at'] }}</small>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#">View all</a></li>
+                                    @if (Auth::user()->notifications->count())
+                                        <li class="footer"><a href="#">Xem tất cả</a></li>
+                                    @else
+                                        <li class="footer"><a href="#">Không có thông báo nào</a></li>
+                                    @endif
                                 </ul>
-                            </li> --}}
+                            </li>
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="{{ asset(Auth::user()->avatar) }}" class="user-image" alt="User Image">
@@ -115,3 +104,8 @@
                     </div>
                 </nav>
             </header>
+            <style>
+                .dropdown-menu .menu .unread {
+                    background: #e0e0e0;
+                }
+            </style>

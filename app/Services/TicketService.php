@@ -28,8 +28,11 @@ class TicketService extends BaseService {
         $params['size'] = $params['size'] ?? config('setting.filter.size');
         $params['sort_field'] = $params['sort_field'] ?? config('setting.filter.sort_field');
         $params['sort_type'] = $params['sort_type'] ?? config('setting.filter.sort_type');
-        $params['date_away'] = !empty($params['date_away']) ? Carbon::createFromFormat(trans('main.date_format'), $params['date_away']) : '';
 
+        if (!empty($params['date_away'])) {
+            $params['date_away'] = Carbon::createFromFormat(trans('main.date_format'), $params['date_away']);
+        }
+        
         return $params;
     }
 
@@ -89,6 +92,10 @@ class TicketService extends BaseService {
 
         $query->with(['busRoute.route']);
 
+        if (!empty($params['export']) && $params['export']) {
+            return $query->orderBy($params['sort_field'], $params['sort_type'])->get();
+        }
+
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }
 
@@ -133,5 +140,18 @@ class TicketService extends BaseService {
     public function getTicketStatuses()
     {
         return array_combine(config('setting.ticket.status'), trans('ticket.status'));
+    }
+
+    public function cancelTicket($id)
+    {
+        $ticket = $this->model->with(['busRoute.route'])->find($id);
+
+        if (!$ticket) {
+            throw new Exception("Model not found", 1);
+        }
+
+        $ticket->update(['status' => config('setting.ticket.status.cancel')]);
+
+        return $ticket;
     }
 }

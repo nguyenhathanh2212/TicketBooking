@@ -13,6 +13,7 @@ return [
     'payment_method' => 'Payment method',
     'payment_method_value' => [
         1 => 'Direct',
+        2 => 'Paypal',
     ], 
     'quantity' => 'Quantity',
     'total_price' => 'Total price',
