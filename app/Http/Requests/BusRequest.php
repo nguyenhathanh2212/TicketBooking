@@ -23,12 +23,17 @@ class BusRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'company_id' => 'required',
+        $rules = [
             'lisense_plate' => 'required',
             'driver_name' => 'required',
-            'number_of_seats' => 'required|numeric',
+            'number_of_seats' => isset($this->type_bus_id) && isset($this->type_bus_id) > 0 ? 'nullable|numeric' : 'required|numeric' ,
             'status' => 'required',
         ];
+
+        if ($this->method() == 'POST') {
+            $rules['company_id'] = 'required';
+        }
+
+        return $rules;
     }
 }

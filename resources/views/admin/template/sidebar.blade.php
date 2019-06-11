@@ -98,6 +98,68 @@
                     </ul>
                 </li>
             @endcan
+            @can('viewList', App\Models\Route::class)
+                <li class="treeview {{ getSizeBarActive([
+                    'route.index',
+                    'route.show',
+                    'route.create',
+                ]) }}">
+                    <a href="#">
+                        <i class="fa fa-road"></i> <span>@lang('main.manage_route')</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ getSizeBarActive([
+                                'route.index',
+                                'route.show',
+                            ]) }}">
+                            <a href="{{ route('route.index') }}">
+                                <i class="fa fa-circle-o"></i> @lang('main.route')
+                            </a>
+                        </li>
+                        <li class="{{ getSizeBarActive([
+                            'route.create',
+                        ]) }}">
+                            <a href="{{ route('route.create') }}">
+                                <i class="fa fa-circle-o"></i> @lang('main.create')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+            @can('viewList', App\Models\Bus::class)
+                <li class="treeview {{ getSizeBarActive([
+                    'bus.index',
+                    'bus.show',
+                    'bus.create',
+                ]) }}">
+                    <a href="#">
+                        <i class="fa fa-bus"></i> <span>@lang('main.manage_bus')</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ getSizeBarActive([
+                            'bus.index',
+                            'bus.show',
+                        ]) }}">
+                            <a href="{{ route('bus.index') }}">
+                                <i class="fa fa-circle-o"></i> @lang('main.bus')
+                            </a>
+                        </li>
+                        <li class="{{ getSizeBarActive([
+                            'bus.create',
+                        ]) }}">
+                            <a href="{{ route('bus.create') }}">
+                                <i class="fa fa-circle-o"></i> @lang('main.create')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
             @can('viewList', App\Models\Station::class)
                 <li class="treeview {{ getSizeBarActive([
                     'station.index',

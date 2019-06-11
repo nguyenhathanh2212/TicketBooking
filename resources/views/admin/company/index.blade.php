@@ -56,6 +56,7 @@
                             </th>
                             <th>@lang('company.phone')</th>
                             <th>@lang('company.route')</th>
+                            <th>@lang('main.bus')</th>
                             <th>@lang('main.ticket')</th>
                             <th>@lang('main.status')</th>
                         </tr>
@@ -69,6 +70,11 @@
                                 <td><a href="{{ route('company.show', $company->id) }}">{{ $company->name }}</a></td>
                                 <td>{{ $company->address }}</td>
                                 <td>{{ $company->phone }}</td>
+                                <td>
+                                    <a href="{{ route('bus.index', ['company_id' => $company->id]) }}">
+                                        <label class="label label-warning">{{ $company->buses->count() }}</label> @lang('main.bus')
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{ route('route.index', ['company_id' => $company->id]) }}">
                                         <label class="label label-info">{{ $company->routes->count() }}</label> @lang('company.route')

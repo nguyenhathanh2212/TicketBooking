@@ -20,22 +20,27 @@ class BusPolicy
         //
     }
 
+    public function viewList(User $user)
+    {
+        return false;
+    }
+
     public function view(User $user, Bus $bus)
     {
         return in_array($user->id, $bus->company->userCompanies->pluck('user_id')->all());
     }
 
-    public function update(User $user, Bus $route)
+    public function update(User $user, Bus $bus)
     {
         return in_array($user->id, $bus->company->userCompanies->pluck('user_id')->all());
     }
 
-    public function delete(User $user, Bus $route)
+    public function delete(User $user, Bus $bus)
     {
         return in_array($user->id, $bus->company->userCompanies->pluck('user_id')->all());
     }
 
-    public function before($user, $ticket)
+    public function before($user, $bus)
     {
         if (in_array($user->role, [
             config('setting.user.role.super_admin'),

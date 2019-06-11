@@ -23,15 +23,20 @@ class RouteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'company_id' => 'required',
+        $rules = [
             'start_station_id' => 'required',
             'destination_station_id' => 'required',
             'start_time' => 'required',
             'destination_time' => 'required',
-            'phone' => 'numeric',
+            'phone' => 'numeric|nullable',
             'number_preset_date' => 'required|numeric',
             'status' => 'required',
         ];
+
+        if ($this->method() == 'POST') {
+            $rules['company_id'] = 'required';
+        }
+
+        return $rules;
     }
 }

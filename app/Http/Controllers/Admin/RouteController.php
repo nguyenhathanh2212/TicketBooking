@@ -142,12 +142,14 @@ class RouteController extends Controller
             $companies = $this->companyService->getAll();
             $statuses = $this->routeService->getListStatuses();
             $stations = $this->stationService->getAll();
+            $buses = $route->company->buses->pluck('lisense_plate', 'id')->all();
             unset($statuses[0]);
 
             return view('admin.route.show', compact('route',
                 'stations',
                 'companies',
-                'statuses'
+                'statuses',
+                'buses'
             ));
         } catch (Exception $e) {
             report($e);

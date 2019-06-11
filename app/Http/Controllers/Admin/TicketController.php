@@ -53,6 +53,7 @@ class TicketController extends Controller
             ]);
 
             $company = $this->companyService->getCompany($params['company_id']);
+            $this->authorize('view', $company);
             $busLisenses = $company->buses()->pluck('lisense_plate', 'id')->all();
             $busLisenses = [0 => trans('main.all_bus')] + $busLisenses;
             $tickets = $this->ticketService->search($params);
@@ -111,6 +112,7 @@ class TicketController extends Controller
     {
         try {
             $ticket = $this->ticketService->getTicket($id);
+            $this->authorize('view', $ticket);
 
             if (isset($request->notification)) {
                 Auth::user()->unreadNotifications->where('id', $request->notification)->markAsRead();

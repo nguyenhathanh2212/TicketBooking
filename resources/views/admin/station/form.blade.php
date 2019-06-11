@@ -7,7 +7,7 @@
                 {{ Form::select('provincial_id', $provincials->pluck('name', 'id') ?? '', $station->provincial_id ?? '',[
                     'class' => 'form-control',
                 ]) }}
-                <label for="provincial_id" class="error help-block"></span>
+                <span for="provincial_id" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="name">@lang('station.name')</label>
@@ -15,7 +15,7 @@
                     'class' => 'form-control',
                     'placeholder' => trans('station.name'),
                 ]) }}
-                <label for="name" class="error help-block"></span>
+                <span for="name" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="address">@lang('station.address')</label>
@@ -23,7 +23,7 @@
                     'class' => 'form-control',
                     'placeholder' => trans('station.address'),
                 ]) }}
-                <label for="address" class="error help-block"></span>
+                <span for="address" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="phone">@lang('station.phone')</label>
@@ -31,14 +31,14 @@
                     'class' => 'form-control',
                     'placeholder' => trans('station.phone'),
                 ]) }}
-                <label for="phone" class="error help-block"></span>
+                <span for="phone" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="status">@lang('station.status')</label>
                 {{ Form::select('status', $statuses, $station->status ?? '', [
                     'class' => 'form-control',
                 ]) }}
-                <label for="status" class="error help-block"></span>
+                <span for="status" class="error help-block"></span>
             </div>
             @if (isset($station))
                 <div class="form-group">

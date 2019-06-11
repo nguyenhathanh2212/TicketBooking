@@ -53,7 +53,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin-page', 'middleware' => 
     Route::delete('route/delete-multy', 'RouteController@deleteMulty')->name('route.delete_multy');
     Route::resource('route', 'RouteController');
 
-    //route
+    //bus
     Route::post('bus/update-multy-status', 'BusController@updateMultyStatus')->name('bus.update_multy_status');
     Route::delete('bus/delete-multy', 'BusController@deleteMulty')->name('bus.delete_multy');
     Route::resource('bus', 'BusController');

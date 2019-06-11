@@ -6,7 +6,7 @@
                 {{ Form::select('station_id', $stations->pluck('name', 'id'), $company->station_id ?? (Request::get('station_id') ?? ''), [
                     'class' => 'form-control',
                 ]) }}
-                <label for="station_id" class="error help-block"></span>
+                <span for="station_id" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="name">@lang('company.name')</label>
@@ -14,20 +14,25 @@
                     'class' => 'form-control',
                     'placeholder' => trans('company.name'),
                 ]) }}
-                <label for="name" class="error help-block"></span>
+                <span for="name" class="error help-block"></span>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group group-member">
                         <label for="status">@lang('company.admin_company')</label>
-                        {{ Form::text('super_manager_view', '', [
-                            'class' => 'form-control user-autocomplate user-admin-company',
-                            'autocomplete' => 'off',
-                            'data-url' => route('user.search'),
-                        ]) }}
-                        {{ Form::hidden('super_manager', '', [
-                            'class' => 'super-manager'
-                        ]) }}
+                        @if(in_array(Auth::user()->role, [
+                            config('setting.user.role.super_admin'),
+                            config('setting.user.role.admin'),
+                        ]))
+                            {{ Form::text('super_manager_view', '', [
+                                'class' => 'form-control user-autocomplate user-admin-company',
+                                'autocomplete' => 'off',
+                                'data-url' => route('user.search'),
+                            ]) }}
+                            {{ Form::hidden('super_manager', '', [
+                                'class' => 'super-manager'
+                            ]) }}
+                        @endif
                         <div class="result-content-complate group-member-admin">
                             <ul class="ui-users ui-users-admin">
                                 @if (isset($company))
@@ -36,27 +41,37 @@
                                             <div class="ui-users-item-wrapper">
                                                 <img src="{{ $user->user->avatar }}" class="member-avatar">
                                                 <span class="name-user">{{ $user->user->full_name }}</span>
-                                                <span class="remove-user"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                                @if(in_array(Auth::user()->role, [
+                                                    config('setting.user.role.super_admin'),
+                                                    config('setting.user.role.admin'),
+                                                ]))
+                                                    <span class="remove-user"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                                @endif
                                             </div>
                                         </li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
-                        <label for="super_manager_view" class="error help-block"></span>
+                        <span for="super_manager_view" class="error help-block"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group group-member">
                         <label for="status">@lang('company.employee_company')</label>
-                        {{ Form::text('employee_view', '', [
-                            'class' => 'form-control user-autocomplate',
-                            'autocomplete' => 'off',
-                            'data-url' => route('user.search'),
-                        ]) }}
-                        {{ Form::hidden('employee', '', [
-                            'class' => 'employee'
-                        ]) }}
+                        @if(in_array(Auth::user()->role, [
+                            config('setting.user.role.super_admin'),
+                            config('setting.user.role.admin'),
+                        ]) || Auth::user()->id == $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->first()->user_id)
+                            {{ Form::text('employee_view', '', [
+                                'class' => 'form-control user-autocomplate',
+                                'autocomplete' => 'off',
+                                'data-url' => route('user.search'),
+                            ]) }}
+                            {{ Form::hidden('employee', '', [
+                                'class' => 'employee'
+                            ]) }}
+                        @endif
                         <div class="result-content-complate group-member-emplyee">
                             <ul class="ui-users">
                                 @if (isset($company))
@@ -65,14 +80,19 @@
                                             <div class="ui-users-item-wrapper">
                                                 <img src="{{ $user->user->avatar }}" class="member-avatar">
                                                 <span class="name-user">{{ $user->user->full_name }}</span>
-                                                <span class="remove-user"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                                @if(in_array(Auth::user()->role, [
+                                                    config('setting.user.role.super_admin'),
+                                                    config('setting.user.role.admin'),
+                                                ]) || Auth::user()->id == $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->first()->user_id)
+                                                    <span class="remove-user"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                                @endif
                                             </div>
                                         </li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
-                        <label for="employee" class="error help-block"></span>
+                        <span for="employee" class="error help-block"></span>
                     </div>
                 </div>
             </div>
@@ -82,7 +102,7 @@
                     'class' => 'form-control',
                     'placeholder' => trans('company.address'),
                 ]) }}
-                <label for="address" class="error help-block"></span>
+                <span for="address" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="phone">@lang('company.phone')</label>
@@ -90,14 +110,14 @@
                     'class' => 'form-control',
                     'placeholder' => trans('company.phone'),
                 ]) }}
-                <label for="phone" class="error help-block"></span>
+                <span for="phone" class="error help-block"></span>
             </div>
             <div class="form-group">
                 <label for="status">@lang('main.status')</label>
                 {{ Form::select('status', $statuses, $company->status ?? '',[
                     'class' => 'form-control',
                 ]) }}
-                <label for="status" class="error help-block"></span>
+                <span for="status" class="error help-block"></span>
             </div>
             @if (isset($company))
                 <div class="form-group">
@@ -105,8 +125,8 @@
                         <label style="cursor: pointer" class="label label-info">{{ $company->routes->count() }} @lang('company.route')</label>
                     </a>
                     
-                    <a href="{{ route('route.index', ['company_id' => $company->id]) }}">
-                        <label style="cursor: pointer" class="label label-warning">{{ $company->ratings->count() }} @lang('company.review')</label>
+                    <a href="{{ route('bus.index', ['company_id' => $company->id]) }}">
+                        <label style="cursor: pointer" class="label label-warning">{{ $company->buses->count() }} @lang('main.bus')</label>
                     </a>
                 </div>
             @endif
@@ -115,7 +135,7 @@
                 <textarea class="textarea" name="description" placeholder="Place some text here"
                     style="width: 100%; height: 200px; font-size: 14px;
                     line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $company->description ?? '' }}</textarea>
-                <label for="description" class="error help-block"></span>
+                <span for="description" class="error help-block"></span>
             </div>
         </div>
     </div>

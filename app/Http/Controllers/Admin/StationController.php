@@ -234,7 +234,7 @@ class StationController extends Controller
     public function updateMultyStatus(Request $request)
     {
         try {
-            $this->authorize('viewList', Station::class);
+            $this->authorize('updateMulty', Station::class);
             $data = json_decode($request->data);
             DB::beginTransaction();
 
@@ -266,7 +266,7 @@ class StationController extends Controller
     public function deleteMulty(Request $request)
     {
         try {
-            $this->authorize('viewList', Station::class);
+            $this->authorize('deleteMulty', Station::class);
             $dataId = json_decode($request->data);
             DB::beginTransaction();
             $this->stationService->deleteMulty($dataId);
