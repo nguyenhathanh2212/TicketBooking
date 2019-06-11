@@ -80,6 +80,10 @@ class BusRouteService extends BaseService {
             $query->where('status', $params['status']);
         }
 
+        if (!empty($params['route_id'])) {
+            $query = $query->whereIn('route_id', $params['route_id']);
+        }
+
         $query = $query->whereIn('route_id', $routesQuery->pluck('id')->all());
         $query->with(['route', 'bus', 'ratings', 'tickets']);
 

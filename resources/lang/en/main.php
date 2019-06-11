@@ -37,4 +37,5 @@ return [
     'export' => 'Export',
     'all_bus' => 'All buses',
     'all_route' => 'All routes',
+    'price' => 'Price',
 ];

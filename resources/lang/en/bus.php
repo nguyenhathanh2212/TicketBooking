@@ -5,4 +5,6 @@ return [
     'driver_name' => 'Driver name',
     'number_of_seats' => 'Number of seats',
     'bus_information' => 'Bus information',
+    'bus_type' => 'Bus type',
+    'other' => 'Other',
 ];

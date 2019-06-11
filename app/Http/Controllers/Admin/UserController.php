@@ -196,9 +196,9 @@ class UserController extends Controller
             ]);
             
             $result = true;
+            $params['search_ajax'] = true;
 
             $users = $this->userService->search($params);
-            // $users = $users->where('social_accounts_count', 0);
         } catch (Exception $e) {
             $result = false;
             $users = [];
@@ -283,7 +283,6 @@ class UserController extends Controller
             
             return redirect()->route('admin.profile')->with('messageSuccess', trans('message.update_successfully'));
         } catch (Exception $e) {
-            dd($e);
             DB::rollBack();
             report($e);
 

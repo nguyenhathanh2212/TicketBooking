@@ -12,12 +12,14 @@ use App\Policies\Admin\BusPolicy;
 use App\Policies\Admin\UserPolicy;
 use App\Policies\Admin\ProvincialPolicy;
 use App\Policies\Admin\StationPolicy;
+use App\Policies\Admin\TicketPolicy;
 use App\Models\Company;
 use App\Models\Route;
 use App\Models\Bus;
 use App\Models\User;
 use App\Models\Provincial;
 use App\Models\Station;
+use App\Models\Ticket;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Station::class => StationPolicy::class,
         Provincial::class => ProvincialPolicy::class,
+        Ticket::class => TicketPolicy::class,
     ];
 
     /**

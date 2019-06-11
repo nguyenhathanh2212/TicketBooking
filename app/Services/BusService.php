@@ -3,16 +3,20 @@
 namespace App\Services;
 
 use App\Models\Bus;
+use App\Models\TypeBus;
 use Exception;
 
 class BusService extends BaseService {
+    protected $typeBus;
+
     /**
      * CompanyService constructor.
      * @param BusRoute $busRoute
      * @param Route $routeModel
      */
-    public function __construct(Bus $bus) {
+    public function __construct(Bus $bus, TypeBus $typeBus) {
         $this->model = $bus;
+        $this->typeBus = $typeBus;
     }
 
     /**
@@ -73,5 +77,15 @@ class BusService extends BaseService {
         $bus->update($data);
         
         return $bus;
+    }
+
+    public function createBus($data)
+    {
+        return $this->model->create($data);
+    }
+
+    public function getBusTypes()
+    {
+        return $this->typeBus->all();
     }
 }

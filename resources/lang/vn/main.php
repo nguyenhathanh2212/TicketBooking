@@ -38,4 +38,5 @@ return [
     'export' => 'Tải excel',
     'all_bus' => 'Tất cả xe bus',
     'all_route' => 'Tất cả tuyến đường',
+    'price' => 'Giá',
 ];

@@ -11,4 +11,5 @@ return [
     'reservation' => 'Cho phép đặt ghế ngồi',
     'number_preset_date' => 'Số ngày cho phép đặt trước',
     'direct_payment' => 'Cho phép thanh toán trực tiếp',
+    'bus_route' => 'Danh sách chuyến xe',
 ];

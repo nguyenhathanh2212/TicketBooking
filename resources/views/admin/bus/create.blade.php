@@ -1,10 +1,10 @@
 @extends('admin.template.master')
 
 @section('header')
-<h1>
-    @lang('main.manage_bus')
-    <small>@lang('main.detail')</small>
-</h1>
+    <h1>
+        @lang('main.manage_bus')
+        <small>@lang('main.create')</small>
+    </h1>
 @endsection
 
 @section('main_content')
@@ -18,13 +18,13 @@
         <!-- /.box-header -->
         @include('admin.template.notice')
         <div class="box-body">
-            {{ Form::open(['class' => 'form-bus',
-                'url' => route('bus.update', $bus->id),
-                'method' => 'PUT',
-                'data-message' => trans('message.confirm_update_bus')]) }}
-                @include('admin.bus.form')
-            {{ Form::close() }}
-            <!-- /.row -->
+        {{ Form::open(['class' => 'form-bus',
+            'url' => route('bus.store'),
+            'method' => 'POST',
+            'data-message' => trans('message.confirm_create_bus')]) }}
+            @include('admin.bus.form')
+        {{ Form::close() }}
+        <!-- /.row -->
         </div>
     </div>
 @endsection

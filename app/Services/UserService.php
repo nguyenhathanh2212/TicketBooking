@@ -64,8 +64,10 @@ class UserService extends BaseService {
         if (!empty($params['filter_id'])) {
             $query->whereNotIn('id', $params['filter_id']);
         }
-        
-        $query->withCount('socialAccounts');
+
+        if (isset($params['search_ajax']) && $params['search_ajax']) {
+            $query->where('password', '!=', '');
+        }
 
         return $query->orderBy($params['sort_field'], $params['sort_type'])->paginate($params['size']);
     }

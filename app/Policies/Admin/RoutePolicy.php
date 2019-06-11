@@ -20,6 +20,11 @@ class RoutePolicy
         //
     }
 
+    public function viewList(User $user)
+    {
+        return false;
+    }
+
     public function view(User $user, Route $route)
     {
         return in_array($user->id, $route->company->userCompanies->pluck('user_id')->all());

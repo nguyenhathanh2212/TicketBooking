@@ -10,5 +10,6 @@ return [
     'time' => 'Time',
     'reservation' => 'Reservation before',
     'number_preset_date' => 'Number preset date',
-    'direct_payment' => 'Allow direct payment'
+    'direct_payment' => 'Allow direct payment',
+    'bus_route' => 'List bus route',
 ];

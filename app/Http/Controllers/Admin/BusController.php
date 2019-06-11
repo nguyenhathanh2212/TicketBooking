@@ -78,12 +78,13 @@ class BusController extends Controller
     public function create()
     {
         try {
-            // $stations = $this->stationService->getAll();
-            // $statuses = $this->stationService->getListStatuses();
-            // $companies = $this->companyService->getAll();
-            // unset($statuses[0]);
+            $companies = $this->companyService->getAll();
+            $statuses = $this->busService->getListStatuses();
+            $busTypes = $this->busService->getBusTypes()->pluck('name', 'id')->all();
+            $busTypes[0] = trans('bus.other');
+            unset($statuses[0]);
 
-            return view('admin.route.create', compact('stations', 'statuses', 'companies'));
+            return view('admin.bus.create', compact('statuses', 'companies', 'busTypes'));
         } catch (Exception $e) {
             report($e);
             abort(404);
@@ -99,25 +100,21 @@ class BusController extends Controller
     public function store(BusRequest $request)
     {
         try {
-            // $data = $request->only([
-            //     'company_id',
-            //     'start_station_id',
-            //     'destination_station_id',
-            //     'start_time',
-            //     'destination_time',
-            //     'number_preset_date',
-            //     'phone',
-            //     'reservation',
-            //     'status',
-            //     'direct_payment'
-            // ]);
+            $data = $request->only([
+                'company_id',
+                'lisense_plate',
+                'driver_name',
+                'number_of_seats',
+                'status',
+                'type_bus_id'
+            ]);
             DB::beginTransaction();
 
-            // $route = $this->routeService->createRoute($data);
+             $bus = $this->busService->createBus($data);
 
             DB::commit();
             
-            return redirect()->route('route.show', ['id' => $route->id])->with('messageSuccess', trans('message.create_successfully'));
+            return redirect()->route('bus.show', ['id' => $bus->id])->with('messageSuccess', trans('message.create_successfully'));
         } catch (Exception $e) {
             DB::rollBack();
             report($e);
@@ -139,11 +136,14 @@ class BusController extends Controller
             $this->authorize('view', $bus);
             $companies = $this->companyService->getAll();
             $statuses = $this->busService->getListStatuses();
+            $busTypes = $this->busService->getBusTypes()->pluck('name', 'id')->all();
+            $busTypes[0] = trans('bus.other');
             unset($statuses[0]);
 
             return view('admin.bus.show', compact('bus',
                 'companies',
-                'statuses'
+                'statuses',
+                'busTypes'
             ));
         } catch (Exception $e) {
             report($e);
@@ -178,6 +178,7 @@ class BusController extends Controller
                 'driver_name',
                 'number_of_seats',
                 'status',
+                'type_bus_id'
             ]);
             
             DB::beginTransaction();
