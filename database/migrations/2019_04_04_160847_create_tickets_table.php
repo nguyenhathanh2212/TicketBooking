@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
+            $table->string('sale_id')->nullable();
             $table->string('start_place')->nullable();
             $table->string('destination_place')->nullable();
             $table->string('seat_number');

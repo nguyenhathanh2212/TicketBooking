@@ -65,7 +65,14 @@
                                     maxDate: getMoment(busRoute.route.start_date, busRoute.route.number_preset_date)
                                 }"></date-picker-component>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 infor-seat">{{ numberOfSeat }}/{{ seats }} {{ $t('route.seat_empty') }}</div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 infor-seat">
+                            <template v-if="numberOfSeat > 0">
+                                {{ numberOfSeat }}/{{ seats }} {{ $t('route.seat_empty') }}
+                            </template>
+                            <template v-else>
+                                <span class="label label-danger">Hết vé</span>
+                            </template>
+                        </div>
                         <div class="clearfix"></div>
                         <hr>
                         <template v-if="typeBus">
@@ -121,6 +128,7 @@
                                         numeric: true,
                                         max_value: numberOfSeat
                                     }"
+                                    :disabled="numberOfSeat <= 0"
                                     type="text"/>
                                 <small class="form-text text-muted error">{{ errors.first('quantity') }}</small>
                             </label>
@@ -298,6 +306,7 @@
             </div>
             <div class="col-md-4 item-block" style="padding: 18px;">
                 <button type="button"
+                    :disabled="numberOfSeat <= 0"
                     class="btn btn-warning btn-md"
                     @click="continueBooking">{{ $t('route.continue') }} <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
             </div>
@@ -370,7 +379,15 @@
             busRoute: function () {
                 this.placeStart = this.busRoute.route.start_station.address;
                 this.placeDestination = this.busRoute.route.destination_station.address;
-                this.date = this.$route.params.date ? this.$route.params.date : this.busRoute.route.start_date; 
+                this.date = this.$route.params.date ? this.$route.params.date : this.busRoute.route.start_date;
+                let seats = this.busRoute.route_tickets[this.date] ? this.busRoute.route_tickets[this.date] : [];
+                let count = 0;
+
+                for (var index = 0; index < seats.length; index ++) {
+                    count += seats[index].quantity;
+                }
+
+                this.numberOfSeat = this.busRoute.bus.seats - count;
             },
             seatChecks: function () {
                 this.seatYouBooks = _.difference(this.getKeys(this.seatChecks), this.getKeys(this.seatIsBookeds));
@@ -640,5 +657,13 @@
 
     input#email {
         text-transform: lowercase;
+    }
+
+    span.tg-stars {
+        cursor: pointer;
+    }
+
+    input.col-md-8.quantity-order:disabled {
+        background: #f3f3f2;
     }
 </style>

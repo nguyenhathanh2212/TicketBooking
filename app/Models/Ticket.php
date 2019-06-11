@@ -21,6 +21,7 @@ class Ticket extends Model
         'start_place',
         'destination_place',
         'payment_method',
+        'sale_id',
     ];
 
     protected $appends = [
@@ -48,6 +49,10 @@ class Ticket extends Model
 
     public function getStatusStrAttribute()
     {
+        if ($this->status == config('setting.ticket.status.active')) {
+            return $this->payment_method == config('setting.ticket.payment_method.direct') ? 'Chưa thanh toán' : 'Đã thanh toán' ;
+        }
+
         return trans('ticket.status')[$this->status];
     }
 

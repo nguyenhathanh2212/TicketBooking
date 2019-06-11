@@ -3,7 +3,10 @@
 use Illuminate\Database\Seeder;
 use App\Models\Provincial;
 use App\Models\Station;
+use App\Models\Company;
 use App\Models\TypeBus;
+use App\Models\User;
+use App\Models\UserCompany;
 
 class ProvincialSeeder extends Seeder
 {
@@ -16,7 +19,11 @@ class ProvincialSeeder extends Seeder
     {
         Provincial::truncate();
         Station::truncate();
+        Company::truncate();
         TypeBus::truncate();
+        User::truncate();
+        UserCompany::truncate();
+
         $provincials = [
             'Đà Nẵng' => [
                 [
@@ -25,6 +32,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '16.060640',
                     'longitude' => '108.176760',
                     'phone' => '0905009498',
+                    'companies' => [
+                        [
+                            'name' => 'Xe khách Danatranco',
+                            'address' => 'Tổ 16 - Phường Hà An - Quận Cẩm Lệ - Đà Nẵng',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905009498',
+                        ],
+                        [
+                            'name' => 'Xe khách Tùng Vy',
+                            'address' => 'Tổ 16 - Phường Hà An - Quận Cẩm Lệ - Đà Nẵng',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905009498',
+                        ],
+                        [
+                            'name' => 'Xe khách Tuấn Nam',
+                            'address' => 'Quận Hải châu - Đà Nẵng',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905009498',
+                        ],
+                    ],
                 ]
             ],
             'Quảng Bình' => [
@@ -34,6 +73,28 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '17.119810',
                     'longitude' => '106.815580',
                     'phone' => '0232 3512 407',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà xe Lâm Huề',
+                            'address' => '30 Trần Hưng Đạo – Lệ Thủy – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Vinh Thanh',
+                            'address' => '31 Trần Hưng Đạo– Lệ Thủy – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ],
                 [
                     'name' => 'Bến xe đồng hới',
@@ -41,6 +102,48 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '17.466840',
                     'longitude' => '106.623170',
                     'phone' => '0232 3512 407',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà xe Hải Hà',
+                            'address' => '30 Quang Trung – Đồng Hới – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Hạnh Luyến',
+                            'address' => '31 Quang Trung – Đồng Hới – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Trung Tín',
+                            'address' => '28 Quang Trung – Đồng Hới – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0913494460',
+                        ],
+                        [
+                            'name' => 'Nhà xe Vinh Thanh',
+                            'address' => '20 Quang Trung – Đồng Hới – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0935735786',
+                        ],
+                    ],
                 ],
                 [
                     'name' => 'Bến xe ba đồn',
@@ -48,6 +151,28 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '17.753410',
                     'longitude' => '106.420311',
                     'phone' => '0232 3512 407',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà Xe Thanh Nghĩa',
+                            'address' => '30 Trần Hưng Đạo – Lệ Thủy – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe xuân nghĩa',
+                            'address' => '31 Trần Hưng Đạo– Lệ Thủy – Quảng Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Quảng Trị' => [
@@ -57,12 +182,76 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '16.812700',
                     'longitude' => '107.107960',
                     'phone' => '0233 3851 488',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => '443 Lê Duẩn - Đông Hà - Quảng Trị',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Ngọc Trinh',
+                            'address' => 'Cây xăng số 32, QL 1A, TT. Hồ Xá, Quảng Trị',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Tân Quang Dũng',
+                            'address' => '115 Quốc Lộ 9, Phường 5 - Đông Hà - Quảng Trị',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ],[
                     'name' => 'Bến xe hồ xá',
                     'address' => ' Lê Duẩn, TT. Hồ Xá, Vĩnh Linh, Quảng Trị',
                     'latitude' => '17.042550',
                     'longitude' => '107.024880',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà xe Bích Ngọc',
+                            'address' => '880 Tôn đức Thắng, Liên Chiểu, TP. Đà Nẵng',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Huệ Thi',
+                            'address' => 'TT. Hồ Xá, Vĩnh Linh, Quảng Trị, Vietnam',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà Xe Hoàng Nam',
+                            'address' => 'TT. Hồ Xá, Vĩnh Linh, Quảng Trị, Vietnam',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ],
             ],
             'Hà Nội' => [
@@ -72,6 +261,48 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '11.151430',
                     'longitude' => '1106.593513',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà xe Phương Trang',
+                            'address' => 'Mỹ Đình, Nam Từ Liêm, Hà Nội',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'XE KHÁCH PHƯƠNG TRANG',
+                            'address' => 'Mỹ Đình, Nam Từ Liêm, Hà Nội',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'XE KHÁCH ĐẠI PHÁT',
+                            'address' => 'Mỹ Đình, Nam Từ Liêm, Hà Nội',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'XE KHÁCH THANH SƠN',
+                            'address' => 'Mỹ Đình, Nam Từ Liêm, Hà Nội',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Phú Yên' => [
@@ -81,6 +312,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '13.086390',
                     'longitude' => '109.306840',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => 'Chính Nghĩa, An Phú - Tuy Hòa - Phú Yên',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Phúc Thuận Thảo',
+                            'address' => '227 Nguyễn Tất Thành - Tuy Hòa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Thanh Thủy - Đà Lạt',
+                            'address' => 'QL1A, Tuy Hòa - Tuy Hòa - Phú Yên',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Khánh Hòa' => [
@@ -90,6 +353,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '12.289200',
                     'longitude' => '109.203650',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Quang Hạnh',
+                            'address' => 'Km số 6, Đường 23 tháng 10, Xã Vĩnh Trung - Nha Trang - Khánh Hòa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Liên Hưng',
+                            'address' => 'Xã Vĩnh Trung - Nha Trang - Khánh Hòa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà Xe Hà Linh',
+                            'address' => 'Xã Vĩnh Trung - Nha Trang - Khánh Hòa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ],
             ],
             'Đắk Lắk' => [
@@ -99,6 +394,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '12.702880',
                     'longitude' => '108.077750',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Cao Nguyên',
+                            'address' => 'Buôn Ma Thuột',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà xe Hải Vân',
+                            'address' => 'Buôn Ma Thuột',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Nhà Xe Tuấn Lợi',
+                            'address' => 'Krông Năng',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Bình Định' => [
@@ -108,6 +435,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '13.751360',
                     'longitude' => '109.208790',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => '57 Võ Liệu, P. Ghềnh Ráng (gần BX Quy Nhơn)',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Kim Liên (Đà Nẵng)',
+                            'address' => 'Bến xe Quy Nhơn',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Phúc Thuận Thảo',
+                            'address' => 'QL 1A - Qui Nhơn',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Quảng Ngãi' => [
@@ -117,6 +476,28 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '15.083650',
                     'longitude' => '108.859120',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Tánh Hạnh',
+                            'address' => 'Nghĩa Kỳ - Tư Nghĩa - Quảng Ngãi',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Trường Thịnh',
+                            'address' => 'Quốc lộ 1A, Đức Chánh - Mộ Đức',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'TP HCM' => [
@@ -126,6 +507,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '10.362350',
                     'longitude' => '106.673880',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Ba Nga',
+                            'address' => 'Bến xe Miền Đông',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Cẩm Vân',
+                            'address' => '49 Tân Thành, P. Hòa Thạnh - Tân Phú',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Đình Nhân',
+                            'address' => '306A Hồng Lạc, Phường 11 - Tân Bình',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Thừa Thiên Huế' => [
@@ -135,6 +548,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '16.447930',
                     'longitude' => '107.609040',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Huetourist',
+                            'address' => '11 Nguyễn Công Trứ - Huế',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe KT Travel Huế',
+                            'address' => '37 Nguyễn Thái Học - P.Phú Hội - Huế',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe HAV Limousine',
+                            'address' => '97 An Dương Vương - Huế',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Nghệ An' => [
@@ -144,6 +589,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '18.679820',
                     'longitude' => '105.674480',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Dương Hồng',
+                            'address' => 'Bến xe Vinh',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => '41 Nguyễn Du - Vinh',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Nam Cường',
+                            'address' => 'Vinh - Nghệ An',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Thanh Hóa' => [
@@ -153,6 +630,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '19.748960',
                     'longitude' => '105.898530',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => '690 Quang Trung 2 - Thanh Hóa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Tú Tạc',
+                            'address' => 'Bến xe phía Nam Thanh Hóa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Tuấn Thành',
+                            'address' => 'Cẩm Thủy - Thanh Hóa',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Quảng Nam' => [
@@ -162,15 +671,28 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '15.859910',
                     'longitude' => '108.274180',
                     'phone' => '0233 3820 215',
-                ]
-            ],
-            'Gia Lai' => [
-                [
-                    'name' => 'Bến xe khách Đức Long Gia Lai Bus Station',
-                    'address' => 'P.Trà Bá, Tp. Pleiku, Gia Lai',
-                    'latitude' => '20.980720',
-                    'longitude' => '105.841958',
-                    'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Xe Trường Thịnh',
+                            'address' => 'Quốc lộ 1A - Núi Thành',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Hạnh Cafe',
+                            'address' => '02 Thái Phiên - Hội An',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Ninh Thuận' => [
@@ -180,6 +702,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '11.121590',
                     'longitude' => '106.192510',
                     'phone' => '0233 3820 215',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà Xe Hà Linh',
+                            'address' => 'Bến Xe Khách Tỉnh Ninh Thuận',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Hải Hoàng Gia',
+                            'address' => 'ngã 5 Phú Hà, 230 Lê Duẩn - Phan Rang-Tháp Chàm',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Việt Sơn Anh',
+                            'address' => 'Cà Đú - Ninh Hải',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
             'Hà Tĩnh' => [
@@ -189,6 +743,38 @@ class ProvincialSeeder extends Seeder
                     'latitude' => '20.435510',
                     'longitude' => '106.150800',
                     'phone' => '0239 3857 768',
+                    'companies' => [
+                        [
+                            'name' => 'Nhà Xe Dương Hồng',
+                            'address' => 'Dọc Quốc Lộ 1A - Hà Tĩnh',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Liên Hưng',
+                            'address' => 'Dọc Quốc Lộ 1A - Hà Tĩnh',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                        [
+                            'name' => 'Xe Hoàng Long',
+                            'address' => 'Dọc Quốc Lộ 1A - Hà Tĩnh',
+                            'description' => 'Với dòng xe Limousine đẳng cấp, cung cấp thông tin và tư vấn đặt chỗ các nhà xe Limousine tốt nhất.
+                                 Là hãng xe mới chất lượng cao, uy tín, đảm bảo mang đến trải nghiệm cực kỳ thoải mái cho khách hàng.
+                                 Là đơn vị đầu tiên đưa dòng xe Limousine cao cấp vào hoạt động trên các tuyến đường.
+                                 Với phương châm : "khách hàng là người thân", cam kết sẽ mang đến cho quý khách một chuyến đi an toàn và thoải mái nhất.
+                                 Sự hài lòng của quý khách là động lực phát triển của chúng tôi, hân hạnh phục vụ quý khách',
+                            'phone' => '0905619619',
+                        ],
+                    ],
                 ]
             ],
         ];
@@ -198,7 +784,26 @@ class ProvincialSeeder extends Seeder
 
             foreach ($value as $item) {
                 $item['provincial_id'] = $provincial->id;
-                Station::create($item);
+                $companies = $item['companies'];
+                unset($item['companies']);
+                $station = Station::create($item);
+                
+                foreach ($companies as $company) {
+                    $company['station_id'] = $station->id;
+                    $company = Company::create($company);
+                    $manager = factory(User::class, 1)->create();
+                    $company->userCompanies()->create([
+                        'user_id' => $manager->first()->id,
+                        'role' => config('setting.user.role_company.super_manager'),
+                    ]);
+                    $emplyees = factory(User::class, 2)->create();
+
+                    foreach ($emplyees as $emplyee)
+                    $company->userCompanies()->create([
+                        'user_id' => $emplyee->id,
+                        'role' => config('setting.user.role_company.manager'),
+                    ]);
+                }
             }
         }
 

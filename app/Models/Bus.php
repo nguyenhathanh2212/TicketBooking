@@ -12,9 +12,6 @@ class Bus extends Model
         'lisense_plate',
         'driver_name',
         'number_of_seats',
-        'number_level',
-        'number_row',
-        'number_column',
         'status',
     ];
 
@@ -22,6 +19,7 @@ class Bus extends Model
         'map',
         'number_of_level',
         'seats',
+        'name_bus_type',
     ];
 
     public function company() {
@@ -49,5 +47,10 @@ class Bus extends Model
     public function getSeatsAttribute()
     {
         return $this->type_bus_id ? $this->typeBus->number_of_seats : $this->number_of_seats;
+    }
+
+    public function getNameBusTypeAttribute()
+    {
+        return $this->type_bus_id ? $this->typeBus->name : '';
     }
 }

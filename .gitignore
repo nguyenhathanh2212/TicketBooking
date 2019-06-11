@@ -16,6 +16,7 @@ yarn-error.log
 /public/images
 /public/vendor
 /public/admin
+/public/messages.js
 
 /storage/logs
 /storage/debugbar

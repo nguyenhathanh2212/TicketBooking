@@ -127,27 +127,31 @@ class CompanyService extends BaseService {
         $company = $this->model->find($id);
         $company->update($data);
 
-        if ($company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->count()) {
-            $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->update([
-                'user_id' => $data['super_manager'],
-            ]);
-        } else {
-            $company->userCompanies()->create([
-                'user_id' => $data['super_manager'],
-                'role' => config('setting.user.role_company.super_manager'),
-            ]);
+        if (isset($data['super_manager'])) {
+            if ($company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->count()) {
+                $company->userCompanies()->where('role', config('setting.user.role_company.super_manager'))->update([
+                    'user_id' => $data['super_manager'],
+                ]);
+            } else {
+                $company->userCompanies()->create([
+                    'user_id' => $data['super_manager'],
+                    'role' => config('setting.user.role_company.super_manager'),
+                ]);
+            }
         }
 
-        $companyManagerId = $company->userCompanies()->where('role', config('setting.user.role_company.manager'))->pluck('user_id')->all();
-        $deleteIds = array_diff($companyManagerId, $data['employee']);
-        $createIds = array_diff($data['employee'], $companyManagerId);
-        $company->userCompanies()->whereIn('user_id', $deleteIds)->delete();
+        if (isset($data['employee'])) {
+            $companyManagerId = $company->userCompanies()->where('role', config('setting.user.role_company.manager'))->pluck('user_id')->all();
+            $deleteIds = array_diff($companyManagerId, $data['employee']);
+            $createIds = array_diff($data['employee'], $companyManagerId);
+            $company->userCompanies()->whereIn('user_id', $deleteIds)->delete();
 
-        foreach($createIds as $id) {
-            $company->userCompanies()->create([
-                'user_id' => $id,
-                'role' => config('setting.user.role_company.manager'),
-            ]);
+            foreach($createIds as $id) {
+                $company->userCompanies()->create([
+                    'user_id' => $id,
+                    'role' => config('setting.user.role_company.manager'),
+                ]);
+            }
         }
 
         return $company;

@@ -82,7 +82,6 @@
         },
         watch: {
             query: function() {
-                console.log(this.companies);
                 this.setCompanies(this.query);
             }
         },

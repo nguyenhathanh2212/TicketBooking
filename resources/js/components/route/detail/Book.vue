@@ -116,6 +116,8 @@
     import { mapActions, mapState } from 'vuex'
     import Banner from '@plugins/Banner.vue'
     import PayPal from 'vue-paypal-checkout'
+    import axios from 'axios'
+    const queryString = require('query-string');
 
     export default {
         data: function() {
@@ -126,7 +128,8 @@
                 credentials: {
                     sandbox: process.env.MIX_PAYPAL_CLIENT_ID,
                     production: ''
-                }
+                },
+                sale_id: ''
             }
         },
         computed: {
@@ -136,11 +139,20 @@
             }
         },
         created() {
-            this.setBusRoute(this.$route.params.id);
+            this.setBusRoute(this.$route.params.id)
+                .then(success => {})
+                .catch(error => {
+                    this.$router.push({
+                        name: '404'
+                    });
+                });
 
             if (!this.$route.params.check) {
                 this.$router.push({
-                    name: '404'
+                    name: 'route.show',
+                    params: {
+                        id: this.$route.params.id
+                    }
                 });
             }
         },
@@ -153,23 +165,41 @@
             ...mapActions('ticket', ['createTicket']),
             bookingTicket: function () {
                 this.data['payment_method'] = this.paymentMethod;
+                this.data['sale_id'] = this.sale_id;
                 this.createTicket(this.data)
                     .then(success => {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: this.$t('message.booking_success'),
-                            type: 'success',
-                            confirmButtonText: 'Ok'
-                        }).then((result) => {
-                            if (result.value) {
-                                this.$router.push({
-                                    name: 'ticket.detail',
-                                    params: {
-                                        id: success.ticket.id
-                                    }
-                                })
+                        if (success.response && success.response.data.code == 1000) {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: success.response.data.message,
+                                type: 'error',
+                                confirmButtonText: 'Ok'
+                            });
+
+                            if (this.paymentMethod != this.paymentMethodSetting.direct) {
+                                this.refundPayPal(this.sale_id);
                             }
-                        });
+                        } else {
+                            if (this.paymentMethod != this.paymentMethodSetting.direct) {
+                                this.refundPayPal(this.sale_id);
+                            }
+                            
+                            Swal.fire({
+                                title: 'Success!',
+                                text: this.$t('message.booking_success'),
+                                type: 'success',
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.value) {
+                                    this.$router.push({
+                                        name: 'ticket.detail',
+                                        params: {
+                                            id: success.data.ticket.id
+                                        }
+                                    })
+                                }
+                            });
+                        }
                     })
                     .catch(error => {
                         Swal.fire({
@@ -181,15 +211,48 @@
                     });
             },
             getPriceUsd: function () {
-                var price = (this.busRoute.price * this.data.quantity) / 23000;
+                var price = (this.busRoute.price * this.data.quantity) / 23331.78;
                 price = Math.round(price * 100) / 100;
 
                 return price.toString();
             },
             checkout: function (response) {
                 if (response.state == 'approved') {
+                    this.sale_id = response.transactions[0].related_resources[0].sale.id;
                     this.bookingTicket();
                 }
+            },
+            refundPayPal: function (saleId) {
+                var PAYPAL_OAUTH_API = 'https://api.sandbox.paypal.com/v1/oauth2/token/';
+                var PAYPAL_PAYMENTS_API = 'https://api.sandbox.paypal.com/v1/payments/sale/';
+                var PAYPAL_CLIENT =process.env.MIX_PAYPAL_CLIENT_ID;
+                var PAYPAL_SECRET =process.env.MIX_PAYPAL_SECRET;
+                // var basicAuth = (`${ PAYPAL_CLIENT }:${ PAYPAL_SECRET }`);
+                var basicAuth = 'QWVwUVFodmxYdmZXYU1vTW8wMUVueWR2RTFrU0pKaUw4SE9QcVlkalhCRnFVeE1oYnh3aXJYLWpSRjQ5Z0t1MzVNeTJlQWRDOUJDUlVzQ2k6RUV6MnRWSGFmMUtnbFhQMF9mNGhoMGxDRmdXbG5nZlRHOHdQLUhlRDBUNVVldmZEanNqVzNUbU5sT1ctbDU4LXpIS0RhUTVHUFNDVGJtWmY';
+                var data = queryString.stringify({
+                    grant_type: "client_credentials"
+                });
+                var token = '';
+                axios.post(PAYPAL_OAUTH_API, data,
+                    {
+                        headers: {
+                            "Authorization": `Basic ${basicAuth}`,
+                            "Accept": "application/json",
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        }
+                    })
+                    .then(response => {
+                        token = response.data.access_token;
+                        axios.post(PAYPAL_PAYMENTS_API + `${saleId}/refund`, {},
+                            {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                    "Content-Type": "application/json",
+                                }
+                            })
+                            .then(response => {
+                            })
+                    });
             }
         },
         updated() {

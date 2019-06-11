@@ -4,6 +4,42 @@
     <title></title>
 </head>
 <body>
+    @php
+        $paypal = $tickets->where('payment_method', config('setting.ticket.payment_method.paypal'))
+            ->where('status', config('setting.ticket.status.active'));
+        $direct = $tickets->where('payment_method', config('setting.ticket.payment_method.direct'))
+            ->where('status', config('setting.ticket.status.active'));
+        $paypalCount = $paypal->count();
+        $totalPrePay = $paypal->sum('total_price');
+        $directCount = $direct->count();
+        $totalNotPayYet = $direct->sum('total_price');
+        // dd($paypalCount, $totalPrePay, $directCount, $totalNotPayYet);
+    @endphp
+    <table class="table table-hover table-record"
+        style="
+            border: 1px solid #ddd;
+            width: 30%;
+            float: right;
+            margin: 10px;
+        ">
+        <tbody>
+            <tr>
+                <th></th>
+                <th>Số lượng</th>
+                <th>Tổng tiền</th>
+            </tr>
+            <tr>
+                <td>Đã thanh toán: </td>
+                <td>{{ $paypalCount }}</td>
+                <td>{{ number_format($totalPrePay, 2) }}đ</td>
+            </tr>
+            <tr>
+                <td>Chưa thanh toán</td>
+                <td>{{ $directCount }}</td>
+                <td>{{ number_format($totalNotPayYet, 2) }}đ</td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table-result table" border="1">
         <thead class="thead-default">
             <tr>

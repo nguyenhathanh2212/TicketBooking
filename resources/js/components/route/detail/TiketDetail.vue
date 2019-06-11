@@ -47,8 +47,8 @@
                                                             </li>
                                                             <li><span>{{ $t('route.ticket_price') }}:</span><em>{{ Number(ticket.bus_route.price).toLocaleString() }}đ</em></li>
                                                             <li class="tg-totalprice">
-                                                                <div v-if="JSON.parse(ticket.seat_number).length" class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * JSON.parse(ticket.seat_number).length).toLocaleString() }}đ</em></div>
-                                                                <div v-else class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price * ticket.quantity).toLocaleString() }}đ</em></div>
+                                                                <div v-if="JSON.parse(ticket.seat_number).length" class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price).toLocaleString() }}đ</em></div>
+                                                                <div v-else class="tg-totalpayment"><span>{{ $t('route.total') }}</span><em> {{ Number(ticket.total_price).toLocaleString() }}đ</em></div>
                                                             </li>
                                                         </ul>
                                                     </div>

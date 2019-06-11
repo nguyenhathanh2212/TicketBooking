@@ -185,6 +185,10 @@
         line-height: 50px;
     }
 
+    .col-md-2.height-item.text-sm-center.text-xs-center.align-center-flex {
+        justify-content: left;
+    }
+
     /* @media (max-width: 992px) { */
         .align-center-flex {
             display: flex;

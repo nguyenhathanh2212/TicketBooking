@@ -60,8 +60,10 @@ class TicketController extends Controller
             $statuses = $this->ticketService->getTicketStatuses();
             $routes = $company->routes->pluck('name_route', 'id')->all();
             $routes = [0 => trans('main.all_route')] + $routes;
+            $params['export'] =  true;
+            $allTickets = $this->ticketService->search($params);
 
-            return view('admin.ticket.index', compact('tickets', 'statuses', 'busLisenses', 'routes'));
+            return view('admin.ticket.index', compact('tickets', 'allTickets', 'statuses', 'busLisenses', 'routes'));
         } catch (Exception $e) {
             report($e);
             abort(404);

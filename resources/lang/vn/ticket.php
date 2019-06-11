@@ -4,7 +4,7 @@ return [
     'status' => [
         0 => 'Tất cả',
         1 => 'Đã đặt',
-        2 => 'Hoàn thành',
+        2 => 'Đóng',
         3 => 'Hủy',
     ],
     'name' => 'Tên',

@@ -35,6 +35,7 @@ class SocialAccountService
                     'first_name' => $providerUser->user['given_name'],
                     'last_name' => $providerUser->user['family_name'],
                     'email' => $providerUser->getEmail(),
+                    'role' => config('setting.user.role.user'),
                 ]);
 
                 $user->images()->create(['url' => $providerUser->user['picture']]);

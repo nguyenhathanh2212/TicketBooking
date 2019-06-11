@@ -74,13 +74,13 @@
                                 </div>
                                 <div class="tg-widgetcontent">
                                     <div class="tg-description"><p>Sign up for our mailing list to get latest updates and offers</p></div>
-                                    <form class="tg-formtheme tg-formnewsletter">
+                                    <!-- <form class="tg-formtheme tg-formnewsletter">
                                         <fieldset>
                                             <input type="email" name="email" class="form-control" placeholder="Your Email">
                                             <button type="submit"><img src="/images/icons/icon-08.png" alt="image destinations"></button>
                                         </fieldset>
-                                    </form>
-                                    <span>We respect your privacy</span>
+                                    </form> -->
+                                    <!-- <span>We respect your privacy</span> -->
                                 </div>
                             </div>
                         </div>

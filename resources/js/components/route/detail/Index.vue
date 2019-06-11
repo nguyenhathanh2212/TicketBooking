@@ -41,7 +41,12 @@
         },
         watch: {
             '$route' (to, from) {
-                this.setBusRoute(this.$route.params.id);
+                this.setBusRoute(this.$route.params.id)
+                    .catch(error => {
+                        this.$router.push({
+                            name: '404'
+                        });
+                    });
             },
         }
     }

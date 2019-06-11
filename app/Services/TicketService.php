@@ -106,19 +106,31 @@ class TicketService extends BaseService {
         $data['date_away'] = Carbon::createFromFormat(trans('main.date_format') . ' H:i:s', "{$data['date_away']} {$startTime}");
         $data['total_price'] = $busRoute->price * $data['quantity'];
         $checkSeat = true;
-        $ticketSeat = $busRoute->tickets()->whereDay('date_away', $data['date_away'])->pluck('seat_number')->all();
+        $bus = $busRoute->bus;
 
-        foreach($ticketSeat as $seats) {
-            $seats = json_decode($seats);
+        if (!$bus->type_bus_id) {
+            $quantityTicket = $busRoute->tickets()->where('status', config('setting.ticket.status.active'))
+                ->whereDay('date_away', $data['date_away'])->sum('quantity');
 
-            if (count(array_unique(array_merge($seats, $data['seat_number']))) < count($data['seat_number']) + count($seats)) {
+            if (($bus->seats - $quantityTicket) < $data['quantity']) {
                 $checkSeat = false;
-                break;
+            }
+        } else {
+            $ticketSeat = $busRoute->tickets()->where('status', config('setting.ticket.status.active'))
+                ->whereDay('date_away', $data['date_away'])->pluck('seat_number')->all();
+
+            foreach($ticketSeat as $seats) {
+                $seats = json_decode($seats);
+
+                if (count(array_unique(array_merge($seats, $data['seat_number']))) < count($data['seat_number']) + count($seats)) {
+                    $checkSeat = false;
+                    break;
+                }
             }
         }
 
         if (!$checkSeat) {
-            throw new Exception("Seat is ordered!", 1000);
+            throw new Exception(trans('message.seat_is_order'), 1000);
         }
 
         $data['seat_number'] = json_encode($data['seat_number']);

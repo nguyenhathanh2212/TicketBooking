@@ -5,7 +5,7 @@ export const createTicket = ({ commit }, params) => {
     return new Promise((resolve, reject) => {
         post(`ticket`, params)
             .then(response => {
-                resolve(response.data);
+                resolve(response);
             })
             .catch(error => {
                 reject(error);
@@ -29,7 +29,6 @@ export const setAuthBookings = ({ commit }, params) => {
                 resolve(response.data.code);
             })
             .catch(error => {
-                console.log(error.response);
                 reject(error);
             })
     })
