@@ -29,7 +29,12 @@
 
     export default {
         created() {
-            this.setCompany(this.id);
+            this.setCompany(this.id)
+                .catch(error => {
+                    this.$router.push({
+                        name: '404'
+                    })
+                });;
         },
         computed: {
             ...mapState('company', [

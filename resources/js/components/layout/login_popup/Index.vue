@@ -20,7 +20,7 @@
                     <div class="tg-signupwith">
                         <h2>{{ $t('main.login_with') }}</h2>
                         <ul class="tg-sharesocialicon">
-                            <li class="tg-facebook"><a href="" @click.prevent="loginSocialAccount('facebook')"><i class="icon-facebook-1"></i><span>Facebook</span></a></li>
+                            <!-- <li class="tg-facebook"><a href="" @click.prevent="loginSocialAccount('facebook')"><i class="icon-facebook-1"></i><span>Facebook</span></a></li> -->
                             <li class="tg-googleplus"><a href="" @click.prevent="loginSocialAccount('google')"><i class="icon-google4"></i><span>Google+</span></a></li>
                         </ul>
                     </div>

@@ -28,9 +28,9 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(App\Models\Bus::class, function (Faker $faker) {
     return [
-        'lisense_plate' => $faker->swiftBicNumber(),
+        'lisense_plate' => '30F - ' . rand(10000, 99999),//$faker->swiftBicNumber(),
         'driver_name' => $faker->name,
-        'number_of_seats' => 42,
+        'number_of_seats' => 29,
     ];
 });
 
@@ -40,7 +40,6 @@ $factory->define(App\Models\Company::class, function (Faker $faker) {
         'address' => $faker->text(200),
         'description' => $faker->text(400),
         'phone' => '0344764057',
-        'address' => $faker->name,
     ];
 });
 
@@ -52,15 +51,18 @@ $factory->define(App\Models\Image::class, function (Faker $faker) {
 
 $factory->define(App\Models\Rating::class, function (Faker $faker) {
     return [
-        'rating' => $faker->numberBetween(0, 5),
+        'rating' => $faker->numberBetween(1, 5),
         'comment' => $faker->text(200),
     ];
 });
 
 $factory->define(App\Models\Route::class, function (Faker $faker) {
+    $startTime = Carbon::now()->addMinutes(rand(0, 60 * 23))->addSeconds(rand(0, 60))->format('H:i');
+    $destinationTime = Carbon::parse($startTime)->addHours(4)->format('H:i');
+
     return [
-        'start_time' => Carbon::now()->addDays(rand(-10, 10))->addMinutes(rand(0, 60 * 23))->addSeconds(rand(0, 60))->format('H:i'),
-        'destination_time' => Carbon::now()->addDays(rand(-10, 10))->addMinutes(rand(0, 60 * 23))->addSeconds(rand(0, 60))->format('H:i'),
+        'start_time' => $startTime,
+        'destination_time' => $destinationTime,
     ];
 });
 

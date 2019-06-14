@@ -31,7 +31,6 @@
                 $('.my-selectpicker').selectpicker();
             },
             valueSelected: function() {
-                console.log('aaaaaaaaaa', this.valueSelected)
                 event.target.value = this.valueSelected;
             }
         },

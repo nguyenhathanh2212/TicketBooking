@@ -69,6 +69,7 @@ class TicketController extends BaseController
                 'seat_number',
                 'payment_method',
                 'quantity',
+                'sale_id',
             ]);
             DB::beginTransaction();
             $data['user_id'] = Auth::user()->id;

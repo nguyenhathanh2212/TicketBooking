@@ -136,4 +136,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .item.tg-populartour img {
+        object-fit: cover;
+        height: 270px;
+    }
 </style>

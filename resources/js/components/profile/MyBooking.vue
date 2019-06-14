@@ -42,7 +42,7 @@
                                     <td data-title="action" style="text-align: center;">
                                         <button
                                             :disabled="!booking.check_cancel"
-                                            @click="cancel(booking.id)" class="btn btn-danger btn-xs">{{ $t('route.cancel') }}</button>
+                                            @click="cancel(booking)" class="btn btn-danger btn-xs">{{ $t('route.cancel') }}</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -60,6 +60,8 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     import Paginate from '@plugins/Paginate.vue'
+    import axios from 'axios'
+    const queryString = require('query-string');
 
     export default {
         data: function () {
@@ -84,7 +86,7 @@
                 
                 return 'label label-default'
             },
-            cancel: function(id) {
+            cancel: function(booking) {
                 Swal.fire({
                     title: 'Warning!',
                     text: this.$t('message.confirm_cancel_ticket'),
@@ -92,8 +94,10 @@
                     confirmButtonText: 'Ok'
                 }).then((result) => {
                     if (result.value) {
-                        this.cancelTicket(id)
+                        this.refundPayPal(booking.sale_id);
+                        this.cancelTicket(booking.id)
                             .then(success => {
+
                                 Swal.fire({
                                     title: 'Success!',
                                     text: this.$t('message.cancel_ticket_success'),
@@ -114,11 +118,42 @@
                             });
                     }
                 });
+            },
+            refundPayPal: function (saleId) {
+                var PAYPAL_OAUTH_API = 'https://api.sandbox.paypal.com/v1/oauth2/token/';
+                var PAYPAL_PAYMENTS_API = 'https://api.sandbox.paypal.com/v1/payments/sale/';
+                var PAYPAL_CLIENT =process.env.MIX_PAYPAL_CLIENT_ID;
+                var PAYPAL_SECRET =process.env.MIX_PAYPAL_SECRET;
+                // var basicAuth = (`${ PAYPAL_CLIENT }:${ PAYPAL_SECRET }`);
+                var basicAuth = 'QWVwUVFodmxYdmZXYU1vTW8wMUVueWR2RTFrU0pKaUw4SE9QcVlkalhCRnFVeE1oYnh3aXJYLWpSRjQ5Z0t1MzVNeTJlQWRDOUJDUlVzQ2k6RUV6MnRWSGFmMUtnbFhQMF9mNGhoMGxDRmdXbG5nZlRHOHdQLUhlRDBUNVVldmZEanNqVzNUbU5sT1ctbDU4LXpIS0RhUTVHUFNDVGJtWmY';
+                var data = queryString.stringify({
+                    grant_type: "client_credentials"
+                });
+                var token = '';
+                axios.post(PAYPAL_OAUTH_API, data,
+                    {
+                        headers: {
+                            "Authorization": `Basic ${basicAuth}`,
+                            "Accept": "application/json",
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        }
+                    })
+                    .then(response => {
+                        token = response.data.access_token;
+                        axios.post(PAYPAL_PAYMENTS_API + `${saleId}/refund`, {},
+                            {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                    "Content-Type": "application/json",
+                                }
+                            })
+                            .then(response => {
+                            })
+                    });
             }
         },
         watch: {
             '$route' (to, from) {
-                console.log(this.authBookings);
                 this.setAuthBookings(this.$route.query);
             }
         },

@@ -24,7 +24,7 @@ class BusRoute extends Model
 
     public function getRouteTicketsAttribute()
     {
-        return $this->tickets->groupBy('date');
+        return $this->tickets->where('status', config('setting.ticket.status.active'))->groupBy('date');
     }
 
     public function getPriceFormatAttribute()

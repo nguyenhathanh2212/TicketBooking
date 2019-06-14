@@ -19,12 +19,10 @@ export const login = ({ commit }, data) => {
     })
 }
 
-
 export const loginSocial = ({ commit }, data) => {
     return new Promise((resolve, reject) => {
         post('auth/login_social', data)
             .then(response => {
-                console.log(response.data);
                 commit(types.LOGIN, response.data);
                 commit(types.SET_USER, response.data.data.user);
                 resolve(response.status);

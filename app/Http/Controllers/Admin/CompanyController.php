@@ -194,7 +194,11 @@ class CompanyController extends Controller
                 'employee',
                 'old_image',
             ]);
-            $data['employee'] = json_decode($data['employee']);
+
+            if (isset($data['employee'])) {
+                $data['employee'] = json_decode($data['employee']);
+            }
+
             $data['old_image'] = json_decode($data['old_image']);
             DB::beginTransaction();
             $company = $this->companyService->updateCompany($id, $data);
@@ -210,6 +214,7 @@ class CompanyController extends Controller
             
             return redirect()->route('company.show', ['id' => $company->id])->with('messageSuccess', trans('message.update_successfully'));
         } catch (Exception $e) {
+            dd($e);
             DB::rollBack();
             report($e);
 

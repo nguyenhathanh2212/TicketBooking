@@ -39,4 +39,5 @@ return [
     'confirm_update_bus' => 'Are you sure you want to update this bus?',
     'start_station_other_destination_station' => 'The place of start station must be different from the destination station.',
     'must_dn_station' => 'One of the two bus station must be Da Nang bus station.',
+    'seat_is_order' => 'The seat you choose has someone booked',
 ];

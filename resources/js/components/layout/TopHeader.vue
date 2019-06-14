@@ -12,11 +12,11 @@
                 </li>
             </ul>
         </nav>
-        <div class="tg-addnavcartsearch">
+        <!-- <div class="tg-addnavcartsearch">
             <nav class="tg-addnav">
                 <ul>
-                    <!-- <li><a href="aboutus.html">about</a></li>
-                    <li><a href="contactus.html">contact</a></li> -->
+                    <li><a href="aboutus.html">about</a></li>
+                    <li><a href="contactus.html">contact</a></li>
                 </ul>
             </nav>             
             <div class="dropdown dropdown-change-language">
@@ -33,7 +33,7 @@
                     <li><a href="#tg-search"><img src="/images/icons/icon-04.png" alt="image destinations"></a></li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
     </div>
 </template>
 

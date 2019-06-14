@@ -64,12 +64,8 @@
                                     <i class="icon-sort fa {{ getSortIcon(Request::all(), 'driver_name') }}"></i>
                                 </a>
                             </th>
-                            <th>@lang('bus.number_of_seats')
-                                <a href="{{ route(Route::currentRouteName(),
-                                    array_merge(Route::current()->parameters(), makeSortLink(Request::all(), 'number_of_seats'))) }}" data-test="">
-                                    <i class="icon-sort fa {{ getSortIcon(Request::all(), 'number_of_seats') }}"></i>
-                                </a>
-                            </th>
+                            <th>Loại xe</th>
+                            <th>@lang('bus.number_of_seats')</th>
                             <th>@lang('main.status')</th>
                         </tr>
                         @php
@@ -81,7 +77,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td><a href="{{ route('bus.show', $bus->id) }}">{{ $bus->lisense_plate }}</a></td>
                                 <td>{{ $bus->driver_name }}</td>
-                                <td>{{ $bus->number_of_seats }}</td>
+                                <td>{{ $bus->name_bus_type }}</td>
+                                <td>{{ $bus->seats }}</td>
                                 <td>
                                     <div class="form-group">
                                         {{ Form::select('status', $statuses, $bus->status,[

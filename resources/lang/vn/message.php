@@ -39,4 +39,5 @@ return [
     'confirm_update_bus' => 'Bạn có chắc muốn cập nhật xe bus này?',
     'start_station_other_destination_station' => 'Bến xe khởi hành phải khác bến xe đích.',
     'must_dn_station' => 'Một trong hai bến xe phải là bến xe Đà Nẵng.',
+    'seat_is_order' => 'Ghế bạn chọn đã có người đặt',
 ];
