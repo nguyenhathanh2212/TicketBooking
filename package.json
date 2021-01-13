@@ -37,7 +37,7 @@
         "hellojs": "^1.18.1",
         "icheck": "^1.0.2",
         "jquery-ui-dist": "^1.12.1",
-        "jquery-validation": "^1.19.0",
+        "jquery-validation": "^1.19.3",
         "module-alias": "^2.2.0",
         "moment": "^2.24.0",
         "normalize.css": "^8.0.1",
