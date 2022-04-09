@@ -39,7 +39,7 @@
         "jquery-ui-dist": "^1.12.1",
         "jquery-validation": "^1.19.0",
         "module-alias": "^2.2.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "normalize.css": "^8.0.1",
         "packery": "^2.1.2",
         "query-string": "^6.7.0",
